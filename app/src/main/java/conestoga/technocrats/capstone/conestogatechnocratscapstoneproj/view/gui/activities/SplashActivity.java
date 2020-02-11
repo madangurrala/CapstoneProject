@@ -21,7 +21,7 @@ public class SplashActivity extends AppCompatActivity
                 startActivity(new Intent(SplashActivity.this,AskAccountActivity.class));
                 SplashActivity.this.finish();
             }
-        },3000);
+        },300);
     }
 
     @Override

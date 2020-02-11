@@ -8,9 +8,12 @@ import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.model.loc
 
 public class RootBL {
     private final String DATABASE_NAME="CONESTOGA_CAPSTONE_DB";
+
+    protected Context ctx;
     private AppDatabase db;
     public RootBL(Context ctx)
     {
-        db = Room.databaseBuilder(ctx,AppDatabase.class, DATABASE_NAME).build();
+        this.ctx=ctx;
+        db = Room.databaseBuilder(this.ctx,AppDatabase.class, DATABASE_NAME).build();
     }
 }
