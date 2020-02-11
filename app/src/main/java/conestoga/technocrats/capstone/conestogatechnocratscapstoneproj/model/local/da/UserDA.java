@@ -13,8 +13,8 @@ public interface UserDA {
     public long insert(UserTO userTO);
 
     @Update
-    public long update(UserTO userTO);
+    public void update(UserTO userTO);
 
     @Delete
-    public long delete(UserTO userTO);
+    public void delete(UserTO userTO);
 }
