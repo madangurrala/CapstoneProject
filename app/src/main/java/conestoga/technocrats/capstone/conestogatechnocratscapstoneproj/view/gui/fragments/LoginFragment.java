@@ -22,6 +22,7 @@ import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.model.to.
 import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.presenter.LoginAccountPresenter;
 import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.view.gui.activities.AskAccountActivity;
 import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.view.gui.activities.MainActivity;
+import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.view.gui.activities.ProfileActivity;
 import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.view.impl.ILoginContract;
 
 public class LoginFragment extends Fragment implements View.OnClickListener, ILoginContract {
@@ -79,7 +80,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener, ILo
     @Override
     public void userLoginStatus(boolean status, UserTO userTO) {
         Toast.makeText(getActivity(), "Welcome!", Toast.LENGTH_SHORT).show();
-        startActivity(new Intent(getActivity(), MainActivity.class));
+        startActivity(new Intent(getActivity(), ProfileActivity.class));
         getActivity().finish();
     }
 }
