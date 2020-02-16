@@ -4,5 +4,5 @@ import androidx.fragment.app.Fragment;
 
 public interface IAskAccountContract
 {
-    public void showFragment(Fragment fragment);
+    public void showFragment(Fragment fragment,String title);
 }

@@ -1,6 +1,12 @@
 <resources>
-    <string name="app_name">ConestogaTechnocratsCapstoneProj</string>
+    <string name="app_name">Rent Space</string>
 
+    <string name="login">
+        Login
+    </string>
+    <string name="sign_up">
+        sign up
+    </string>
     <string name="enter_email">
         Enter your email address here
     </string>

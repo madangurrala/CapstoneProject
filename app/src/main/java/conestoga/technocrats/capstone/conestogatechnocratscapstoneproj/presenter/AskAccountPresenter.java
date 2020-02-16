@@ -4,6 +4,7 @@ import android.content.Context;
 
 import androidx.fragment.app.Fragment;
 
+import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.R;
 import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.model.local.bl.UserBL;
 import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.model.to.UserTO;
 import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.view.gui.fragments.LoginFragment;
@@ -23,21 +24,22 @@ public class AskAccountPresenter
         userBL=new UserBL(this.ctx);
     }
 
-    public void showRightFragment(Fragment fragment)
+    public void showRightFragment(Fragment fragment,String title)
     {
+
         if(fragment!=null)
         {
-            iAskAccountContract.showFragment(fragment);
+            iAskAccountContract.showFragment(fragment,title);
             return;
         }
         UserTO userTO=userBL.fetchLoginAccountSP();
         if(userTO==null || userTO.getEmail()==null)
         {
-            iAskAccountContract.showFragment(new SignUpAccountFragment());
+            iAskAccountContract.showFragment(new SignUpAccountFragment(),ctx.getResources().getString(R.string.sign_up));
         }
         else
         {
-            iAskAccountContract.showFragment(new LoginFragment());
+            iAskAccountContract.showFragment(new LoginFragment(),ctx.getResources().getString(R.string.login));
         }
 
 

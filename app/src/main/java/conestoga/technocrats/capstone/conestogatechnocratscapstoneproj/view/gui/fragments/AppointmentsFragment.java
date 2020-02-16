@@ -24,7 +24,7 @@ import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.view.gui.
 import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.view.gui.activities.MainActivity;
 import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.view.impl.ILoginContract;
 
-public class LoginFragment extends Fragment implements View.OnClickListener, ILoginContract {
+public class AppointmentsFragment extends Fragment implements View.OnClickListener, ILoginContract {
 
     private LoginAccountPresenter loginAccountPresenter=null;
 

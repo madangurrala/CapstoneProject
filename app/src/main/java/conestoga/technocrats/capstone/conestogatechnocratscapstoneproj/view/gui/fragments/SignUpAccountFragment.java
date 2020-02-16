@@ -59,7 +59,8 @@ public class SignUpAccountFragment extends Fragment implements View.OnClickListe
             {
                 if(getActivity()!=null && getActivity() instanceof AskAccountActivity)
                 {
-                    ((AskAccountActivity)getActivity()).getAskAccountPresenter().showRightFragment(new LoginFragment());
+                    AskAccountActivity askAccountActivity=(AskAccountActivity)getActivity();
+                    askAccountActivity.getAskAccountPresenter().showRightFragment(askAccountActivity.getLoginFragment(),getResources().getString(R.string.login));
                 }
                 break;
             }
