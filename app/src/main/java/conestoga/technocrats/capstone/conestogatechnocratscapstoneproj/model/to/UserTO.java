@@ -4,7 +4,7 @@ import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
-@Entity(tableName = "TBL_USER")
+@Entity(tableName = "TBL_USERS")
 public class UserTO
 {
     @PrimaryKey

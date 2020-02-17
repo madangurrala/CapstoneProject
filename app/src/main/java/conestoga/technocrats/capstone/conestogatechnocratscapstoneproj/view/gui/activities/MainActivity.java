@@ -1,11 +1,10 @@
 package conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.view.gui.activities;
 
+import android.os.Bundle;
+
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 import androidx.viewpager.widget.ViewPager;
-
-import android.os.Bundle;
 
 import com.google.android.material.tabs.TabLayout;
 
@@ -15,6 +14,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.R;
+import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.model.local.bl.UserBL;
 import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.view.gui.adapters.MainActivityTabLayoutAdapter;
 import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.view.gui.fragments.AppointmentsFragment;
 import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.view.gui.fragments.MessagesFragment;
@@ -22,12 +22,12 @@ import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.view.gui.
 import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.view.gui.fragments.PropertiesFragment;
 import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.view.impl.IMainContract;
 
-public class MainActivity extends AppCompatActivity implements IMainContract,ViewPager.OnPageChangeListener,TabLayout.OnTabSelectedListener{
+public class MainActivity extends AppCompatActivity implements IMainContract, ViewPager.OnPageChangeListener, TabLayout.OnTabSelectedListener {
 
 
-    private MainActivityTabLayoutAdapter tabLayoutAdapter=null;
-    private List<String> titles=new ArrayList<>();
-    private int viewPagerDefaultIndex=0;
+    private MainActivityTabLayoutAdapter tabLayoutAdapter = null;
+    private List<String> titles = new ArrayList<>();
+    private int viewPagerDefaultIndex = 0;
 
 
     @BindView(R.id.tabLayout)
@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity implements IMainContract,Vie
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
         setTitle(getResources().getString(R.string.app_name));
-        tabLayoutAdapter=new MainActivityTabLayoutAdapter(getSupportFragmentManager(), FragmentStatePagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
+        tabLayoutAdapter = new MainActivityTabLayoutAdapter(getSupportFragmentManager(), FragmentStatePagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
         initFragments();
         viewPager.setAdapter(tabLayoutAdapter);
         tabLayout.setupWithViewPager(viewPager);
@@ -55,8 +55,7 @@ public class MainActivity extends AppCompatActivity implements IMainContract,Vie
         tabLayout.addOnTabSelectedListener(this);
     }
 
-    private void initFragments()
-    {
+    private void initFragments() {
         tabLayoutAdapter.addItem(new PropertiesFragment());
         titles.add("Properties List");
         tabLayoutAdapter.addItem(new MessagesFragment());
@@ -100,6 +99,6 @@ public class MainActivity extends AppCompatActivity implements IMainContract,Vie
 
     @Override
     public void onTabReselected(TabLayout.Tab tab) {
-
+        new UserBL(this).fetchLoginAccountSP().getEmail();
     }
 }

@@ -2,10 +2,10 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "60aba87b918faf7f68974b17247db079",
+    "identityHash": "7813a356560c530e1626468249a2c498",
     "entities": [
       {
-        "tableName": "TBL_USER",
+        "tableName": "TBL_USERS",
         "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER NOT NULL, `name` TEXT, `family` TEXT, `email` TEXT, `phone1` TEXT, `phone2` TEXT, PRIMARY KEY(`id`))",
         "fields": [
           {
@@ -58,7 +58,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '60aba87b918faf7f68974b17247db079')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '7813a356560c530e1626468249a2c498')"
     ]
   }
 }
