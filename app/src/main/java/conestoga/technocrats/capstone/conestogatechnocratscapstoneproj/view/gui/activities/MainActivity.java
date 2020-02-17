@@ -17,7 +17,7 @@ import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.R;
 import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.model.local.bl.UserBL;
 import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.view.gui.adapters.MainActivityTabLayoutAdapter;
 import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.view.gui.fragments.AppointmentsFragment;
-import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.view.gui.fragments.MessagesFragment;
+import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.view.gui.fragments.ChatListFragment;
 import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.view.gui.fragments.ProfileFragment;
 import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.view.gui.fragments.PropertiesFragment;
 import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.view.impl.IMainContract;
@@ -58,7 +58,7 @@ public class MainActivity extends AppCompatActivity implements IMainContract, Vi
     private void initFragments() {
         tabLayoutAdapter.addItem(new PropertiesFragment());
         titles.add("Properties List");
-        tabLayoutAdapter.addItem(new MessagesFragment());
+        tabLayoutAdapter.addItem(new ChatListFragment());
         titles.add("My Messages");
         tabLayoutAdapter.addItem(new AppointmentsFragment());
         titles.add("My Appointments");

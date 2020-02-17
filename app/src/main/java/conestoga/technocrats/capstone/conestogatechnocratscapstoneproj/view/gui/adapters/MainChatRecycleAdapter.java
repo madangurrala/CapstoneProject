@@ -18,23 +18,21 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.R;
-import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.model.to.PropertyTO;
+import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.model.to.MessageTO;
 
-public class MainPropertiesRecycleAdapter extends RecyclerView.Adapter<MainPropertiesRecycleAdapter.ViewHolder>
-{
+public class MainChatRecycleAdapter extends RecyclerView.Adapter<MainChatRecycleAdapter.ViewHolder> {
     private Context ctx;
-    private List<PropertyTO> propertyTOS;
+    private List<MessageTO> messageTOS;
 
-    public MainPropertiesRecycleAdapter(Context ctx,List<PropertyTO> propertyTOS)
-    {
-        this.ctx=ctx;
-        this.propertyTOS=propertyTOS;
+    public MainChatRecycleAdapter(Context ctx, List<MessageTO> messageTOS) {
+        this.ctx = ctx;
+        this.messageTOS = messageTOS;
     }
+
     @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType)
-    {
-        View view= LayoutInflater.from(ctx).inflate(R.layout.recycle_item1,parent,false);
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(ctx).inflate(R.layout.recycle_item2, parent, false);
         return new ViewHolder(view);
     }
 
@@ -45,11 +43,10 @@ public class MainPropertiesRecycleAdapter extends RecyclerView.Adapter<MainPrope
 
     @Override
     public int getItemCount() {
-        return propertyTOS!=null?propertyTOS.size():0;
+        return messageTOS != null ? messageTOS.size() : 0;
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder
-    {
+    public class ViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.rootConstraint)
         public ConstraintLayout rootConstraint;
         @BindView(R.id.imgItem)
@@ -62,13 +59,14 @@ public class MainPropertiesRecycleAdapter extends RecyclerView.Adapter<MainPrope
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            ButterKnife.bind(this,itemView);
+            ButterKnife.bind(this, itemView);
         }
 
-        public void setData(int position)
-        {
-
+        public void setData(int position) {
+            txtTitle.setText("Item Text "+position);
+            txtSubTitle.setText("Item Subtitle "+position);
         }
+
         @OnClick(R.id.rootConstraint)
         public void onClick(View view)
         {

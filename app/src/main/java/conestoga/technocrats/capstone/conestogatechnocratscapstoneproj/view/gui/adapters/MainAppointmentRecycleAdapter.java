@@ -1,6 +1,7 @@
 package conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.view.gui.adapters;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,23 +19,22 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.R;
-import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.model.to.PropertyTO;
+import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.model.to.AppointmentTO;
+import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.model.to.MessageTO;
 
-public class MainPropertiesRecycleAdapter extends RecyclerView.Adapter<MainPropertiesRecycleAdapter.ViewHolder>
-{
+public class MainAppointmentRecycleAdapter extends RecyclerView.Adapter<MainAppointmentRecycleAdapter.ViewHolder> {
     private Context ctx;
-    private List<PropertyTO> propertyTOS;
+    private List<AppointmentTO> appointmentTOS;
 
-    public MainPropertiesRecycleAdapter(Context ctx,List<PropertyTO> propertyTOS)
-    {
-        this.ctx=ctx;
-        this.propertyTOS=propertyTOS;
+    public MainAppointmentRecycleAdapter(Context ctx, List<AppointmentTO> appointmentTOS) {
+        this.ctx = ctx;
+        this.appointmentTOS = appointmentTOS;
     }
+
     @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType)
-    {
-        View view= LayoutInflater.from(ctx).inflate(R.layout.recycle_item1,parent,false);
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(ctx).inflate(R.layout.recycle_item1, parent, false);
         return new ViewHolder(view);
     }
 
@@ -45,11 +45,10 @@ public class MainPropertiesRecycleAdapter extends RecyclerView.Adapter<MainPrope
 
     @Override
     public int getItemCount() {
-        return propertyTOS!=null?propertyTOS.size():0;
+        return appointmentTOS != null ? appointmentTOS.size() : 0;
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder
-    {
+    public class ViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.rootConstraint)
         public ConstraintLayout rootConstraint;
         @BindView(R.id.imgItem)
@@ -62,13 +61,15 @@ public class MainPropertiesRecycleAdapter extends RecyclerView.Adapter<MainPrope
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            ButterKnife.bind(this,itemView);
+            ButterKnife.bind(this, itemView);
         }
 
-        public void setData(int position)
-        {
-
+        public void setData(int position) {
+            txtTitle.setText("Item Text "+position);
+            txtSubTitle.setText("Item Subtitle "+position);
+            imgItem.setBackgroundColor(Color.GREEN);
         }
+
         @OnClick(R.id.rootConstraint)
         public void onClick(View view)
         {

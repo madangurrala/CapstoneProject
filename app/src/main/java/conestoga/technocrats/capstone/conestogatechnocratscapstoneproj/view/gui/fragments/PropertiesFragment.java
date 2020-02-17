@@ -33,7 +33,7 @@ public class PropertiesFragment extends Fragment implements IPropertiesContract 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
-        rootConstraint = (ConstraintLayout) inflater.inflate(R.layout.fragment_properties, container, false);
+        rootConstraint = (ConstraintLayout) inflater.inflate(R.layout.recycle_view_layout, container, false);
         ButterKnife.bind(this, rootConstraint);
         mainPropertyPresenter=new MainPropertyPresenter(getActivity(),this);
         mainPropertyPresenter.getPropertiesList();
