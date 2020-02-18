@@ -1,86 +1,50 @@
 package conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.view.gui.fragments;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.material.button.MaterialButton;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.R;
-import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.model.to.UserTO;
-import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.presenter.LoginAccountPresenter;
-import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.view.gui.activities.AskAccountActivity;
-import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.view.gui.activities.MainActivity;
-import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.view.impl.ILoginContract;
+import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.model.to.AppointmentTO;
+import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.presenter.AppointmentListPresenter;
+import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.view.gui.adapters.MainAppointmentRecycleAdapter;
+import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.view.impl.IAppointmentsContract;
 
-public class AppointmentsFragment extends Fragment implements View.OnClickListener, ILoginContract {
+public class AppointmentsFragment extends Fragment implements IAppointmentsContract {
+    private AppointmentListPresenter appointmentListPresenter;
 
-    private LoginAccountPresenter loginAccountPresenter=null;
-
-    private FrameLayout rootFrameLayout;
-    @BindView(R.id.btnLogin)
-    public MaterialButton btnLogin;
-    @BindView(R.id.btnSignUp)
-    public MaterialButton btnSignUp;
+    private ConstraintLayout rootConstraint;
+    @BindView(R.id.recycleView)
+    public RecyclerView recycleView;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
-        rootFrameLayout = (FrameLayout) inflater.inflate(R.layout.fragment_login, container, false);
-        ButterKnife.bind(this, rootFrameLayout);
-        loginAccountPresenter=new LoginAccountPresenter(this);
-        return rootFrameLayout;
-    }
-
-
-    @OnClick({R.id.btnLogin,R.id.btnSignUp})
-    @Override
-    public void onClick(View view)
-    {
-        switch (view.getId())
-        {
-            case R.id.btnLogin:
-            {
-                UserTO userTO=new UserTO();
-                loginAccountPresenter.validateUserData(userTO);
-                break;
-            }
-            case R.id.btnSignUp:
-            {
-                if(getActivity()!=null && getActivity() instanceof AskAccountActivity)
-                {
-                    AskAccountActivity askAccountActivity=(AskAccountActivity)getActivity();
-                    askAccountActivity.getAskAccountPresenter().showRightFragment(askAccountActivity.getSignUpAccountFragment(),getResources().getString(R.string.sign_up));
-                }
-                break;
-            }
-        }
+        rootConstraint = (ConstraintLayout) inflater.inflate(R.layout.recycle_view_layout, container, false);
+        ButterKnife.bind(this, rootConstraint);
+        appointmentListPresenter = new AppointmentListPresenter(getActivity(), this);
+        appointmentListPresenter.getAppointmentsList();
+        return rootConstraint;
     }
 
     @Override
-    public void isUserDataValid(boolean status, UserTO userTO) {
-        if(status)
-        {
-            loginAccountPresenter.loginUser(userTO);
-        }
-    }
-
-    @Override
-    public void userLoginStatus(boolean status, UserTO userTO) {
-        Toast.makeText(getActivity(), "Welcome!", Toast.LENGTH_SHORT).show();
-        startActivity(new Intent(getActivity(), MainActivity.class));
-        getActivity().finish();
+    public void fillAppointmentsRecycleView(List<AppointmentTO> appointmentTOS) {
+        recycleView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
+        recycleView.setAdapter(new MainAppointmentRecycleAdapter(getActivity(), appointmentTOS));
     }
 }
+
+

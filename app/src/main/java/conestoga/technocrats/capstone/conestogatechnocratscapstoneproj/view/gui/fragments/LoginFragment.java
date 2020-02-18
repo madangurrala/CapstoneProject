@@ -81,7 +81,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener, ILo
     @Override
     public void userLoginStatus(boolean status, UserTO userTO) {
         Toast.makeText(getActivity(), "Welcome!", Toast.LENGTH_SHORT).show();
-        startActivity(new Intent(getActivity(), ProfileActivity.class));
+        startActivity(new Intent(getActivity(), MainActivity.class));
         getActivity().finish();
     }
 }
