@@ -13,11 +13,15 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.R;
 import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.presenter.AskAccountPresenter;
+import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.view.gui.fragments.LoginFragment;
+import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.view.gui.fragments.SignUpAccountFragment;
 import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.view.impl.IAskAccountContract;
 
 public class AskAccountActivity extends AppCompatActivity implements IAskAccountContract {
 
     private AskAccountPresenter askAccountPresenter=null;
+    private LoginFragment loginFragment=null;
+    private SignUpAccountFragment signUpAccountFragment=null;
 
     private FragmentManager fragmentManager=null;
     @BindView(R.id.frame_content)
@@ -29,7 +33,7 @@ public class AskAccountActivity extends AppCompatActivity implements IAskAccount
         setContentView(R.layout.activity_ask_account);
         ButterKnife.bind(this);
         askAccountPresenter=new AskAccountPresenter(this,this);
-        askAccountPresenter.showRightFragment(null);
+        askAccountPresenter.showRightFragment(null,null);
     }
 
     public AskAccountPresenter getAskAccountPresenter()
@@ -37,9 +41,26 @@ public class AskAccountActivity extends AppCompatActivity implements IAskAccount
         return askAccountPresenter;
     }
 
+    public LoginFragment getLoginFragment() {
+        if(loginFragment==null)
+        {
+            loginFragment=new LoginFragment();
+        }
+        return loginFragment;
+    }
+
+    public SignUpAccountFragment getSignUpAccountFragment() {
+        if(signUpAccountFragment==null)
+        {
+            signUpAccountFragment=new SignUpAccountFragment();
+        }
+        return signUpAccountFragment;
+    }
+
     @Override
-    public void showFragment(Fragment fragment)
+    public void showFragment(Fragment fragment,String title)
     {
+        setTitle(title);
         if(fragmentManager==null)
         {
             fragmentManager = getSupportFragmentManager();
