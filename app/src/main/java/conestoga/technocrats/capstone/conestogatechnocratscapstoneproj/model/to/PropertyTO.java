@@ -7,7 +7,7 @@ import androidx.room.PrimaryKey;
 @Entity(tableName = "TBL_PROPERTIES")
 public class PropertyTO
 {
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     private long id;
     @ColumnInfo(name = "title")
     private String title;
@@ -19,6 +19,8 @@ public class PropertyTO
     private String shortDescription;
     @ColumnInfo(name = "longDescription")
     private String longDescription;
+    @ColumnInfo(name = "status")
+    private String status;
     @ColumnInfo(name = "user")
     private String user;
     @ColumnInfo(name = "registerDate")
