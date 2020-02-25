@@ -1,6 +1,7 @@
 package conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.presenter;
 
 import android.content.Context;
+import android.widget.ImageView;
 
 import androidx.fragment.app.Fragment;
 
@@ -11,6 +12,7 @@ import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.R;
 import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.model.local.bl.UserBL;
 import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.model.to.PropertyTO;
 import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.model.to.UserTO;
+import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.presenter.root.AppImagePresenter;
 import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.view.gui.fragments.LoginFragment;
 import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.view.gui.fragments.SignUpAccountFragment;
 import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.view.impl.IAskAccountContract;
@@ -35,7 +37,8 @@ public class MainPropertyPresenter
         {
             PropertyTO propertyTO=new PropertyTO();
             propertyTO.setId(i);
-            propertyTO.setTitle("Property Title "+i);
+            propertyTO.setTitle("Property Title "+(i+1));
+            propertyTO.setShortDescription("Here is a brief description");
             propertyTO.setSmallImagePath("https://www.theplancollection.com/Upload/Plans/SubCategory/240216120038_Plan1011874MainImage_28_9_2015_13_600_400.jpg");
             propertyTO.setAddress("Location "+i);
             propertyTOS.add(propertyTO);

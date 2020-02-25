@@ -19,16 +19,19 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.R;
 import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.model.to.PropertyTO;
+import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.presenter.root.AppImagePresenter;
 
 public class MainPropertiesRecycleAdapter extends RecyclerView.Adapter<MainPropertiesRecycleAdapter.ViewHolder>
 {
     private Context ctx;
     private List<PropertyTO> propertyTOS;
+    private AppImagePresenter appImagePresenter;
 
     public MainPropertiesRecycleAdapter(Context ctx,List<PropertyTO> propertyTOS)
     {
         this.ctx=ctx;
         this.propertyTOS=propertyTOS;
+        appImagePresenter=new AppImagePresenter();
     }
     @NonNull
     @Override
@@ -67,7 +70,10 @@ public class MainPropertiesRecycleAdapter extends RecyclerView.Adapter<MainPrope
 
         public void setData(int position)
         {
-
+            PropertyTO propertyTO=propertyTOS.get(position);
+            appImagePresenter.load(ctx,propertyTO.getSmallImagePath(),imgItem);
+            txtTitle.setText(propertyTO.getTitle());
+            txtSubTitle.setText(propertyTO.getShortDescription());
         }
         @OnClick(R.id.rootConstraint)
         public void onClick(View view)

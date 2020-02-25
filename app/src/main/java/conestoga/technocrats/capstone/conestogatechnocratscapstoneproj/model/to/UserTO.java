@@ -7,7 +7,7 @@ import androidx.room.PrimaryKey;
 @Entity(tableName = "TBL_USERS")
 public class UserTO
 {
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     private long id;
     @ColumnInfo(name = "name")
     private String name;
@@ -16,9 +16,9 @@ public class UserTO
     @ColumnInfo(name = "email")
     private String email;
     @ColumnInfo(name = "phone1")
-    private String phone1;
-    @ColumnInfo(name = "phone2")
-    private String phone2;
+    private String phone;
+    @ColumnInfo(name = "token")
+    private String token;
 
     public long getId() {
         return id;
@@ -52,19 +52,19 @@ public class UserTO
         this.email = email;
     }
 
-    public String getPhone1() {
-        return phone1;
+    public String getPhone() {
+        return phone;
     }
 
-    public void setPhone1(String phone1) {
-        this.phone1 = phone1;
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
-    public String getPhone2() {
-        return phone2;
+    public String getToken() {
+        return token;
     }
 
-    public void setPhone2(String phone2) {
-        this.phone2 = phone2;
+    public void setToken(String token) {
+        this.token = token;
     }
 }
