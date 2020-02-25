@@ -1,10 +1,10 @@
 package conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.view.gui.activities;
 
 import android.os.Bundle;
-import android.widget.Toolbar;
 
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.FragmentStatePagerAdapter;
@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity implements IMainContract, Vi
 
 
     private MainActivityTabLayoutAdapter tabLayoutAdapter=null;
-    private androidx.appcompat.widget.Toolbar toolbar;
+    private Toolbar toolbar;
     private DrawerLayout drawer;
     private List<String> titles=new ArrayList<>();
     private int viewPagerDefaultIndex=0;
@@ -118,7 +118,7 @@ public class MainActivity extends AppCompatActivity implements IMainContract, Vi
 
     @Override
     public void onTabReselected(TabLayout.Tab tab) {
-        new UserBL(this).fetchLoginAccountSP().getEmail();
+       // new UserBL(this).fetchLoginAccountSP().getEmail();
     }
 
     @Override
