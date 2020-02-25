@@ -6,7 +6,7 @@ import androidx.fragment.app.Fragment;
 
 import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.model.local.bl.UserBL;
 import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.model.to.UserTO;
-import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.view.gui.fragments.DisplayProfileFragment;
+import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.view.gui.fragments.ProfileFragment;
 import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.view.gui.fragments.LoginFragment;
 import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.view.gui.fragments.SignUpAccountFragment;
 import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.view.impl.IAskAccountContract;
@@ -38,7 +38,7 @@ public class ProfilePresenter {
         }
         else
         {
-            iProfileContract.showFragment(new DisplayProfileFragment());
+            iProfileContract.showFragment(new ProfileFragment());
         }
 
 

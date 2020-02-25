@@ -1,12 +1,17 @@
 package conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.view.gui.activities;
 
 import android.os.Bundle;
+import android.widget.Toolbar;
 
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.tabs.TabLayout;
+import com.google.android.material.navigation.NavigationView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,10 +19,6 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.R;
-<<<<<<< HEAD
-
-=======
->>>>>>> fa22d9277ed3e9a61e92af5e79d5713a2f2dff26
 import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.model.local.bl.UserBL;
 import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.view.gui.adapters.MainActivityTabLayoutAdapter;
 import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.view.gui.fragments.AppointmentsFragment;
@@ -29,16 +30,11 @@ import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.view.impl
 public class MainActivity extends AppCompatActivity implements IMainContract, ViewPager.OnPageChangeListener, TabLayout.OnTabSelectedListener {
 
 
-<<<<<<< HEAD
     private MainActivityTabLayoutAdapter tabLayoutAdapter=null;
+    private androidx.appcompat.widget.Toolbar toolbar;
+    private DrawerLayout drawer;
     private List<String> titles=new ArrayList<>();
     private int viewPagerDefaultIndex=0;
-=======
-    private MainActivityTabLayoutAdapter tabLayoutAdapter = null;
-    private List<String> titles = new ArrayList<>();
-    private int viewPagerDefaultIndex = 0;
->>>>>>> fa22d9277ed3e9a61e92af5e79d5713a2f2dff26
-
 
     @BindView(R.id.tabLayout)
     public TabLayout tabLayout;
@@ -49,15 +45,14 @@ public class MainActivity extends AppCompatActivity implements IMainContract, Vi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-<<<<<<< HEAD
-
-        new UserBL(this).fetchLoginAccountSP().getEmail();
-
-=======
->>>>>>> fa22d9277ed3e9a61e92af5e79d5713a2f2dff26
+        toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        drawer = findViewById(R.id.drawer_layout);
+        //new UserBL(this).fetchLoginAccountSP().getEmail();
         ButterKnife.bind(this);
         setTitle(getResources().getString(R.string.app_name));
-        tabLayoutAdapter = new MainActivityTabLayoutAdapter(getSupportFragmentManager(), FragmentStatePagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
+        tabLayoutAdapter = new MainActivityTabLayoutAdapter(getSupportFragmentManager(),
+                FragmentStatePagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
         initFragments();
         viewPager.setAdapter(tabLayoutAdapter);
         tabLayout.setupWithViewPager(viewPager);
@@ -68,7 +63,14 @@ public class MainActivity extends AppCompatActivity implements IMainContract, Vi
         viewPager.setCurrentItem(viewPagerDefaultIndex);
         updateTitle(titles.get(viewPagerDefaultIndex));
         viewPager.addOnPageChangeListener(this);
-        tabLayout.addOnTabSelectedListener(this);
+        tabLayout.addOnTabSelectedListener(this );
+
+        ActionBarDrawerToggle drawerToggle = new ActionBarDrawerToggle(this, drawer, toolbar,
+                R.string.nav_draw_open,
+                R.string.nav_draw_close);
+
+        drawer.addDrawerListener(drawerToggle);
+        drawerToggle.syncState();
     }
 
     private void initFragments() {
@@ -81,6 +83,7 @@ public class MainActivity extends AppCompatActivity implements IMainContract, Vi
         tabLayoutAdapter.addItem(new ProfileFragment());
         titles.add("My Profile");
     }
+
 
     @Override
     public void updateTitle(String title) {
@@ -115,9 +118,17 @@ public class MainActivity extends AppCompatActivity implements IMainContract, Vi
 
     @Override
     public void onTabReselected(TabLayout.Tab tab) {
-<<<<<<< HEAD
-=======
         new UserBL(this).fetchLoginAccountSP().getEmail();
->>>>>>> fa22d9277ed3e9a61e92af5e79d5713a2f2dff26
+    }
+
+    @Override
+    public void onBackPressed(){
+
+        if(drawer.isDrawerOpen(GravityCompat.START)){
+            drawer.closeDrawer(GravityCompat.START);
+        }else{
+            super.onBackPressed();
+        }
+
     }
 }
