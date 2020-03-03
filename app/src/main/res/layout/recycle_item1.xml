@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:id="@+id/rootCardView"
-    app:cardBackgroundColor="@android:color/white"
+    app:cardBackgroundColor="@color/colorSurface"
     app:cardElevation="2dp"
     app:cardUseCompatPadding="true"
     app:cardCornerRadius="2dp"
@@ -63,32 +63,38 @@
             app:layout_constraintTop_toBottomOf="@id/imgItem"
             app:layout_constraintRight_toRightOf="parent">
 
-            <ImageButton
+            <RatingBar
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/imgBtn1"
-                android:src="@android:drawable/ic_menu_add"
-                android:background="?attr/selectableItemBackgroundBorderless"
-                android:layout_weight="1"
-                android:layout_margin="8dp"/>
+                android:layout_height="match_parent"
+                android:id="@+id/ratingBar"
+                style="@android:style/Widget.Holo.RatingBar.Small"
+                android:numStars="5"
+                android:rating="3.0"
+                android:max="5"
+                android:stepSize="0.5"
+                android:layout_margin="8dp"
+                android:layout_gravity="center_vertical|left"
+                />
 
             <ImageButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/imgBtn2"
-                android:src="@android:drawable/ic_menu_add"
+                android:src="@drawable/ic_visibility"
                 android:background="?attr/selectableItemBackgroundBorderless"
                 android:layout_weight="1"
-                android:layout_margin="8dp"/>
+                android:layout_margin="8dp"
+                android:layout_gravity="center"/>
 
             <ImageButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/imgBtn3"
-                android:src="@android:drawable/ic_menu_add"
+                android:src="@drawable/ic_favorite_border"
                 android:background="?attr/selectableItemBackgroundBorderless"
                 android:layout_weight="1"
-                android:layout_margin="8dp"/>
+                android:layout_margin="8dp"
+                android:layout_gravity="center_vertical|right"/>
 
         </LinearLayout>
 

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:id="@+id/rootCardView"
-    app:cardBackgroundColor="@android:color/white"
+    app:cardBackgroundColor="@color/colorSurface"
     app:cardElevation="2dp"
     app:cardUseCompatPadding="true"
     app:cardCornerRadius="2dp"
@@ -25,7 +25,6 @@
         android:id="@+id/imgItem"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:background="#2196F3"
         android:layout_margin="8dp"/>
 
         <TextView

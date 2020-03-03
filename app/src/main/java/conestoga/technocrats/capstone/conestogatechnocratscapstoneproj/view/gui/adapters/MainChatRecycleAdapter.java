@@ -19,14 +19,17 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.R;
 import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.model.to.MessageTO;
+import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.presenter.root.AppImagePresenter;
 
 public class MainChatRecycleAdapter extends RecyclerView.Adapter<MainChatRecycleAdapter.ViewHolder> {
     private Context ctx;
     private List<MessageTO> messageTOS;
+    private AppImagePresenter appImagePresenter;
 
     public MainChatRecycleAdapter(Context ctx, List<MessageTO> messageTOS) {
         this.ctx = ctx;
         this.messageTOS = messageTOS;
+        appImagePresenter=new AppImagePresenter();
     }
 
     @NonNull
@@ -62,9 +65,12 @@ public class MainChatRecycleAdapter extends RecyclerView.Adapter<MainChatRecycle
             ButterKnife.bind(this, itemView);
         }
 
-        public void setData(int position) {
+        public void setData(int position)
+        {
+            MessageTO messageTO=messageTOS.get(position);
             txtTitle.setText("Item Text "+position);
             txtSubTitle.setText("Item Subtitle "+position);
+            appImagePresenter.load(ctx,messageTO.getMessageIcon(),imgItem);
         }
 
         @OnClick(R.id.rootConstraint)

@@ -10,8 +10,8 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
+import com.google.android.material.badge.BadgeDrawable;
 import com.google.android.material.tabs.TabLayout;
-import com.google.android.material.navigation.NavigationView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,7 +19,6 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.R;
-import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.model.local.bl.UserBL;
 import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.view.gui.adapters.MainActivityTabLayoutAdapter;
 import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.view.gui.fragments.AppointmentsFragment;
 import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.view.gui.fragments.ChatListFragment;
@@ -30,11 +29,11 @@ import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.view.impl
 public class MainActivity extends AppCompatActivity implements IMainContract, ViewPager.OnPageChangeListener, TabLayout.OnTabSelectedListener {
 
 
-    private MainActivityTabLayoutAdapter tabLayoutAdapter=null;
+    private MainActivityTabLayoutAdapter tabLayoutAdapter = null;
     private Toolbar toolbar;
     private DrawerLayout drawer;
-    private List<String> titles=new ArrayList<>();
-    private int viewPagerDefaultIndex=0;
+    private List<String> titles = new ArrayList<>();
+    private int viewPagerDefaultIndex = 0;
 
     @BindView(R.id.tabLayout)
     public TabLayout tabLayout;
@@ -63,7 +62,7 @@ public class MainActivity extends AppCompatActivity implements IMainContract, Vi
         viewPager.setCurrentItem(viewPagerDefaultIndex);
         updateTitle(titles.get(viewPagerDefaultIndex));
         viewPager.addOnPageChangeListener(this);
-        tabLayout.addOnTabSelectedListener(this );
+        tabLayout.addOnTabSelectedListener(this);
 
         ActionBarDrawerToggle drawerToggle = new ActionBarDrawerToggle(this, drawer, toolbar,
                 R.string.nav_draw_open,
@@ -71,6 +70,10 @@ public class MainActivity extends AppCompatActivity implements IMainContract, Vi
 
         drawer.addDrawerListener(drawerToggle);
         drawerToggle.syncState();
+
+        updateTabLayoutBadge(0, 10);
+        updateTabLayoutBadge(1, 99);
+        updateTabLayoutBadge(2, 2);
     }
 
     private void initFragments() {
@@ -82,6 +85,12 @@ public class MainActivity extends AppCompatActivity implements IMainContract, Vi
         titles.add("My Appointments");
         tabLayoutAdapter.addItem(new ProfileFragment());
         titles.add("My Profile");
+    }
+
+    public void updateTabLayoutBadge(int index, int number) {
+        BadgeDrawable badgeDrawable_0 = tabLayout.getTabAt(index).getOrCreateBadge();
+        badgeDrawable_0.setVisible(true);
+        badgeDrawable_0.setNumber(number);
     }
 
 
@@ -118,15 +127,15 @@ public class MainActivity extends AppCompatActivity implements IMainContract, Vi
 
     @Override
     public void onTabReselected(TabLayout.Tab tab) {
-       // new UserBL(this).fetchLoginAccountSP().getEmail();
+        // new UserBL(this).fetchLoginAccountSP().getEmail();
     }
 
     @Override
-    public void onBackPressed(){
+    public void onBackPressed() {
 
-        if(drawer.isDrawerOpen(GravityCompat.START)){
+        if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
-        }else{
+        } else {
             super.onBackPressed();
         }
 

@@ -28,6 +28,14 @@ public class ChatListPresenter
         for(int i=0;i<20;i++)
         {
             MessageTO messageTO=new MessageTO();
+            if(i%2==0)
+            {
+                messageTO.setMessageIcon("https://cdn.iconscout.com/icon/free/png-512/avatar-367-456319.png");
+            }
+            else
+            {
+                messageTO.setMessageIcon("https://image.flaticon.com/icons/png/512/194/194938.png");
+            }
             messageTOS.add(messageTO);
         }
         iChatListContract.fillChatListRecycleView(messageTOS);

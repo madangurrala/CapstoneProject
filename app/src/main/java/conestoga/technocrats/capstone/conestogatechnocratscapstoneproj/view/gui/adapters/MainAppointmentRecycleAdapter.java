@@ -21,14 +21,17 @@ import butterknife.OnClick;
 import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.R;
 import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.model.to.AppointmentTO;
 import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.model.to.MessageTO;
+import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.presenter.root.AppImagePresenter;
 
 public class MainAppointmentRecycleAdapter extends RecyclerView.Adapter<MainAppointmentRecycleAdapter.ViewHolder> {
     private Context ctx;
     private List<AppointmentTO> appointmentTOS;
+    private AppImagePresenter appImagePresenter;
 
     public MainAppointmentRecycleAdapter(Context ctx, List<AppointmentTO> appointmentTOS) {
         this.ctx = ctx;
         this.appointmentTOS = appointmentTOS;
+        appImagePresenter=new AppImagePresenter();
     }
 
     @NonNull
@@ -65,9 +68,10 @@ public class MainAppointmentRecycleAdapter extends RecyclerView.Adapter<MainAppo
         }
 
         public void setData(int position) {
+            AppointmentTO appointmentTO=appointmentTOS.get(position);
             txtTitle.setText("Item Text "+position);
             txtSubTitle.setText("Item Subtitle "+position);
-            imgItem.setBackgroundColor(Color.GREEN);
+            appImagePresenter.load(ctx,appointmentTO.getAppointmentIcon(),imgItem);
         }
 
         @OnClick(R.id.rootConstraint)

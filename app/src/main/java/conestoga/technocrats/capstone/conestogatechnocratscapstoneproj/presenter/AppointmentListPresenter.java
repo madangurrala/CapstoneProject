@@ -28,6 +28,14 @@ public class AppointmentListPresenter
         for(int i=0;i<20;i++)
         {
             AppointmentTO appointmentTO=new AppointmentTO();
+            if(i%2==0)
+            {
+                appointmentTO.setAppointmentIcon("https://cdn.iconscout.com/icon/free/png-512/avatar-367-456319.png");
+            }
+            else
+            {
+                appointmentTO.setAppointmentIcon("https://image.flaticon.com/icons/png/512/194/194938.png");
+            }
             appointmentTOS.add(appointmentTO);
         }
         iAppointmentsContract.fillAppointmentsRecycleView(appointmentTOS);
