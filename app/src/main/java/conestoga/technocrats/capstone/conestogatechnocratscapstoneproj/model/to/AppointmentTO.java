@@ -1,12 +1,23 @@
 package conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.model.to;
 
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+
+@Entity(tableName = "TBL_APPOINTMENTS")
 public class AppointmentTO
 {
+    @PrimaryKey(autoGenerate = true)
     private long id;
+    @ColumnInfo(name = "peerId")
     private long peerId;
+    @ColumnInfo(name = "peerTitle")
     private String peerTitle;
+    @ColumnInfo(name = "appointmentIcon")
     private String appointmentIcon;
+    @ColumnInfo(name = "registerDate")
     private long registerDate;
+    @ColumnInfo(name = "appointmentDate")
     private long appointmentDate;
 
     public long getId() {
