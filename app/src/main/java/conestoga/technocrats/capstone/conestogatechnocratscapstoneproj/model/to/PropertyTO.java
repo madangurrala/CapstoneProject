@@ -21,6 +21,8 @@ public class PropertyTO
     private String longDescription;
     @ColumnInfo(name = "status")
     private String status;
+    @ColumnInfo(name = "userId")
+    private long userId;
     @ColumnInfo(name = "user")
     private String user;
     @ColumnInfo(name = "registerDate")
@@ -84,6 +86,22 @@ public class PropertyTO
 
     public void setLongDescription(String longDescription) {
         this.longDescription = longDescription;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(long userId) {
+        this.userId = userId;
     }
 
     public String getUser() {

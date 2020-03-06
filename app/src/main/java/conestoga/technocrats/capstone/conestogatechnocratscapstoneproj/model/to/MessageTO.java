@@ -1,17 +1,34 @@
 package conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.model.to;
 
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+
+
+@Entity(tableName = "TBL_MESSAGES")
 public class MessageTO
 {
+    @PrimaryKey(autoGenerate = true)
     private long id;
+    @ColumnInfo(name = "senderId")
     private long senderId;
+    @ColumnInfo(name = "receiverId")
     private long receiverId;
+    @ColumnInfo(name = "senderTitle")
     private long senderTitle;
+    @ColumnInfo(name = "receiverTitle")
     private long receiverTitle;
+    @ColumnInfo(name = "messageIcon")
     private String messageIcon;
+    @ColumnInfo(name = "message")
     private String message;
+    @ColumnInfo(name = "registerDate")
     private long registerDate;
+    @ColumnInfo(name = "updateDate")
     private long updateDate;
+    @ColumnInfo(name = "seenDate")
     private long seenDate;
+    @ColumnInfo(name = "deleteDate")
     private long deleteDate;
 
     public long getId() {
