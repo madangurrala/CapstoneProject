@@ -1,6 +1,9 @@
 package conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.view.gui.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Toast;
 
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
@@ -11,6 +14,7 @@ import androidx.fragment.app.FragmentStatePagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.badge.BadgeDrawable;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
 
 import java.util.ArrayList;
@@ -18,6 +22,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.R;
 import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.view.gui.adapters.MainActivityTabLayoutAdapter;
 import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.view.gui.fragments.AppointmentsFragment;
@@ -26,7 +31,8 @@ import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.view.gui.
 import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.view.gui.fragments.PropertiesFragment;
 import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.view.impl.IMainContract;
 
-public class MainActivity extends AppCompatActivity implements IMainContract, ViewPager.OnPageChangeListener, TabLayout.OnTabSelectedListener {
+public class MainActivity extends AppCompatActivity implements IMainContract, ViewPager.OnPageChangeListener,
+        TabLayout.OnTabSelectedListener {
 
 
     private MainActivityTabLayoutAdapter tabLayoutAdapter = null;
@@ -34,11 +40,14 @@ public class MainActivity extends AppCompatActivity implements IMainContract, Vi
     private DrawerLayout drawer;
     private List<String> titles = new ArrayList<>();
     private int viewPagerDefaultIndex = 0;
+    private FloatingActionButton postAddButton;
+    private Intent postAdIntent;
 
     @BindView(R.id.tabLayout)
     public TabLayout tabLayout;
     @BindView(R.id.viewPager)
     public ViewPager viewPager;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +57,7 @@ public class MainActivity extends AppCompatActivity implements IMainContract, Vi
         setSupportActionBar(toolbar);
         drawer = findViewById(R.id.drawer_layout);
         //new UserBL(this).fetchLoginAccountSP().getEmail();
+        postAddButton = findViewById(R.id.floatingButton);
         ButterKnife.bind(this);
         setTitle(getResources().getString(R.string.app_name));
         tabLayoutAdapter = new MainActivityTabLayoutAdapter(getSupportFragmentManager(),
@@ -74,7 +84,18 @@ public class MainActivity extends AppCompatActivity implements IMainContract, Vi
         updateTabLayoutBadge(0, 10);
         updateTabLayoutBadge(1, 99);
         updateTabLayoutBadge(2, 2);
+
+        postAddButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                postAdIntent = new Intent(MainActivity.this, PostPropertyActivity.class);
+                startActivity(postAdIntent);
+
+            }
+        });
     }
+
 
     private void initFragments() {
         tabLayoutAdapter.addItem(new PropertiesFragment());
@@ -130,6 +151,7 @@ public class MainActivity extends AppCompatActivity implements IMainContract, Vi
         // new UserBL(this).fetchLoginAccountSP().getEmail();
     }
 
+
     @Override
     public void onBackPressed() {
 
@@ -140,4 +162,5 @@ public class MainActivity extends AppCompatActivity implements IMainContract, Vi
         }
 
     }
+
 }

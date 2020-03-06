@@ -1,0 +1,339 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".view.gui.activities.PostPropertyActivity">
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        app:cardBackgroundColor="@color/colorSurface"
+        android:layout_centerInParent="true"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        app:cardCornerRadius="10dp"
+        app:cardElevation="3dp"
+        app:cardPreventCornerOverlap="false"
+        app:cardUseCompatPadding="true"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:id="@+id/linearLayout"
+                android:layout_width="match_parent"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:background="@color/colorPrimary"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:layout_width="50dp"
+                    android:layout_marginTop="10dp"
+                    android:padding="10dp"
+                    android:background="@drawable/circle"
+                    android:tint="@color/colorBG"
+                    android:src="@drawable/ic_create"
+                    android:layout_height="50dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Post Property"
+                    android:textColor="@color/colorBG"
+                    android:fontFamily="sans-serif-medium"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="10dp"
+                    android:textSize="22sp"/>
+
+            </LinearLayout>
+
+            <ScrollView
+                android:layout_below="@id/linearLayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/titleLayout"
+                        android:layout_margin="10dp"
+                        android:layout_width="match_parent"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_height="wrap_content">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:layout_width="match_parent"
+                            android:hint="Title"
+                            android:layout_height="wrap_content">
+
+                        </com.google.android.material.textfield.TextInputEditText>
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+
+                    <TextView
+                        android:id="@+id/pTypeView"
+                        android:layout_margin="10dp"
+                        android:layout_below="@id/titleLayout"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        android:textColor="@color/colorPrimary"
+                        android:text="Select Property Type"
+                        />
+
+                    <Spinner
+                        android:id="@+id/pType_spinner"
+                        android:background="@drawable/rectangle"
+                        android:layout_margin="10dp"
+                        android:layout_toEndOf="@+id/pTypeView"
+                        android:layout_below="@id/titleLayout"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/rentLayout"
+                        android:layout_margin="10dp"
+                        android:layout_below="@id/pType_spinner"
+                        android:layout_width="match_parent"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_height="wrap_content">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:layout_width="match_parent"
+                            android:hint="Rent"
+                            android:inputType="number"
+                            android:layout_height="wrap_content">
+
+                        </com.google.android.material.textfield.TextInputEditText>
+
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/sizeLayout"
+                        android:layout_margin="10dp"
+                        android:layout_below="@id/rentLayout"
+                        android:layout_width="match_parent"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_height="wrap_content">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:layout_width="match_parent"
+                            android:hint="Property Size(sqft)"
+                            android:inputType="number"
+                            android:layout_height="wrap_content">
+
+                        </com.google.android.material.textfield.TextInputEditText>
+
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/agreementLayout"
+                        android:layout_margin="10dp"
+                        android:layout_below="@id/sizeLayout"
+                        android:layout_width="match_parent"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_height="wrap_content">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:layout_width="match_parent"
+                            android:hint="Agreement Duration(Months)"
+                            android:inputType="number"
+                            android:layout_height="wrap_content">
+
+                        </com.google.android.material.textfield.TextInputEditText>
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/bedroomLayout"
+                        android:layout_margin="10dp"
+                        android:layout_below="@id/agreementLayout"
+                        android:layout_width="match_parent"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_height="wrap_content">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:layout_width="match_parent"
+                            android:hint="Bedroom(s)"
+                            android:inputType="number"
+                            android:layout_height="wrap_content">
+
+                        </com.google.android.material.textfield.TextInputEditText>
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/bathroomLayout"
+                        android:layout_margin="10dp"
+                        android:layout_below="@id/bedroomLayout"
+                        android:layout_width="match_parent"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_height="wrap_content">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:layout_width="match_parent"
+                            android:hint="Bathroom(s)"
+                            android:inputType="number"
+                            android:layout_height="wrap_content">
+
+                        </com.google.android.material.textfield.TextInputEditText>
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <TextView
+                        android:id="@+id/utilitiesId"
+                        android:layout_margin="10dp"
+                        android:layout_below="@id/bathroomLayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        android:textColor="@color/colorBG"
+                        android:background="@color/colorPrimary"
+                        android:text="Utilities/Amenities Included"
+                        />
+
+                    <CheckBox
+                        xmlns:android="http://schemas.android.com/apk/res/android"
+                        xmlns:app="http://schemas.android.com/apk/res-auto"
+                        android:id="@+id/hydroId"
+                        android:layout_margin="10dp"
+                        android:layout_below="@id/utilitiesId"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Hydro"
+                        app:useMaterialThemeColors="false"/>
+
+                    <CheckBox
+                        xmlns:android="http://schemas.android.com/apk/res/android"
+                        xmlns:app="http://schemas.android.com/apk/res-auto"
+                        android:id="@+id/gasId"
+                        android:layout_margin="10dp"
+                        android:layout_below="@id/utilitiesId"
+                        android:layout_toEndOf="@+id/hydroId"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Gas"
+                        app:useMaterialThemeColors="false"/>
+
+                    <CheckBox
+                        xmlns:android="http://schemas.android.com/apk/res/android"
+                        xmlns:app="http://schemas.android.com/apk/res-auto"
+                        android:id="@+id/internetId"
+                        android:layout_margin="10dp"
+                        android:layout_below="@id/utilitiesId"
+                        android:layout_toEndOf="@+id/gasId"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Internet"
+                        app:useMaterialThemeColors="false"/>
+
+
+                    <CheckBox
+                        xmlns:android="http://schemas.android.com/apk/res/android"
+                        xmlns:app="http://schemas.android.com/apk/res-auto"
+                        android:id="@+id/gymId"
+                        android:layout_margin="10dp"
+                        android:layout_below="@id/utilitiesId"
+                        android:layout_toEndOf="@+id/internetId"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Gym"
+                        app:useMaterialThemeColors="false"/>
+
+                    <CheckBox
+                        xmlns:android="http://schemas.android.com/apk/res/android"
+                        xmlns:app="http://schemas.android.com/apk/res-auto"
+                        android:id="@+id/furnishedId"
+                        android:layout_margin="10dp"
+                        android:layout_below="@id/hydroId"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Furnished"
+                        app:useMaterialThemeColors="false"/>
+
+                    <CheckBox
+                        xmlns:android="http://schemas.android.com/apk/res/android"
+                        xmlns:app="http://schemas.android.com/apk/res-auto"
+                        android:id="@+id/laundryId"
+                        android:layout_margin="10dp"
+                        android:layout_below="@id/hydroId"
+                        android:layout_toEndOf="@+id/furnishedId"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Laundry"
+                        app:useMaterialThemeColors="false"/>
+
+
+                        <TextView
+                            android:id="@+id/imageText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:padding="10dp"
+                            android:layout_margin="10dp"
+                            android:textColor="@color/colorPrimary"
+                            android:layout_below="@+id/furnishedId"
+                            android:text="Select Image">
+
+                        </TextView>
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnImage"
+                        style="@style/Widget.MaterialComponents.Button"
+                        android:layout_width="wrap_content"
+                        android:layout_margin="5dp"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/furnishedId"
+                        android:layout_toEndOf="@+id/imageText"
+                        android:text="Upload" />
+
+                    <LinearLayout
+                        android:id="@+id/buttonsLayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:orientation="horizontal"
+                        android:weightSum="2"
+                        android:layout_below="@id/imageText">
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btnCancel"
+                            app:useMaterialThemeColors="false"
+                            style="@style/Widget.MaterialComponents.Button"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:layout_margin="4dp"
+                            android:text="Cancel" />
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btnSubmit"
+                            style="@style/Widget.MaterialComponents.Button"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="4dp"
+                            android:layout_weight="1"
+                            android:text="Submit" />
+                    </LinearLayout>
+
+
+
+                </RelativeLayout>
+
+
+            </ScrollView>
+
+        </RelativeLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+</RelativeLayout>
