@@ -10,14 +10,14 @@ import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.model.loc
 import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.model.local.da.MessageDA;
 import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.model.local.da.PropertyDA;
 import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.model.local.da.UserDA;
+import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.model.to.AppointmentTO;
+import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.model.to.MessageTO;
+import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.model.to.PropertyTO;
 import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.model.to.UserTO;
 
-@Database(entities = {UserTO.class, PropertyDA.class, MessageDA.class, AppointmentDA.class}
+@Database(entities = {UserTO.class, PropertyTO.class, MessageTO.class, AppointmentTO.class}
         , version = 1)
 public abstract class AppDatabase extends RoomDatabase {
-    private AppDatabase() {
-    }
-
     private static AppDatabase appDatabase;
 
     public abstract UserDA userDA();

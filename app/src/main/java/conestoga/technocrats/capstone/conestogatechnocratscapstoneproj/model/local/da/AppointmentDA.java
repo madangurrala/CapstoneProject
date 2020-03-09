@@ -23,5 +23,5 @@ public interface AppointmentDA
     @Query(value = "SELECT * FROM TBL_APPOINTMENTS WHERE ID=:id ORDER BY appointmentDate DESC")
     public LiveData<List<AppointmentTO>> select(long id);
     @Query(value = "SELECT * FROM TBL_APPOINTMENTS ORDER BY appointmentDate DESC")
-    public LiveData<List<AppointmentTO>> selectAll(AppointmentTO appointmentTO);
+    public LiveData<List<AppointmentTO>> selectAll();
 }
