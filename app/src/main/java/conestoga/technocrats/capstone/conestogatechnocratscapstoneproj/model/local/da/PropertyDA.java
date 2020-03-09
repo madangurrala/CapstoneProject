@@ -22,7 +22,7 @@ public interface PropertyDA
     @Delete
     public void delete(PropertyTO propertyTO);
     @Query(value = "SELECT * FROM TBL_PROPERTIES WHERE ID=:id limit 1")
-    public void select(long id);
+    public PropertyTO select(long id);
     @Query(value = "SELECT * FROM TBL_PROPERTIES ORDER BY registerDate DESC")
     public LiveData<List<PropertyTO>> selectAll();
     @Query(value = "SELECT * FROM TBL_PROPERTIES WHERE userId=:userId ORDER BY registerDate DESC")

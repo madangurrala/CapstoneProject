@@ -15,8 +15,10 @@ public class UserTO
     private String family;
     @ColumnInfo(name = "email")
     private String email;
-    @ColumnInfo(name = "phone1")
+    @ColumnInfo(name = "phone")
     private String phone;
+    @ColumnInfo(name = "photo")
+    private String photo;
     @ColumnInfo(name = "token")
     private String token;
 
@@ -58,6 +60,14 @@ public class UserTO
 
     public void setPhone(String phone) {
         this.phone = phone;
+    }
+
+    public String getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(String photo) {
+        this.photo = photo;
     }
 
     public String getToken() {

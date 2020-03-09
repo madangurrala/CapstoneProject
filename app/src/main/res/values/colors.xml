@@ -9,4 +9,5 @@
     <color name="colorTransperent">#00000000</color>
     <color name="colorRed">#ff0000 </color>
     <color name="colorBorder">#808080</color>
+    <color name="colorGrayBG">#957A7A7A</color>
 </resources>

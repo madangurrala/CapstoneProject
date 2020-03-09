@@ -2,11 +2,15 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
+<<<<<<< HEAD
     "identityHash": "132c1a9449d0202334cb40b5d571d3e1",
+=======
+    "identityHash": "018f2ec028c7749a4df47b8fa6d062b4",
+>>>>>>> d58baae6153638d65aa661f0aa43c7b2ccd57e42
     "entities": [
       {
         "tableName": "TBL_USERS",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `name` TEXT, `family` TEXT, `email` TEXT, `phone1` TEXT, `token` TEXT)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `name` TEXT, `family` TEXT, `email` TEXT, `phone` TEXT, `photo` TEXT, `token` TEXT)",
         "fields": [
           {
             "fieldPath": "id",
@@ -34,7 +38,13 @@
           },
           {
             "fieldPath": "phone",
-            "columnName": "phone1",
+            "columnName": "phone",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "photo",
+            "columnName": "photo",
             "affinity": "TEXT",
             "notNull": false
           },
@@ -55,34 +65,268 @@
         "foreignKeys": []
       },
       {
+<<<<<<< HEAD
         "tableName": "PropertyDA",
         "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` ()",
         "fields": [],
         "primaryKey": {
           "columnNames": [],
           "autoGenerate": false
+=======
+        "tableName": "TBL_PROPERTIES",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `title` TEXT, `smallImagePath` TEXT, `bigImagePath` TEXT, `shortDescription` TEXT, `longDescription` TEXT, `status` TEXT, `userId` INTEGER NOT NULL, `user` TEXT, `registerDate` INTEGER NOT NULL, `latitude` REAL NOT NULL, `longitude` REAL NOT NULL, `address` TEXT, `price` TEXT, `rate` REAL NOT NULL, `viewCount` INTEGER NOT NULL)",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "title",
+            "columnName": "title",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "smallImagePath",
+            "columnName": "smallImagePath",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "bigImagePath",
+            "columnName": "bigImagePath",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "shortDescription",
+            "columnName": "shortDescription",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "longDescription",
+            "columnName": "longDescription",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "status",
+            "columnName": "status",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "userId",
+            "columnName": "userId",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "user",
+            "columnName": "user",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "registerDate",
+            "columnName": "registerDate",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "latitude",
+            "columnName": "latitude",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "longitude",
+            "columnName": "longitude",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "address",
+            "columnName": "address",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "price",
+            "columnName": "price",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "rate",
+            "columnName": "rate",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "viewCount",
+            "columnName": "viewCount",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "id"
+          ],
+          "autoGenerate": true
+>>>>>>> d58baae6153638d65aa661f0aa43c7b2ccd57e42
         },
         "indices": [],
         "foreignKeys": []
       },
       {
+<<<<<<< HEAD
         "tableName": "MessageDA",
         "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` ()",
         "fields": [],
         "primaryKey": {
           "columnNames": [],
           "autoGenerate": false
+=======
+        "tableName": "TBL_MESSAGES",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `senderId` INTEGER NOT NULL, `receiverId` INTEGER NOT NULL, `senderTitle` INTEGER NOT NULL, `receiverTitle` INTEGER NOT NULL, `messageIcon` TEXT, `message` TEXT, `registerDate` INTEGER NOT NULL, `updateDate` INTEGER NOT NULL, `seenDate` INTEGER NOT NULL, `deleteDate` INTEGER NOT NULL)",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "senderId",
+            "columnName": "senderId",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "receiverId",
+            "columnName": "receiverId",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "senderTitle",
+            "columnName": "senderTitle",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "receiverTitle",
+            "columnName": "receiverTitle",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "messageIcon",
+            "columnName": "messageIcon",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "message",
+            "columnName": "message",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "registerDate",
+            "columnName": "registerDate",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "updateDate",
+            "columnName": "updateDate",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "seenDate",
+            "columnName": "seenDate",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "deleteDate",
+            "columnName": "deleteDate",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "id"
+          ],
+          "autoGenerate": true
+>>>>>>> d58baae6153638d65aa661f0aa43c7b2ccd57e42
         },
         "indices": [],
         "foreignKeys": []
       },
       {
+<<<<<<< HEAD
         "tableName": "AppointmentDA",
         "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` ()",
         "fields": [],
         "primaryKey": {
           "columnNames": [],
           "autoGenerate": false
+=======
+        "tableName": "TBL_APPOINTMENTS",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `peerId` INTEGER NOT NULL, `peerTitle` TEXT, `appointmentIcon` TEXT, `registerDate` INTEGER NOT NULL, `appointmentDate` INTEGER NOT NULL)",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "peerId",
+            "columnName": "peerId",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "peerTitle",
+            "columnName": "peerTitle",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "appointmentIcon",
+            "columnName": "appointmentIcon",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "registerDate",
+            "columnName": "registerDate",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "appointmentDate",
+            "columnName": "appointmentDate",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "id"
+          ],
+          "autoGenerate": true
+>>>>>>> d58baae6153638d65aa661f0aa43c7b2ccd57e42
         },
         "indices": [],
         "foreignKeys": []
@@ -91,7 +335,11 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
+<<<<<<< HEAD
       "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '132c1a9449d0202334cb40b5d571d3e1')"
+=======
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '018f2ec028c7749a4df47b8fa6d062b4')"
+>>>>>>> d58baae6153638d65aa661f0aa43c7b2ccd57e42
     ]
   }
 }

@@ -1,6 +1,7 @@
 package conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.view.gui.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +21,7 @@ import butterknife.OnClick;
 import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.R;
 import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.model.to.MessageTO;
 import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.presenter.root.AppImagePresenter;
+import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.view.gui.activities.ChatDetailsActivity;
 
 public class MainChatRecycleAdapter extends RecyclerView.Adapter<MainChatRecycleAdapter.ViewHolder> {
     private Context ctx;
@@ -76,7 +78,8 @@ public class MainChatRecycleAdapter extends RecyclerView.Adapter<MainChatRecycle
         @OnClick(R.id.rootConstraint)
         public void onClick(View view)
         {
-            Toast.makeText(ctx, "We still are working to complete this part", Toast.LENGTH_SHORT).show();
+            Intent intent=new Intent(ctx, ChatDetailsActivity.class);
+            ctx.startActivity(intent);
         }
     }
 
