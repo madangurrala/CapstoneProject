@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "bf3379479ac3d4f75270543c96d87ab1",
+    "identityHash": "132c1a9449d0202334cb40b5d571d3e1",
     "entities": [
       {
         "tableName": "TBL_USERS",
@@ -53,12 +53,45 @@
         },
         "indices": [],
         "foreignKeys": []
+      },
+      {
+        "tableName": "PropertyDA",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` ()",
+        "fields": [],
+        "primaryKey": {
+          "columnNames": [],
+          "autoGenerate": false
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "MessageDA",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` ()",
+        "fields": [],
+        "primaryKey": {
+          "columnNames": [],
+          "autoGenerate": false
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "AppointmentDA",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` ()",
+        "fields": [],
+        "primaryKey": {
+          "columnNames": [],
+          "autoGenerate": false
+        },
+        "indices": [],
+        "foreignKeys": []
       }
     ],
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'bf3379479ac3d4f75270543c96d87ab1')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '132c1a9449d0202334cb40b5d571d3e1')"
     ]
   }
 }
