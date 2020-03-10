@@ -2,11 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-<<<<<<< HEAD
-    "identityHash": "018f2ec028c7749a4df47b8fa6d062b4",
-=======
     "identityHash": "7bedf70fd3623a64e8b717df0257cdb8",
->>>>>>> 614786e7696b177d2800e72af59857d39064c21e
     "entities": [
       {
         "tableName": "TBL_USERS",
@@ -314,11 +310,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-<<<<<<< HEAD
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '018f2ec028c7749a4df47b8fa6d062b4')"
-=======
       "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '7bedf70fd3623a64e8b717df0257cdb8')"
->>>>>>> 614786e7696b177d2800e72af59857d39064c21e
     ]
   }
 }
