@@ -2,7 +2,11 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
+<<<<<<< HEAD
     "identityHash": "018f2ec028c7749a4df47b8fa6d062b4",
+=======
+    "identityHash": "7bedf70fd3623a64e8b717df0257cdb8",
+>>>>>>> 614786e7696b177d2800e72af59857d39064c21e
     "entities": [
       {
         "tableName": "TBL_USERS",
@@ -62,7 +66,7 @@
       },
       {
         "tableName": "TBL_PROPERTIES",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `title` TEXT, `smallImagePath` TEXT, `bigImagePath` TEXT, `shortDescription` TEXT, `longDescription` TEXT, `status` TEXT, `userId` INTEGER NOT NULL, `user` TEXT, `registerDate` INTEGER NOT NULL, `latitude` REAL NOT NULL, `longitude` REAL NOT NULL, `address` TEXT, `price` TEXT, `rate` REAL NOT NULL, `viewCount` INTEGER NOT NULL)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `title` TEXT, `smallImagePath` TEXT, `bigImagePath` TEXT, `shortDescription` TEXT, `longDescription` TEXT, `status` TEXT, `userId` INTEGER NOT NULL, `user` TEXT, `registerDate` INTEGER NOT NULL, `latitude` REAL NOT NULL, `longitude` REAL NOT NULL, `address` TEXT, `size` TEXT, `price` TEXT, `rate` REAL NOT NULL, `viewCount` INTEGER NOT NULL)",
         "fields": [
           {
             "fieldPath": "id",
@@ -139,6 +143,12 @@
           {
             "fieldPath": "address",
             "columnName": "address",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "size",
+            "columnName": "size",
             "affinity": "TEXT",
             "notNull": false
           },
@@ -304,7 +314,11 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
+<<<<<<< HEAD
       "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '018f2ec028c7749a4df47b8fa6d062b4')"
+=======
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '7bedf70fd3623a64e8b717df0257cdb8')"
+>>>>>>> 614786e7696b177d2800e72af59857d39064c21e
     ]
   }
 }

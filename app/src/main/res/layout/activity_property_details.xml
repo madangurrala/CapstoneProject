@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.viewpager2.widget.ViewPager2
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            android:id="@+id/viewPagerImgSlider"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:background="@color/colorAccent"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/txtOwnerHeader"
+            android:layout_margin="8dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/viewPagerImgSlider"
+            android:textColor="@color/colorGrayFG"
+            android:text="Owner Profile"/>
+
+        <ImageView
+            android:layout_width="90dp"
+            android:layout_height="90dp"
+            android:id="@+id/imgOwner"
+            android:layout_margin="16dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/txtOwnerHeader"
+            android:src="@color/colorPrimary"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/txtOwnerName"
+            android:layout_margin="16dp"
+            app:layout_constraintLeft_toRightOf="@id/imgOwner"
+            app:layout_constraintTop_toBottomOf="@id/txtOwnerHeader"
+            android:textColor="#000000"
+            android:text="Owner Full Name"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/txtOwnerPhone"
+            android:layout_margin="16dp"
+            app:layout_constraintLeft_toRightOf="@id/imgOwner"
+            app:layout_constraintTop_toBottomOf="@id/txtOwnerName"
+            android:textColor="#000000"
+            android:text="Phone: (***) *** ****"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/txtOwnerEmail"
+            android:layout_margin="16dp"
+            app:layout_constraintLeft_toRightOf="@id/imgOwner"
+            app:layout_constraintTop_toBottomOf="@id/txtOwnerPhone"
+            android:textColor="#000000"
+            android:text="Email: *****.*****@*****.***"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/txtPropertyHeader"
+            android:layout_margin="8dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/imgOwner"
+            android:textColor="@color/colorGrayFG"
+            android:text="Property Profile"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/linearPropertyProfile1"
+            android:orientation="horizontal"
+            android:weightSum="2"
+            android:layout_margin="8dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/txtPropertyHeader">
+
+            <com.google.android.material.textview.MaterialTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/txtPropertySize"
+                android:layout_margin="8dp"
+                android:textColor="#000000"
+                android:text="Property Size"
+                android:layout_weight="1"/>
+
+            <com.google.android.material.textview.MaterialTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/txtPropertyStatus"
+                android:layout_margin="8dp"
+                android:textColor="#000000"
+                android:text="Property Size"
+                android:layout_weight="1"/>
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/linearPropertyProfile2"
+            android:orientation="horizontal"
+            android:weightSum="2"
+            android:layout_margin="8dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/linearPropertyProfile1">
+            <com.google.android.material.textview.MaterialTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/txtPropertyPrice"
+                android:layout_margin="8dp"
+                android:textColor="#000000"
+                android:text="Property Price"
+                android:layout_weight="1"/>
+            <com.google.android.material.textview.MaterialTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/txtPropertyRegisterDate"
+                android:layout_margin="8dp"
+                android:textColor="#000000"
+                android:text="Property Register Date"
+                android:layout_weight="1"/>
+        </LinearLayout>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnRequestAppointment"
+            style="@style/Widget.MaterialComponents.Button"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Request Appointment"
+            android:layout_margin="16dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/linearPropertyProfile2"
+            app:layout_constraintRight_toRightOf="parent"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/txtPropertyDescHeader"
+            android:layout_margin="8dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/btnRequestAppointment"
+            android:textColor="@color/colorGrayFG"
+            android:text="Property Description"/>
+
+        <com.google.android.material.textview.MaterialTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/txtPropertyDesc"
+            android:layout_margin="8dp"
+            android:padding="8dp"
+            android:textColor="#000000"
+            android:text="@string/sample_text"
+            android:layout_weight="1"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/txtPropertyDescHeader"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
