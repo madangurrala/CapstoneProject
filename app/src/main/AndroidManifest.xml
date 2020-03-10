@@ -33,6 +33,7 @@
             android:windowSoftInputMode="adjustPan" />
         <activity android:name=".view.gui.activities.AskAccountActivity" />
         <activity android:name=".view.gui.activities.ChatDetailsActivity" />
+        <activity android:name=".view.gui.activities.PropertyDetailsActivity" />
     </application>
 
 </manifest>

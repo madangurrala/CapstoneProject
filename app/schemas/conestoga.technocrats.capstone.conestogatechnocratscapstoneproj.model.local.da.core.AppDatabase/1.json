@@ -2,11 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-<<<<<<< HEAD
-    "identityHash": "132c1a9449d0202334cb40b5d571d3e1",
-=======
-    "identityHash": "018f2ec028c7749a4df47b8fa6d062b4",
->>>>>>> d58baae6153638d65aa661f0aa43c7b2ccd57e42
+    "identityHash": "7bedf70fd3623a64e8b717df0257cdb8",
     "entities": [
       {
         "tableName": "TBL_USERS",
@@ -65,16 +61,8 @@
         "foreignKeys": []
       },
       {
-<<<<<<< HEAD
-        "tableName": "PropertyDA",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` ()",
-        "fields": [],
-        "primaryKey": {
-          "columnNames": [],
-          "autoGenerate": false
-=======
         "tableName": "TBL_PROPERTIES",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `title` TEXT, `smallImagePath` TEXT, `bigImagePath` TEXT, `shortDescription` TEXT, `longDescription` TEXT, `status` TEXT, `userId` INTEGER NOT NULL, `user` TEXT, `registerDate` INTEGER NOT NULL, `latitude` REAL NOT NULL, `longitude` REAL NOT NULL, `address` TEXT, `price` TEXT, `rate` REAL NOT NULL, `viewCount` INTEGER NOT NULL)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `title` TEXT, `smallImagePath` TEXT, `bigImagePath` TEXT, `shortDescription` TEXT, `longDescription` TEXT, `status` TEXT, `userId` INTEGER NOT NULL, `user` TEXT, `registerDate` INTEGER NOT NULL, `latitude` REAL NOT NULL, `longitude` REAL NOT NULL, `address` TEXT, `size` TEXT, `price` TEXT, `rate` REAL NOT NULL, `viewCount` INTEGER NOT NULL)",
         "fields": [
           {
             "fieldPath": "id",
@@ -155,6 +143,12 @@
             "notNull": false
           },
           {
+            "fieldPath": "size",
+            "columnName": "size",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
             "fieldPath": "price",
             "columnName": "price",
             "affinity": "TEXT",
@@ -178,20 +172,11 @@
             "id"
           ],
           "autoGenerate": true
->>>>>>> d58baae6153638d65aa661f0aa43c7b2ccd57e42
         },
         "indices": [],
         "foreignKeys": []
       },
       {
-<<<<<<< HEAD
-        "tableName": "MessageDA",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` ()",
-        "fields": [],
-        "primaryKey": {
-          "columnNames": [],
-          "autoGenerate": false
-=======
         "tableName": "TBL_MESSAGES",
         "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `senderId` INTEGER NOT NULL, `receiverId` INTEGER NOT NULL, `senderTitle` INTEGER NOT NULL, `receiverTitle` INTEGER NOT NULL, `messageIcon` TEXT, `message` TEXT, `registerDate` INTEGER NOT NULL, `updateDate` INTEGER NOT NULL, `seenDate` INTEGER NOT NULL, `deleteDate` INTEGER NOT NULL)",
         "fields": [
@@ -267,20 +252,11 @@
             "id"
           ],
           "autoGenerate": true
->>>>>>> d58baae6153638d65aa661f0aa43c7b2ccd57e42
         },
         "indices": [],
         "foreignKeys": []
       },
       {
-<<<<<<< HEAD
-        "tableName": "AppointmentDA",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` ()",
-        "fields": [],
-        "primaryKey": {
-          "columnNames": [],
-          "autoGenerate": false
-=======
         "tableName": "TBL_APPOINTMENTS",
         "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `peerId` INTEGER NOT NULL, `peerTitle` TEXT, `appointmentIcon` TEXT, `registerDate` INTEGER NOT NULL, `appointmentDate` INTEGER NOT NULL)",
         "fields": [
@@ -326,7 +302,6 @@
             "id"
           ],
           "autoGenerate": true
->>>>>>> d58baae6153638d65aa661f0aa43c7b2ccd57e42
         },
         "indices": [],
         "foreignKeys": []
@@ -335,11 +310,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-<<<<<<< HEAD
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '132c1a9449d0202334cb40b5d571d3e1')"
-=======
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '018f2ec028c7749a4df47b8fa6d062b4')"
->>>>>>> d58baae6153638d65aa661f0aa43c7b2ccd57e42
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '7bedf70fd3623a64e8b717df0257cdb8')"
     ]
   }
 }

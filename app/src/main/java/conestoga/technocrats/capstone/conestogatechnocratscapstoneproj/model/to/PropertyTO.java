@@ -33,6 +33,8 @@ public class PropertyTO
     private double longitude;
     @ColumnInfo(name = "address")
     private String address;
+    @ColumnInfo(name = "size")
+    private String size;
     @ColumnInfo(name = "price")
     private String price;
     @ColumnInfo(name = "rate")
@@ -142,6 +144,14 @@ public class PropertyTO
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public String getSize() {
+        return size;
+    }
+
+    public void setSize(String size) {
+        this.size = size;
     }
 
     public String getPrice() {
