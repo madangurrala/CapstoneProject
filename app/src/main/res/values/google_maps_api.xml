@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--debug-->
+    <!--keytool -list -v -keystore ~/.android/debug.keystore -alias androiddebugkey -storepass android -keypass android-->
+
+    <!--release-->
+    <!--keytool -list -v -keystore your_keystore_name -alias your_alias_name-->
+    <string name="google_map_key">AIzaSyA0QEHxvh_6Pgcxl52jP7xof2iU_spj3iE</string>
+</resources>

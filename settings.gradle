@@ -1,2 +1,5 @@
 include ':app'
 rootProject.name='ConestogaTechnocratsCapstoneProj'
+
+/*include ':google_play_services'
+project(':google_play_services').projectDir = new File('/home/farshad/Android/Sdk/extras/google/google_play_services')*/

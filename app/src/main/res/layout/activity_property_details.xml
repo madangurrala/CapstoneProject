@@ -133,6 +133,17 @@
         </LinearLayout>
 
         <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnShowMap"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/ic_location_on"
+            android:text="Show On Map"
+            android:layout_margin="16dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/linearPropertyProfile2"/>
+
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/btnRequestAppointment"
             style="@style/Widget.MaterialComponents.Button"
             android:layout_width="0dp"
@@ -140,7 +151,7 @@
             android:text="Request Appointment"
             android:layout_margin="16dp"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/linearPropertyProfile2"
+            app:layout_constraintTop_toBottomOf="@id/btnShowMap"
             app:layout_constraintRight_toRightOf="parent"/>
 
         <TextView
