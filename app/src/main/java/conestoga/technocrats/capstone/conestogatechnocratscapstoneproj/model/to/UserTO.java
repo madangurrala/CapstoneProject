@@ -7,7 +7,7 @@ import androidx.room.PrimaryKey;
 @Entity(tableName = "TBL_USERS")
 public class UserTO
 {
-    @PrimaryKey(autoGenerate = true)
+    @PrimaryKey(autoGenerate = false)
     private long id;
     @ColumnInfo(name = "name")
     private String name;

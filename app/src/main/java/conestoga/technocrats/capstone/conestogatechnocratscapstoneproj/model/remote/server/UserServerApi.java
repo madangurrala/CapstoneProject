@@ -1,18 +1,17 @@
 package conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.model.remote.server;
 
 import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.model.remote.server.impl.IUserServiceAPI;
-import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.model.remote.server.root.ServerService;
 import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.model.to.UserTO;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Retrofit;
 
-public class UserServiceAPI {
+public class UserServerApi {
     private IUserServiceAPI iUserServiceAPI;
     private final String baseUrl = "";
 
-    public UserServiceAPI() {
-        Retrofit retrofit = new ServerService(baseUrl).getRetrofit();
+    public UserServerApi() {
+        Retrofit retrofit = new CoreServerApi(baseUrl).getRetrofit();
         iUserServiceAPI = retrofit.create(IUserServiceAPI.class);
     }
 

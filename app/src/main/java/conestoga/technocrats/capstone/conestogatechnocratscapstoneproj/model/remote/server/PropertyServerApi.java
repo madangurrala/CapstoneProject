@@ -3,18 +3,17 @@ package conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.model.re
 import java.util.List;
 
 import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.model.remote.server.impl.IPropertyServiceAPI;
-import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.model.remote.server.root.ServerService;
 import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.model.to.PropertyTO;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Retrofit;
 
-public class PropertyServiceAPI {
+public class PropertyServerApi {
     private IPropertyServiceAPI iPropertyServiceAPI;
     private final String baseUrl = "";
 
-    public PropertyServiceAPI() {
-        Retrofit retrofit = new ServerService(baseUrl).getRetrofit();
+    public PropertyServerApi() {
+        Retrofit retrofit = new CoreServerApi(baseUrl).getRetrofit();
         iPropertyServiceAPI = retrofit.create(IPropertyServiceAPI.class);
     }
 

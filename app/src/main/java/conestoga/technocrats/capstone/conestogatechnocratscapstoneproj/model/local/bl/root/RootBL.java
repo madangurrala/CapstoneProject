@@ -4,7 +4,7 @@ import android.content.Context;
 
 import androidx.room.Room;
 
-import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.model.local.da.core.AppDatabase;
+import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.model.local.da.AppDatabase;
 
 public class RootBL {
     private final String DATABASE_NAME="CONESTOGA_CAPSTONE_DB";

@@ -1,4 +1,4 @@
-package conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.model.local.da.core;
+package conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.model.local.da;
 
 import android.content.Context;
 
@@ -6,10 +6,6 @@ import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
-import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.model.local.da.AppointmentDA;
-import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.model.local.da.MessageDA;
-import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.model.local.da.PropertyDA;
-import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.model.local.da.UserDA;
 import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.model.to.AppointmentTO;
 import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.model.to.MessageTO;
 import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.model.to.PropertyTO;

@@ -8,7 +8,7 @@ import androidx.room.PrimaryKey;
 @Entity(tableName = "TBL_MESSAGES")
 public class MessageTO
 {
-    @PrimaryKey(autoGenerate = true)
+    @PrimaryKey(autoGenerate = false)
     private long id;
     @ColumnInfo(name = "senderId")
     private long senderId;

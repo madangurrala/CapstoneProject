@@ -1,20 +1,20 @@
 package conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.model.remote.bl;
 
-import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.model.remote.server.UserServiceAPI;
+import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.model.remote.server.UserServerApi;
 import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.model.to.UserTO;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class UserServiceBL
+public class UserServerBL
 {
-    private UserServiceAPI userServiceAPI;
-    public UserServiceBL() {
-        userServiceAPI=new UserServiceAPI();
+    private UserServerApi userServerApi;
+    public UserServerBL() {
+        userServerApi =new UserServerApi();
     }
 
     public void login(String email, String passwd) {
-        userServiceAPI.login(email, passwd, new Callback<UserTO>() {
+        userServerApi.login(email, passwd, new Callback<UserTO>() {
             @Override
             public void onResponse(Call<UserTO> call, Response<UserTO> response) {
 
@@ -28,7 +28,7 @@ public class UserServiceBL
     }
 
     public void logout(String token) {
-        userServiceAPI.logout(token, new Callback<Void>() {
+        userServerApi.logout(token, new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
 
