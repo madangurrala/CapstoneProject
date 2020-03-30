@@ -72,6 +72,7 @@
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:layout_width="match_parent"
+                            android:id="@+id/editTitle"
                             android:hint="Title"
                             android:layout_height="wrap_content">
 
@@ -111,6 +112,7 @@
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:layout_width="match_parent"
+                            android:id="@+id/editRent"
                             android:hint="Rent"
                             android:inputType="number"
                             android:layout_height="wrap_content">
@@ -130,6 +132,7 @@
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:layout_width="match_parent"
+                            android:id="@+id/editSize"
                             android:hint="Property Size(sqft)"
                             android:inputType="number"
                             android:layout_height="wrap_content">
@@ -149,6 +152,7 @@
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:layout_width="match_parent"
+                            android:id="@+id/editDuration"
                             android:hint="Agreement Duration(Months)"
                             android:inputType="number"
                             android:layout_height="wrap_content">
@@ -166,6 +170,7 @@
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:layout_width="match_parent"
+                            android:id="@+id/editBedroomCount"
                             android:hint="Bedroom(s)"
                             android:inputType="number"
                             android:layout_height="wrap_content">
@@ -183,6 +188,7 @@
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:layout_width="match_parent"
+                            android:id="@+id/editBathroomCount"
                             android:hint="Bathroom(s)"
                             android:inputType="number"
                             android:layout_height="wrap_content">

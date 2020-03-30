@@ -13,11 +13,13 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.google.android.material.button.MaterialButton;
+import com.google.android.material.textfield.TextInputEditText;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.R;
+import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.model.local.bl.UserBL;
 import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.model.to.UserTO;
 import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.presenter.LoginAccountPresenter;
 import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.view.gui.activities.AskAccountActivity;
@@ -30,6 +32,10 @@ public class LoginFragment extends Fragment implements View.OnClickListener, ILo
     private LoginAccountPresenter loginAccountPresenter=null;
 
     private FrameLayout rootFrameLayout;
+    @BindView(R.id.editEmail)
+    public TextInputEditText editEmail;
+    @BindView(R.id.editPasswd)
+    public TextInputEditText editPasswd;
     @BindView(R.id.btnLogin)
     public MaterialButton btnLogin;
     @BindView(R.id.btnSignUp)
@@ -41,7 +47,14 @@ public class LoginFragment extends Fragment implements View.OnClickListener, ILo
         super.onCreateView(inflater, container, savedInstanceState);
         rootFrameLayout = (FrameLayout) inflater.inflate(R.layout.fragment_login, container, false);
         ButterKnife.bind(this, rootFrameLayout);
-        loginAccountPresenter=new LoginAccountPresenter(this);
+        loginAccountPresenter=new LoginAccountPresenter(getActivity().getApplicationContext(),this);
+
+        UserBL userBL=new UserBL(getActivity().getApplicationContext());
+        UserTO loginUserTO=userBL.fetchLoginAccountSP();
+        if(loginUserTO!=null && loginUserTO.getEmail()!=null)
+        {
+            editEmail.setText(loginUserTO.getEmail());
+        }
         return rootFrameLayout;
     }
 
@@ -55,6 +68,8 @@ public class LoginFragment extends Fragment implements View.OnClickListener, ILo
             case R.id.btnLogin:
             {
                 UserTO userTO=new UserTO();
+                userTO.setEmail(editEmail.getText().toString());
+                userTO.setPasswd(editPasswd.getText().toString());
                 loginAccountPresenter.validateUserData(userTO);
                 break;
             }
@@ -80,7 +95,11 @@ public class LoginFragment extends Fragment implements View.OnClickListener, ILo
 
     @Override
     public void userLoginStatus(boolean status, UserTO userTO) {
-        Toast.makeText(getActivity(), "Welcome!", Toast.LENGTH_SHORT).show();
+        if(!status)
+        {
+            Toast.makeText(getActivity(), "Sorry, Try Again!", Toast.LENGTH_SHORT).show();
+            return;
+        }
         startActivity(new Intent(getActivity(), MainActivity.class));
         getActivity().finish();
     }

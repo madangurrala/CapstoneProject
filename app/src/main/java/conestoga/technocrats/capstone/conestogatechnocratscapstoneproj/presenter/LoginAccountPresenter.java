@@ -1,13 +1,28 @@
 package conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.presenter;
 
+import android.content.Context;
+import android.os.AsyncTask;
+
+import java.lang.ref.WeakReference;
+
+import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.model.local.bl.UserBL;
+import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.model.local.sp.LoginAccountSP;
+import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.model.remote.server.UserServerApi;
 import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.model.to.UserTO;
 import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.view.impl.ILoginContract;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class LoginAccountPresenter
 {
+    private UserServerApi userServerApi;
+    private UserBL userBL;
     private ILoginContract iLoginContract=null;
-    public LoginAccountPresenter(ILoginContract iLoginContract)
+    public LoginAccountPresenter(Context context,ILoginContract iLoginContract)
     {
+        userServerApi=new UserServerApi();
+        userBL=new UserBL(context);
         this.iLoginContract=iLoginContract;
     }
 
@@ -19,7 +34,45 @@ public class LoginAccountPresenter
 
     public void loginUser(UserTO userTO)
     {
-        iLoginContract.userLoginStatus(true,userTO);
+        userServerApi.login(userTO, new Callback<UserTO>() {
+            @Override
+            public void onResponse(Call<UserTO> call, Response<UserTO> response) {
+                if(response.code()!=200)
+                {
+                    iLoginContract.userLoginStatus(false,null);
+                    return;
+                }
+                UserTO loginUserTO=response.body();
+                new AsyncTaskActions(userBL,iLoginContract).execute(loginUserTO);
+            }
+
+            @Override
+            public void onFailure(Call<UserTO> call, Throwable t) {
+                iLoginContract.userLoginStatus(false,null);
+            }
+        });
+    }
+
+    private static class AsyncTaskActions extends AsyncTask<UserTO,Void,Void>
+    {
+        private WeakReference<UserBL> userBLWeakReference;
+        private WeakReference<ILoginContract> iLoginContractWeakReference;
+
+        public AsyncTaskActions(UserBL userBL,ILoginContract iLoginContract)
+        {
+            userBLWeakReference=new WeakReference<>(userBL);
+            iLoginContractWeakReference=new WeakReference<>(iLoginContract);
+        }
+
+        @Override
+        protected Void doInBackground(UserTO... userTOS)
+        {
+            UserTO loginUserTO=userTOS[0];
+            userBLWeakReference.get().registerLoginAccountSP(loginUserTO);
+            userBLWeakReference.get().registerUser(loginUserTO);
+            iLoginContractWeakReference.get().userLoginStatus(true,loginUserTO);
+            return null;
+        }
     }
 
 }

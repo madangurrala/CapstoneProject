@@ -1,15 +1,22 @@
 package conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.model.remote.server.impl;
 
+import com.google.gson.JsonObject;
+
 import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.model.to.UserTO;
+import okhttp3.RequestBody;
 import retrofit2.Call;
+import retrofit2.http.Body;
 import retrofit2.http.Field;
+import retrofit2.http.Headers;
 import retrofit2.http.POST;
 
 public interface IUserServiceAPI {
     //@FormUrlEncoded
-    @POST(value = "/conestoga/api/login")
-    Call<UserTO> login(@Field(value = "email") String email, @Field(value = "passwd") String passwd);
+    //@Headers( "Content-Type: application/json" )
+    //@Headers( { "Accept: text/plain"} )
+    @POST("login")
+    Call<UserTO> login(@Body RequestBody requestBody);
 
-    @POST(value = "/conestoga/api/logout")
-    Call<Void> logout(@Field(value = "token") String token);
+    @POST(value = "user")
+    Call<UserTO> register(@Body RequestBody requestBody);
 }

@@ -2,11 +2,11 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "4f5352daba7433d2896c1b90c64fe8d1",
+    "identityHash": "b5341399b9d347a760ecf0f03bb9a6f7",
     "entities": [
       {
         "tableName": "TBL_USERS",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER NOT NULL, `name` TEXT, `family` TEXT, `email` TEXT, `phone` TEXT, `photo` TEXT, `token` TEXT, PRIMARY KEY(`id`))",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `name` TEXT, `family` TEXT, `email` TEXT, `phone` TEXT, `photo` TEXT, `password` TEXT, `token` TEXT)",
         "fields": [
           {
             "fieldPath": "id",
@@ -45,6 +45,12 @@
             "notNull": false
           },
           {
+            "fieldPath": "passwd",
+            "columnName": "password",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
             "fieldPath": "token",
             "columnName": "token",
             "affinity": "TEXT",
@@ -55,14 +61,14 @@
           "columnNames": [
             "id"
           ],
-          "autoGenerate": false
+          "autoGenerate": true
         },
         "indices": [],
         "foreignKeys": []
       },
       {
         "tableName": "TBL_PROPERTIES",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER NOT NULL, `title` TEXT, `smallImagePath` TEXT, `bigImagePath` TEXT, `shortDescription` TEXT, `longDescription` TEXT, `status` TEXT, `userId` INTEGER NOT NULL, `user` TEXT, `registerDate` INTEGER NOT NULL, `latitude` REAL NOT NULL, `longitude` REAL NOT NULL, `address` TEXT, `size` TEXT, `price` TEXT, `rate` REAL NOT NULL, `viewCount` INTEGER NOT NULL, PRIMARY KEY(`id`))",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `title` TEXT, `smallImagePath` TEXT, `bigImagePath` TEXT, `shortDescription` TEXT, `longDescription` TEXT, `status` TEXT, `userId` INTEGER NOT NULL, `user` TEXT, `registerDate` INTEGER NOT NULL, `latitude` REAL NOT NULL, `longitude` REAL NOT NULL, `address` TEXT, `size` TEXT, `price` TEXT, `rate` REAL NOT NULL, `viewCount` INTEGER NOT NULL)",
         "fields": [
           {
             "fieldPath": "id",
@@ -171,14 +177,14 @@
           "columnNames": [
             "id"
           ],
-          "autoGenerate": false
+          "autoGenerate": true
         },
         "indices": [],
         "foreignKeys": []
       },
       {
         "tableName": "TBL_MESSAGES",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER NOT NULL, `senderId` INTEGER NOT NULL, `receiverId` INTEGER NOT NULL, `senderTitle` INTEGER NOT NULL, `receiverTitle` INTEGER NOT NULL, `messageIcon` TEXT, `message` TEXT, `registerDate` INTEGER NOT NULL, `updateDate` INTEGER NOT NULL, `seenDate` INTEGER NOT NULL, `deleteDate` INTEGER NOT NULL, PRIMARY KEY(`id`))",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `senderId` INTEGER NOT NULL, `receiverId` INTEGER NOT NULL, `senderTitle` INTEGER NOT NULL, `receiverTitle` INTEGER NOT NULL, `messageIcon` TEXT, `message` TEXT, `registerDate` INTEGER NOT NULL, `updateDate` INTEGER NOT NULL, `seenDate` INTEGER NOT NULL, `deleteDate` INTEGER NOT NULL)",
         "fields": [
           {
             "fieldPath": "id",
@@ -251,14 +257,14 @@
           "columnNames": [
             "id"
           ],
-          "autoGenerate": false
+          "autoGenerate": true
         },
         "indices": [],
         "foreignKeys": []
       },
       {
         "tableName": "TBL_APPOINTMENTS",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER NOT NULL, `peerId` INTEGER NOT NULL, `peerTitle` TEXT, `appointmentIcon` TEXT, `registerDate` INTEGER NOT NULL, `appointmentDate` INTEGER NOT NULL, PRIMARY KEY(`id`))",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `peerId` INTEGER NOT NULL, `peerTitle` TEXT, `appointmentIcon` TEXT, `registerDate` INTEGER NOT NULL, `appointmentDate` INTEGER NOT NULL)",
         "fields": [
           {
             "fieldPath": "id",
@@ -301,7 +307,7 @@
           "columnNames": [
             "id"
           ],
-          "autoGenerate": false
+          "autoGenerate": true
         },
         "indices": [],
         "foreignKeys": []
@@ -310,7 +316,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '4f5352daba7433d2896c1b90c64fe8d1')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'b5341399b9d347a760ecf0f03bb9a6f7')"
     ]
   }
 }
