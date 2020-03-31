@@ -26,12 +26,10 @@ import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.presenter
 public class MainAppointmentRecycleAdapter extends RecyclerView.Adapter<MainAppointmentRecycleAdapter.ViewHolder> {
     private Context ctx;
     private List<AppointmentTO> appointmentTOS;
-    private AppImagePresenter appImagePresenter;
 
     public MainAppointmentRecycleAdapter(Context ctx, List<AppointmentTO> appointmentTOS) {
         this.ctx = ctx;
         this.appointmentTOS = appointmentTOS;
-        appImagePresenter=new AppImagePresenter();
     }
 
     @NonNull
@@ -71,7 +69,7 @@ public class MainAppointmentRecycleAdapter extends RecyclerView.Adapter<MainAppo
             AppointmentTO appointmentTO=appointmentTOS.get(position);
             txtTitle.setText("Item Text "+position);
             txtSubTitle.setText("Item Subtitle "+position);
-            appImagePresenter.load(ctx,appointmentTO.getAppointmentIcon(),imgItem);
+            imgItem.setImageResource(R.drawable.ic_business_center);
         }
 
         @OnClick(R.id.rootConstraint)
