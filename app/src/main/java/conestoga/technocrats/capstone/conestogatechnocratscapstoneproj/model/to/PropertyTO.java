@@ -1,12 +1,76 @@
 package conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.model.to;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
 @Entity(tableName = "TBL_PROPERTIES")
-public class PropertyTO
+public class PropertyTO implements Parcelable
 {
+    public PropertyTO(){}
+    public PropertyTO(Parcel in) {
+        propertyId = in.readLong();
+        id = in.readLong();
+        title = in.readString();
+        smallImagePath = in.readString();
+        bigImagePath = in.readString();
+        shortDescription = in.readString();
+        longDescription = in.readString();
+        status = in.readString();
+        userId = in.readLong();
+        user = in.readString();
+        registerDate = in.readLong();
+        latitude = in.readDouble();
+        longitude = in.readDouble();
+        address = in.readString();
+        size = in.readString();
+        price = in.readString();
+        rate = in.readFloat();
+        viewCount = in.readInt();
+    }
+
+    public static final Creator<PropertyTO> CREATOR = new Creator<PropertyTO>() {
+        @Override
+        public PropertyTO createFromParcel(Parcel in) {
+            return new PropertyTO(in);
+        }
+
+        @Override
+        public PropertyTO[] newArray(int size) {
+            return new PropertyTO[size];
+        }
+    };
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeLong(propertyId);
+        dest.writeLong(id);
+        dest.writeString(title);
+        dest.writeString(smallImagePath);
+        dest.writeString(bigImagePath);
+        dest.writeString(shortDescription);
+        dest.writeString(longDescription);
+        dest.writeString(status);
+        dest.writeLong(userId);
+        dest.writeString(user);
+        dest.writeLong(registerDate);
+        dest.writeDouble(latitude);
+        dest.writeDouble(longitude);
+        dest.writeString(address);
+        dest.writeString(size);
+        dest.writeString(price);
+        dest.writeFloat(rate);
+        dest.writeInt(viewCount);
+    }
+
     public static final class KEY
     {
             public static final String PROPERTY_ID_KEY = "propertyId";

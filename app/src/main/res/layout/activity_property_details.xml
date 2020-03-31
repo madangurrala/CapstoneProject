@@ -101,7 +101,7 @@
                 android:id="@+id/txtPropertyStatus"
                 android:layout_margin="8dp"
                 android:textColor="#000000"
-                android:text="Property Size"
+                android:text="Property Status"
                 android:layout_weight="1"/>
 
         </LinearLayout>

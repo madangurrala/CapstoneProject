@@ -24,7 +24,7 @@ public class SignUpAccountPresenter
     public SignUpAccountPresenter(Context ctx,ISignUpAccountContract iSignUpAccountContract)
     {
         this.ctx=ctx;
-        userServerApi=new UserServerApi();
+        userServerApi=new UserServerApi(null);
         userBL=new UserBL(this.ctx);
         this.iSignUpAccountContract=iSignUpAccountContract;
     }

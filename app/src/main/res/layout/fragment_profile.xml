@@ -1,175 +1,178 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<androidx.core.widget.NestedScrollView
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:android="http://schemas.android.com/apk/res/android">
-
-    <FrameLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.swiperefreshlayout.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:id="@+id/profileFrameLayout">
+    android:id="@+id/swipeRefreshLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/profileRootConstraint"
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <FrameLayout
+            android:id="@+id/profileFrameLayout"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <ImageView
-                android:id="@+id/imageView"
-                android:layout_width="202dp"
-                android:layout_height="109dp"
-                android:contentDescription="@string/account_icon"
-                android:src="@drawable/ic_account_circle_black_24dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.042" />
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/fNameLayout"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/profileRootConstraint"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginLeft="8dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginRight="8dp"
-                android:hint="First Name"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/imageView">
+                android:layout_height="match_parent">
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/fNameText"
+                <ImageView
+                    android:id="@+id/imageView"
+                    android:layout_width="202dp"
+                    android:layout_height="109dp"
+                    android:contentDescription="@string/account_icon"
+                    android:src="@drawable/ic_account_circle_black_24dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.042" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/fNameLayout"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:enabled="false">
+                    android:layout_marginStart="8dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginRight="8dp"
+                    android:hint="First Name"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/imageView">
 
-                </com.google.android.material.textfield.TextInputEditText>
-            </com.google.android.material.textfield.TextInputLayout>
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/fNameText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:enabled="false">
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/lNameLayout"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginLeft="8dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginRight="8dp"
-                android:hint="Last Name"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/fNameLayout"
-                app:layout_constraintVertical_bias="0.02999998">
+                    </com.google.android.material.textfield.TextInputEditText>
+                </com.google.android.material.textfield.TextInputLayout>
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/lNameText"
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/lNameLayout"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginRight="8dp"
+                    android:hint="Last Name"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/fNameLayout"
+                    app:layout_constraintVertical_bias="0.02999998">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/lNameText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:enabled="false">
+
+                    </com.google.android.material.textfield.TextInputEditText>
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/emailLayout"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:enabled="false">
+                    android:layout_marginStart="8dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginRight="8dp"
+                    android:hint="Email"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.52"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/lNameLayout"
+                    app:layout_constraintVertical_bias="0.02999998">
 
-                </com.google.android.material.textfield.TextInputEditText>
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/emailText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:enabled="false" />
+                </com.google.android.material.textfield.TextInputLayout>
 
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/emailLayout"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginLeft="8dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginRight="8dp"
-                android:hint="Email"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.52"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/lNameLayout"
-                app:layout_constraintVertical_bias="0.02999998">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/emailText"
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/phoneLayout"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:enabled="false" />
-            </com.google.android.material.textfield.TextInputLayout>
+                    android:layout_marginStart="8dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginRight="8dp"
+                    android:hint="Phone Number"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/emailLayout"
+                    app:layout_constraintVertical_bias="0.02999998">
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/phoneLayout"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginLeft="8dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginRight="8dp"
-                android:hint="Phone Number"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/emailLayout"
-                app:layout_constraintVertical_bias="0.02999998">
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/phoneText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:enabled="false">
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/phoneText"
-                    android:layout_width="match_parent"
+                    </com.google.android.material.textfield.TextInputEditText>
+
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <LinearLayout
+                    android:id="@+id/linearLayout2"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:enabled="false">
+                    android:layout_margin="16dp"
+                    android:orientation="horizontal"
+                    android:weightSum="2"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/phoneLayout"
+                    app:layout_constraintVertical_bias="0.17000002">
 
-                </com.google.android.material.textfield.TextInputEditText>
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/editProfile"
+                        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="4dp"
+                        android:layout_weight="1"
+                        android:text="@string/edit_profile">
 
+                    </com.google.android.material.button.MaterialButton>
 
-            </com.google.android.material.textfield.TextInputLayout>
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/updateProfile"
+                        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="4dp"
+                        android:layout_weight="1"
+                        android:enabled="false"
+                        android:text="@string/update_profile">
 
-            <LinearLayout
-                android:id="@+id/linearLayout2"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_margin="16dp"
-                android:orientation="horizontal"
-                android:weightSum="2"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/phoneLayout"
-                app:layout_constraintVertical_bias="0.17000002">
-
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/editProfile"
-                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="4dp"
-                    android:layout_weight="1"
-                    android:text="@string/edit_profile">
-
-                </com.google.android.material.button.MaterialButton>
-
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/updateProfile"
-                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="4dp"
-                    android:layout_weight="1"
-                    android:enabled="false"
-                    android:text="@string/update_profile">
-
-                </com.google.android.material.button.MaterialButton>
+                    </com.google.android.material.button.MaterialButton>
 
 
-            </LinearLayout>
+                </LinearLayout>
 
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </FrameLayout>
-</androidx.core.widget.NestedScrollView>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </FrameLayout>
+    </androidx.core.widget.NestedScrollView>
+</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

@@ -21,7 +21,7 @@ public class LoginAccountPresenter
     private ILoginContract iLoginContract=null;
     public LoginAccountPresenter(Context context,ILoginContract iLoginContract)
     {
-        userServerApi=new UserServerApi();
+        userServerApi=new UserServerApi(null);
         userBL=new UserBL(context);
         this.iLoginContract=iLoginContract;
     }

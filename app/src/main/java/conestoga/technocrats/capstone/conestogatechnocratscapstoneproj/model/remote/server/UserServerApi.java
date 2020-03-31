@@ -14,9 +14,9 @@ public class UserServerApi {
     private IUserServiceAPI iUserServiceAPI;
     private String baseUrl = "";
 
-    public UserServerApi() {
+    public UserServerApi(String token) {
         baseUrl=CoreServerApi.BASE_URL;
-        Retrofit retrofit = new CoreServerApi(baseUrl,null).getRetrofit();
+        Retrofit retrofit = new CoreServerApi(baseUrl,token).getRetrofit();
         iUserServiceAPI = retrofit.create(IUserServiceAPI.class);
     }
 
@@ -46,6 +46,14 @@ public class UserServerApi {
 
         RequestBody requestBody=RequestBody.create(MediaType.parse("application/json"),jsonObject.toString());
         Call<UserTO> call = iUserServiceAPI.register(requestBody);
+        call.enqueue(callback);
+    }
+
+    public void getUserById(long id, Callback<UserTO> callback) {
+        if (callback == null) {
+            return;
+        }
+        Call<UserTO> call = iUserServiceAPI.selectUserById((int)id);
         call.enqueue(callback);
     }
 }

@@ -40,7 +40,8 @@ public class SplashActivity extends AppCompatActivity {
         String[] permissions = {
                 Manifest.permission.INTERNET,
                 Manifest.permission.ACCESS_FINE_LOCATION,
-                Manifest.permission.WRITE_EXTERNAL_STORAGE
+                Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                Manifest.permission.CAMERA
 
         };
         for (String permission : permissions) {

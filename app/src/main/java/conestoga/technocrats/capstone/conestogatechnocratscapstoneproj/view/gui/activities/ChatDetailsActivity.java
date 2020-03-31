@@ -10,6 +10,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.textfield.TextInputEditText;
+import com.sendbird.android.BaseChannel;
+import com.sendbird.android.OpenChannel;
+import com.sendbird.android.User;
 
 import java.util.List;
 
@@ -18,12 +21,12 @@ import butterknife.ButterKnife;
 import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.R;
 import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.model.to.MessageTO;
 import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.model.to.UserTO;
-import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.presenter.ChatDetailsPresenter;
+import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.presenter.TextChatPresenter;
 import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.view.gui.adapters.ChatDetailsRecycleAdapter;
 import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.view.impl.IChatDetailsContract;
 
 public class ChatDetailsActivity extends AppCompatActivity implements IChatDetailsContract {
-    private ChatDetailsPresenter chatDetailsPresenter;
+    private TextChatPresenter textChatPresenter;
     private ChatDetailsRecycleAdapter chatDetailsRecycleAdapter;
     private UserTO userOwnerTO;
     private UserTO userPeerTO;
@@ -41,9 +44,29 @@ public class ChatDetailsActivity extends AppCompatActivity implements IChatDetai
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat_details);
         ButterKnife.bind(this);
-        chatDetailsPresenter=new ChatDetailsPresenter(this,this);
+        textChatPresenter=new TextChatPresenter(this,null,this);
         loadUsers();
-        chatDetailsPresenter.loadMessages();
+        textChatPresenter.loadMessages();
+
+    }
+
+    @Override
+    public void getAllChannelUsersList(List<User> userList) {
+
+    }
+
+    @Override
+    public void existChannelDetails(boolean isExited, OpenChannel openChannel) {
+
+    }
+
+    @Override
+    public void sendMessageDetails(boolean isSent, String senderId, String receiverId, String message) {
+
+    }
+
+    @Override
+    public void receiveMessageDetails(String senderId, String receiverId, String message, BaseChannel baseChannel) {
 
     }
 

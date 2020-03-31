@@ -1,8 +1,11 @@
 package conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.presenter;
 
 import android.content.Context;
+import android.os.AsyncTask;
 
 import androidx.fragment.app.Fragment;
+
+import java.lang.ref.WeakReference;
 
 import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.model.local.bl.UserBL;
 import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.model.to.UserTO;
@@ -24,24 +27,48 @@ public class ProfilePresenter {
         userBL=new UserBL(this.ctx);
     }
 
-    public void showRightFragment(Fragment fragment)
+    public void updateUserProfile()
     {
-        if(fragment!=null)
-        {
-            iProfileContract.showFragment(fragment);
-            return;
-        }
-        UserTO userTO=userBL.fetchLoginAccountSP();
-        if(userTO==null || userTO.getEmail()==null)
-        {
-            iProfileContract.showFragment(new LoginFragment());
-        }
-        else
-        {
-            iProfileContract.showFragment(new ProfileFragment());
-        }
-
 
     }
 
+
+    public void getUserProfile()
+    {
+        new AsyncTaskGetProfileAction(userBL,iProfileContract).execute();
+    }
+
+    private static class AsyncTaskGetProfileAction extends AsyncTask<Void,Void,UserTO>
+    {
+        private WeakReference<UserBL> userBLWeakReference;
+        private WeakReference<IProfileContract> iProfileContractWeakReference;
+
+        public AsyncTaskGetProfileAction(UserBL userBL,IProfileContract iProfileContract)
+        {
+            userBLWeakReference=new WeakReference<>(userBL);
+            iProfileContractWeakReference=new WeakReference<>(iProfileContract);
+        }
+
+        @Override
+        protected UserTO doInBackground(Void... voids)
+        {
+            UserTO userTO=userBLWeakReference.get().fetchLoginAccountSP();
+            if(userTO==null || userTO.getEmail()==null)
+            {
+                return null;
+            }
+            userTO=userBLWeakReference.get().fetchUser(userTO.getEmail());
+            if(userTO==null || userTO.getToken()==null)
+            {
+                return null;
+            }
+            return userTO;
+        }
+
+        @Override
+        protected void onPostExecute(UserTO userTO) {
+            super.onPostExecute(userTO);
+            iProfileContractWeakReference.get().setUserProfileData(userTO);
+        }
+    }
 }

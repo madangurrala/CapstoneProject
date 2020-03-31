@@ -2,7 +2,9 @@ package conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.view.imp
 
 import androidx.fragment.app.Fragment;
 
+import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.model.to.UserTO;
+
 public interface IProfileContract {
 
-    public void showFragment(Fragment fragment);
+    public void setUserProfileData(UserTO userTO);
 }

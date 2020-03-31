@@ -76,11 +76,14 @@ public class MainPropertiesRecycleAdapter extends RecyclerView.Adapter<MainPrope
             appImagePresenter.load(ctx,propertyTO.getSmallImagePath(),imgItem);
             txtTitle.setText(propertyTO.getTitle());
             txtSubTitle.setText(propertyTO.getShortDescription());
+            rootConstraint.setTag(position);
         }
         @OnClick(R.id.rootConstraint)
         public void onClick(View view)
         {
+            int position= Integer.parseInt(view.getTag().toString());
             Intent intent=new Intent(ctx, PropertyDetailsActivity.class);
+            intent.putExtra("property",propertyTOS.get(position));
             ctx.startActivity(intent);
         }
     }
