@@ -45,4 +45,9 @@ public class PropertiesFragment extends Fragment implements IPropertiesContract 
         recycleView.setLayoutManager(new LinearLayoutManager(getActivity(),LinearLayoutManager.VERTICAL,false));
         recycleView.setAdapter(new MainPropertiesRecycleAdapter(getActivity(),propertyTOS));
     }
+
+    @Override
+    public void addProperty(boolean status) {
+
+    }
 }

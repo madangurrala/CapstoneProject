@@ -9,6 +9,9 @@ import androidx.room.PrimaryKey;
 public class MessageTO
 {
     @PrimaryKey(autoGenerate = true)
+    @ColumnInfo(name = "messageId")
+    private long messageId;
+    @ColumnInfo(name = "id")
     private long id;
     @ColumnInfo(name = "senderId")
     private long senderId;
@@ -30,6 +33,14 @@ public class MessageTO
     private long seenDate;
     @ColumnInfo(name = "deleteDate")
     private long deleteDate;
+
+    public long getMessageId() {
+        return messageId;
+    }
+
+    public void setMessageId(long messageId) {
+        this.messageId = messageId;
+    }
 
     public long getId() {
         return id;

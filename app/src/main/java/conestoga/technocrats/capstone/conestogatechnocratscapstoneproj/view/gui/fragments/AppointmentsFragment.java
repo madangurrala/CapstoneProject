@@ -35,6 +35,7 @@ public class AppointmentsFragment extends Fragment implements IAppointmentsContr
         super.onCreateView(inflater, container, savedInstanceState);
         rootConstraint = (ConstraintLayout) inflater.inflate(R.layout.recycle_view_layout, container, false);
         ButterKnife.bind(this, rootConstraint);
+        recycleView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
         appointmentListPresenter = new AppointmentListPresenter(getActivity(), this);
         appointmentListPresenter.getAppointmentsList();
         return rootConstraint;
@@ -42,7 +43,6 @@ public class AppointmentsFragment extends Fragment implements IAppointmentsContr
 
     @Override
     public void fillAppointmentsRecycleView(List<AppointmentTO> appointmentTOS) {
-        recycleView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
         recycleView.setAdapter(new MainAppointmentRecycleAdapter(getActivity(), appointmentTOS));
     }
 }

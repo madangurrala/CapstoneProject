@@ -7,7 +7,32 @@ import androidx.room.PrimaryKey;
 @Entity(tableName = "TBL_PROPERTIES")
 public class PropertyTO
 {
+    public static final class KEY
+    {
+            public static final String PROPERTY_ID_KEY = "propertyId";
+            public static final String ID_KEY = "id";
+            public static final String TITLE_KEY = "title";
+            public static final String SMALL_IMAGE_PATH_KEY = "smallImagePath";
+            public static final String BIG_IMAGE_PATH_KEY = "bigImagePath";
+            public static final String SHORT_DESCRIPTION_KEY = "shortDescription";
+            public static final String LONG_DESCRIPTION_KEY = "longDescription";
+            public static final String STATUS_KEY = "status";
+            public static final String USER_ID_KEY = "userId";
+            public static final String USER_KEY = "user";
+            public static final String REGISTER_DATE_KEY = "registerDate";
+            public static final String LATITUDE_KEY = "latitude";
+            public static final String LONGITUDE_KEY = "longitude";
+            public static final String ADDRESS_KEY = "address";
+            public static final String SIZE_KEY = "size";
+            public static final String PRICE_KEY = "price";
+            public static final String RATE_KEY = "rate";
+            public static final String VIEW_COUNT_KEY = "viewCount";
+    }
+
     @PrimaryKey(autoGenerate = true)
+    @ColumnInfo(name = "propertyId")
+    private long propertyId;
+    @ColumnInfo(name = "id")
     private long id;
     @ColumnInfo(name = "title")
     private String title;
@@ -41,6 +66,14 @@ public class PropertyTO
     private float rate;
     @ColumnInfo(name = "viewCount")
     private int viewCount;
+
+    public long getPropertyId() {
+        return propertyId;
+    }
+
+    public void setPropertyId(long propertyId) {
+        this.propertyId = propertyId;
+    }
 
     public long getId() {
         return id;

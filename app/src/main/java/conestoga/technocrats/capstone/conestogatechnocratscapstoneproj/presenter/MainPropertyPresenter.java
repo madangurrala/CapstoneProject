@@ -29,15 +29,28 @@ public class MainPropertyPresenter {
     }
 
     public void getPropertiesList() {
-        new AsyncTaskActions(userBL,iPropertiesContract,propertyServerApi).execute();
+        new AsyncTaskGetAction(userBL,iPropertiesContract,propertyServerApi).execute();
     }
 
-    private static class AsyncTaskActions extends AsyncTask<Void,Void,Void>
+    public void addPropertyValidation(PropertyTO propertyTO)
+    {
+        if(propertyTO!=null)
+        {
+            addProperty(propertyTO);
+        }
+    }
+    private void addProperty(PropertyTO propertyTO)
+    {
+        new AsyncTaskAddAction(userBL,iPropertiesContract,propertyServerApi).execute(propertyTO);
+    }
+
+
+    private static class AsyncTaskGetAction extends AsyncTask<Void,Void,Void>
     {
         private WeakReference<UserBL> userBLWeakReference;
         private WeakReference<IPropertiesContract> iPropertiesContractWeakReference;
         private WeakReference<PropertyServerApi> propertyServerApiWeakReference;
-        public AsyncTaskActions(UserBL userBL,IPropertiesContract iPropertiesContract,PropertyServerApi propertyServerApi)
+        public AsyncTaskGetAction(UserBL userBL,IPropertiesContract iPropertiesContract,PropertyServerApi propertyServerApi)
         {
             userBLWeakReference=new WeakReference<>(userBL);
             iPropertiesContractWeakReference=new WeakReference<>(iPropertiesContract);
@@ -58,14 +71,62 @@ public class MainPropertyPresenter {
             propertyServerApiWeakReference.get().getProperties(userTO.getToken(), new Callback<List<PropertyTO>>() {
                 @Override
                 public void onResponse(Call<List<PropertyTO>> call, Response<List<PropertyTO>> response) {
-                    System.out.println(response.code());
-
+                    if(response.code()!=200)
+                    {
+                        iPropertiesContractWeakReference.get().fillPropertiesRecycleView(null);
+                        return;
+                    }
+                    iPropertiesContractWeakReference.get().fillPropertiesRecycleView(response.body());
+                    //todo register all the available properties in local data base
                 }
 
                 @Override
                 public void onFailure(Call<List<PropertyTO>> call, Throwable t) {
-                    System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"+t.getMessage());
                     iPropertiesContractWeakReference.get().fillPropertiesRecycleView(null);
+                }
+            });
+            return null;
+        }
+    }
+
+    private static class AsyncTaskAddAction extends AsyncTask<PropertyTO,Void,Void>
+    {
+        private WeakReference<UserBL> userBLWeakReference;
+        private WeakReference<IPropertiesContract> iPropertiesContractWeakReference;
+        private WeakReference<PropertyServerApi> propertyServerApiWeakReference;
+        public AsyncTaskAddAction(UserBL userBL,IPropertiesContract iPropertiesContract,PropertyServerApi propertyServerApi)
+        {
+            userBLWeakReference=new WeakReference<>(userBL);
+            iPropertiesContractWeakReference=new WeakReference<>(iPropertiesContract);
+            propertyServerApiWeakReference=new WeakReference<>(propertyServerApi);
+        }
+        @Override
+        protected Void doInBackground(PropertyTO... propertyTOs) {
+            UserTO userTO = userBLWeakReference.get().fetchLoginAccountSP();
+            if (userTO == null || userTO.getEmail() == null) {
+                iPropertiesContractWeakReference.get().fillPropertiesRecycleView(null);
+                return null;
+            }
+            userTO = userBLWeakReference.get().fetchUser(userTO.getEmail());
+            if (userTO == null || userTO.getToken() == null) {
+                iPropertiesContractWeakReference.get().fillPropertiesRecycleView(null);
+                return null;
+            }
+            propertyServerApiWeakReference.get().registerProperty(userTO.getToken(), propertyTOs[0], new Callback<PropertyTO>() {
+                @Override
+                public void onResponse(Call<PropertyTO> call, Response<PropertyTO> response) {
+                    if(response.code()!=200)
+                    {
+                        iPropertiesContractWeakReference.get().addProperty(false);
+                        return;
+                    }
+                    iPropertiesContractWeakReference.get().addProperty(true);
+                    //todo register all the available property in local data base
+                }
+
+                @Override
+                public void onFailure(Call<PropertyTO> call, Throwable t) {
+                    iPropertiesContractWeakReference.get().addProperty(false);
                 }
             });
             return null;
