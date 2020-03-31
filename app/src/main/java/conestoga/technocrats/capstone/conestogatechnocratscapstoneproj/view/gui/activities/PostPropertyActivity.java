@@ -19,10 +19,17 @@ import com.google.android.material.button.MaterialButton;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 import java.nio.charset.CharacterCodingException;
+import java.util.Date;
+import java.util.List;
 
 import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.R;
+import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.model.to.PropertyTO;
+import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.presenter.MainPropertyPresenter;
+import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.view.impl.IPropertiesContract;
 
-public class PostPropertyActivity extends AppCompatActivity {
+public class PostPropertyActivity extends AppCompatActivity implements IPropertiesContract {
+
+    private MainPropertyPresenter mainPropertyPresenter;
 
     private MaterialButton cancelButton, submitButton, imageButton;
     private Intent cancelPostIntent;
@@ -41,6 +48,8 @@ public class PostPropertyActivity extends AppCompatActivity {
         submitButton = findViewById(R.id.btnSubmit);
         imageButton = findViewById(R.id.btnImage);
         propertyType = findViewById(R.id.pType_spinner);
+
+        mainPropertyPresenter=new MainPropertyPresenter(this,this);
         
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.proprtyType_array,
                 android.R.layout.simple_spinner_item);
@@ -105,6 +114,31 @@ public class PostPropertyActivity extends AppCompatActivity {
         });
 
 
+        submitButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                PropertyTO propertyTO=new PropertyTO();
+                propertyTO.setTitle("Title 1");
+                propertyTO.setSmallImagePath("Small Image Path");
+                propertyTO.setBigImagePath("Big Image Path");
+                propertyTO.setShortDescription("Short Description");
+                propertyTO.setLongDescription("Long Description");
+                propertyTO.setStatus("Status 1");
+                propertyTO.setUserId(1);
+                propertyTO.setUser("User Name");
+                propertyTO.setRegisterDate(new Date().getTime());
+                propertyTO.setLatitude(0.0);
+                propertyTO.setLongitude(0.0);
+                propertyTO.setAddress("Address 1");
+                propertyTO.setSize("500");
+                propertyTO.setPrice("10000");
+                propertyTO.setRate(10.0f);
+                propertyTO.setViewCount(0);
+
+                mainPropertyPresenter.addPropertyValidation(propertyTO);
+            }
+        });
+
     }
 
     private void pickImageFromGallery(){
@@ -129,6 +163,23 @@ public class PostPropertyActivity extends AppCompatActivity {
                 }
             }
         }
+    }
+
+    @Override
+    public void fillPropertiesRecycleView(List<PropertyTO> propertyTOS) {
+
+    }
+
+    @Override
+    public void addProperty(boolean status)
+    {
+        if(status)
+        {
+            Toast.makeText(this, "Added Successfully", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        Toast.makeText(this, "Failed", Toast.LENGTH_SHORT).show();
+
     }
 
     /*@Override

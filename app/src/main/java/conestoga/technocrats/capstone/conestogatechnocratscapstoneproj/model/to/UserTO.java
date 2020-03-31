@@ -5,9 +5,23 @@ import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
 @Entity(tableName = "TBL_USERS")
-public class UserTO
-{
-    @PrimaryKey(autoGenerate = false)
+public class UserTO {
+    public static final class KEY {
+        public static final String USER_ID_KEY = "userId";
+        public static final String ID_KEY = "id";
+        public static final String NAME_KEY = "name";
+        public static final String FAMILY_KEY = "family";
+        public static final String EMAIL_KEY = "email";
+        public static final String PHONE_KEY = "phone";
+        public static final String PHOTO_KEY = "photo";
+        public static final String PASSWD_KEY = "password";
+        public static final String TOKEN_KEY = "token";
+    }
+
+    @PrimaryKey(autoGenerate = true)
+    @ColumnInfo(name = "userId")
+    private long userId;
+    @ColumnInfo(name = "id")
     private long id;
     @ColumnInfo(name = "name")
     private String name;
@@ -19,8 +33,18 @@ public class UserTO
     private String phone;
     @ColumnInfo(name = "photo")
     private String photo;
+    @ColumnInfo(name = "password")
+    private String passwd;
     @ColumnInfo(name = "token")
     private String token;
+
+    public long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(long userId) {
+        this.userId = userId;
+    }
 
     public long getId() {
         return id;
@@ -68,6 +92,14 @@ public class UserTO
 
     public void setPhoto(String photo) {
         this.photo = photo;
+    }
+
+    public String getPasswd() {
+        return passwd;
+    }
+
+    public void setPasswd(String passwd) {
+        this.passwd = passwd;
     }
 
     public String getToken() {

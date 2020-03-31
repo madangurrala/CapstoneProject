@@ -7,7 +7,10 @@ import androidx.room.PrimaryKey;
 @Entity(tableName = "TBL_APPOINTMENTS")
 public class AppointmentTO
 {
-    @PrimaryKey(autoGenerate = false)
+    @PrimaryKey(autoGenerate = true)
+    @ColumnInfo(name = "appointmentId")
+    private long appointmentId;
+    @ColumnInfo(name = "id")
     private long id;
     @ColumnInfo(name = "peerId")
     private long peerId;
@@ -19,6 +22,14 @@ public class AppointmentTO
     private long registerDate;
     @ColumnInfo(name = "appointmentDate")
     private long appointmentDate;
+
+    public long getAppointmentId() {
+        return appointmentId;
+    }
+
+    public void setAppointmentId(long appointmentId) {
+        this.appointmentId = appointmentId;
+    }
 
     public long getId() {
         return id;

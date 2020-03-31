@@ -11,6 +11,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import java.util.List;
 
@@ -22,10 +23,12 @@ import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.presenter
 import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.view.gui.adapters.MainPropertiesRecycleAdapter;
 import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.view.impl.IPropertiesContract;
 
-public class PropertiesFragment extends Fragment implements IPropertiesContract {
+public class PropertiesFragment extends Fragment implements IPropertiesContract, SwipeRefreshLayout.OnRefreshListener {
     private MainPropertyPresenter mainPropertyPresenter;
 
     private ConstraintLayout rootConstraint;
+    @BindView(R.id.swipeRefreshLayout)
+    public SwipeRefreshLayout swipeRefreshLayout;
     @BindView(R.id.recycleView)
     public RecyclerView recycleView;
 
@@ -35,14 +38,31 @@ public class PropertiesFragment extends Fragment implements IPropertiesContract 
         super.onCreateView(inflater, container, savedInstanceState);
         rootConstraint = (ConstraintLayout) inflater.inflate(R.layout.recycle_view_layout, container, false);
         ButterKnife.bind(this, rootConstraint);
-        mainPropertyPresenter=new MainPropertyPresenter(getActivity(),this);
-        mainPropertyPresenter.getPropertiesList();
+        swipeRefreshLayout.setOnRefreshListener(this);
+        mainPropertyPresenter=new MainPropertyPresenter(getActivity().getApplicationContext(),this);
+        requestPropertiesList();
         return rootConstraint;
+    }
+
+    private void requestPropertiesList()
+    {
+        mainPropertyPresenter.getPropertiesList();
     }
 
     @Override
     public void fillPropertiesRecycleView(List<PropertyTO> propertyTOS) {
         recycleView.setLayoutManager(new LinearLayoutManager(getActivity(),LinearLayoutManager.VERTICAL,false));
         recycleView.setAdapter(new MainPropertiesRecycleAdapter(getActivity(),propertyTOS));
+    }
+
+    @Override
+    public void addProperty(boolean status) {
+
+    }
+
+    @Override
+    public void onRefresh() {
+        requestPropertiesList();
+        swipeRefreshLayout.setRefreshing(false);
     }
 }

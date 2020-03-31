@@ -1,12 +1,9 @@
 package conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.view.gui.fragments;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -15,26 +12,22 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.material.button.MaterialButton;
+import com.sendbird.android.BaseChannel;
+import com.sendbird.android.OpenChannel;
+import com.sendbird.android.User;
 
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.R;
 import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.model.to.MessageTO;
-import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.model.to.UserTO;
-import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.presenter.ChatListPresenter;
-import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.presenter.LoginAccountPresenter;
-import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.view.gui.activities.AskAccountActivity;
-import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.view.gui.activities.MainActivity;
+import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.presenter.TextChatPresenter;
 import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.view.gui.adapters.MainChatRecycleAdapter;
 import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.view.impl.IChatListContract;
-import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.view.impl.ILoginContract;
 
 public class ChatListFragment extends Fragment implements IChatListContract {
-    private ChatListPresenter chatListPresenter;
+    private TextChatPresenter chatListPresenter;
 
     private ConstraintLayout rootConstraint;
     @BindView(R.id.recycleView)
@@ -46,11 +39,41 @@ public class ChatListFragment extends Fragment implements IChatListContract {
         super.onCreateView(inflater, container, savedInstanceState);
         rootConstraint = (ConstraintLayout) inflater.inflate(R.layout.recycle_view_layout, container, false);
         ButterKnife.bind(this, rootConstraint);
-        chatListPresenter=new ChatListPresenter(getActivity(),this);
+        chatListPresenter=new TextChatPresenter(getActivity(),this,null);
         chatListPresenter.getChatsList();
         return rootConstraint;
     }
 
+
+    @Override
+    public void connectionDetails(boolean isConnected) {
+
+    }
+
+    @Override
+    public void newChannelDetails(boolean isCreated, OpenChannel openChannel) {
+
+    }
+
+    @Override
+    public void enterChannelDetails(boolean isEntered) {
+
+    }
+
+    @Override
+    public void getAllChannelsList(List<OpenChannel> openChannelList) {
+
+    }
+
+    @Override
+    public void deleteChannelDetails(boolean isDeleted, OpenChannel openChannel) {
+
+    }
+
+    @Override
+    public void receiveMessageDetails(String senderId, String receiverId, String message, BaseChannel baseChannel) {
+
+    }
 
     @Override
     public void fillChatListRecycleView(List<MessageTO> messageTOS) {

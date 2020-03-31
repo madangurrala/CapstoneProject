@@ -58,6 +58,11 @@
         Sample Property Text Is Here. Sample Property Text Is Here. Sample Property Text Is Here.
     </string>
 
+
+
+    <string name="chat_channel_id">aPW8b55fudzKTWZm</string>
+    <string name="chat_channel_security_key">vvFUCmVCNJjN8SbIOPcq9zwlI8L7FGFe</string>
+
     <string-array name="proprtyType_array">
         <item>Apartment</item>
         <item>House</item>

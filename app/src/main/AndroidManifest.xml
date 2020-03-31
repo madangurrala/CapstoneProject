@@ -8,15 +8,18 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.VIBRATE" android:maxSdkVersion="18"/>
 
     <application
+        android:name=".ProjApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".view.gui.activities.PostPropertyActivity"/>
+        <activity android:name=".view.gui.activities.PostPropertyActivity" />
         <activity android:name=".view.gui.activities.ProfileActivity" />
         <activity
             android:name=".view.gui.activities.SplashActivity"
@@ -36,10 +39,24 @@
         <activity android:name=".view.gui.activities.PropertyDetailsActivity" />
         <activity android:name=".view.gui.activities.PropertyMapActivity" />
 
-
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="@string/google_map_key"/>
+            android:value="@string/google_map_key" />
+
+        <!-- You don't need to include android:required="false" if your app's
+        minSdkVersion is 28 or higher. -->
+        <uses-library
+            android:name="android.test.runner"
+            android:required="false" />
+        <!-- For both of these declarations, you don't need to include
+     android:required="false" if your app's minSdkVersion is 28
+     or higher. -->
+        <uses-library
+            android:name="android.test.base"
+            android:required="false" />
+        <uses-library
+            android:name="android.test.mock"
+            android:required="false" />
 
     </application>
 

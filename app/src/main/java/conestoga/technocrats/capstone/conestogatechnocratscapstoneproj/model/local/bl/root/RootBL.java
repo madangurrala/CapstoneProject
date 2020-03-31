@@ -10,7 +10,7 @@ public class RootBL {
     private final String DATABASE_NAME="CONESTOGA_CAPSTONE_DB";
 
     protected Context ctx;
-    private AppDatabase db;
+    public AppDatabase db;
     public RootBL(Context ctx)
     {
         this.ctx=ctx;

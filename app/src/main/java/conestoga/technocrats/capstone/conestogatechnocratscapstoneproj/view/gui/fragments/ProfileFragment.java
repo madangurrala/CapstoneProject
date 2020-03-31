@@ -7,6 +7,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,18 +22,20 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.R;
 import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.model.local.bl.UserBL;
+import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.model.to.UserTO;
 import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.presenter.ProfilePresenter;
+import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.view.impl.IProfileContract;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class ProfileFragment extends Fragment {
+public class ProfileFragment extends Fragment  implements IProfileContract, SwipeRefreshLayout.OnRefreshListener {
 
     private ProfilePresenter profilePresenter=null;
-    private FragmentManager fragmentManager=null;
 
-    private FrameLayout displayFrameLayout;
     private View view;
+    @BindView(R.id.swipeRefreshLayout)
+    public SwipeRefreshLayout swipeRefreshLayout;
     @BindView(R.id.editProfile)
     public MaterialButton btnEditProfile;
     public TextInputEditText emailText;
@@ -46,8 +49,7 @@ public class ProfileFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
         view = inflater.inflate(R.layout.fragment_profile, container, false);
-        displayFrameLayout = (FrameLayout) inflater.inflate(R.layout.fragment_profile, container, false);
-        ButterKnife.bind(this, displayFrameLayout);
+        ButterKnife.bind(this, view);
         //profilePresenter = new ProfilePresenter(getContext(), this) ;
         emailText= view.findViewById(R.id.emailText);
         phoneText = view.findViewById(R.id.phoneText);
@@ -55,14 +57,6 @@ public class ProfileFragment extends Fragment {
         lNameText = view.findViewById(R.id.lNameText);
         btnEditProfile = view.findViewById(R.id.editProfile);
         btnUpdateProfile = view.findViewById(R.id.updateProfile);
-
-        /*fNameText.setText(new UserBL(getContext()).fetchLoginAccountSP().getFamily());
-        lNameText.setText(new UserBL(getContext()).fetchLoginAccountSP().getName());
-        emailText.setText( new UserBL(getContext()).fetchLoginAccountSP().getEmail());
-        phoneText.setText(new UserBL(getContext()).fetchLoginAccountSP().getPhone1());*/
-
-        //Static data testing
-        fNameText.setText("User Name");
 
         btnEditProfile.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -92,8 +86,34 @@ public class ProfileFragment extends Fragment {
                 btnUpdateProfile.setEnabled(false);
             }
         });
-        // Inflate the layout for this fragment
+        swipeRefreshLayout.setOnRefreshListener(this);
+        profilePresenter =new ProfilePresenter(getActivity().getApplicationContext(), this);
+        requestUserProfileData();
         return view;
     }
 
+    private void requestUserProfileData()
+    {
+        profilePresenter.getUserProfile();
+    }
+
+
+    @Override
+    public void setUserProfileData(UserTO userTO)
+    {
+        if(userTO==null)
+        {
+            return;
+        }
+        fNameText.setText(userTO.getName());
+        lNameText.setText(userTO.getFamily());
+        emailText.setText(userTO.getEmail());
+        phoneText.setText(userTO.getPhone());
+    }
+
+    @Override
+    public void onRefresh() {
+        requestUserProfileData();
+        swipeRefreshLayout.setRefreshing(false);
+    }
 }

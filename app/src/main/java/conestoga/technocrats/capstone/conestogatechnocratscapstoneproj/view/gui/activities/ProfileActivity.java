@@ -11,11 +11,13 @@ import android.widget.FrameLayout;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.R;
+import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.model.to.UserTO;
 import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.presenter.AskAccountPresenter;
 import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.presenter.ProfilePresenter;
+import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.view.gui.fragments.ProfileFragment;
 import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.view.impl.IProfileContract;
 
-public class ProfileActivity extends AppCompatActivity implements IProfileContract {
+public class ProfileActivity extends AppCompatActivity{
 
     private ProfilePresenter profilePresenter=null;
 
@@ -28,24 +30,9 @@ public class ProfileActivity extends AppCompatActivity implements IProfileContra
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
         ButterKnife.bind(this);
-        profilePresenter =new ProfilePresenter(this, this);
-        profilePresenter.showRightFragment(null);
-    }
-
-    public ProfilePresenter getProfilePresenter()
-    {
-        return profilePresenter;
-    }
-
-    @Override
-    public void showFragment(Fragment fragment)
-    {
-        if(fragmentManager==null)
-        {
-            fragmentManager = getSupportFragmentManager();
-        }
+        fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.profile_frame_content, fragment);
+        fragmentTransaction.replace(R.id.profile_frame_content, new ProfileFragment());
         fragmentTransaction.commit();
     }
 }
