@@ -1,5 +1,6 @@
 package conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.model.remote.server;
 
+import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
 import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.model.remote.server.impl.IUserServiceAPI;
@@ -54,6 +55,18 @@ public class UserServerApi {
             return;
         }
         Call<UserTO> call = iUserServiceAPI.selectUserById((int)id);
+        call.enqueue(callback);
+    }
+
+
+    public void update(UserTO userTO, Callback<UserTO> callback) {
+        if (callback == null) {
+            return;
+        }
+        Gson gson=new Gson();
+        String userJson=gson.toJson(userTO);
+        RequestBody requestBody=RequestBody.create(MediaType.parse("application/json"),userJson);
+        Call<UserTO> call = iUserServiceAPI.update(requestBody);
         call.enqueue(callback);
     }
 }

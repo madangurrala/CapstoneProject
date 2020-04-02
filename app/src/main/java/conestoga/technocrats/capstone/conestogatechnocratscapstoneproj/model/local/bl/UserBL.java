@@ -16,7 +16,13 @@ public class UserBL extends RootBL
     public void registerUser(UserTO userTO)
     {
         UserDA userDA=db.userDA();
+        userDA.delete(userTO);
         userDA.insert(userTO);
+    }
+    public void updateUser(UserTO userTO)
+    {
+        UserDA userDA=db.userDA();
+        userDA.update(userTO);
     }
     public UserTO fetchUser(String email)
     {

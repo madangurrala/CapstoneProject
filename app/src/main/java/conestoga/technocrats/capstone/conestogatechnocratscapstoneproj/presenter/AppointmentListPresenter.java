@@ -39,7 +39,7 @@ public class AppointmentListPresenter
         new AsyncTaskActions(userBL,iAppointmentsContract,appointmentServerApi).execute();
     }
 
-    private static class AsyncTaskActions extends AsyncTask<Void,Void,Void>
+    private static class AsyncTaskActions extends AsyncTask<Void,Void,UserTO>
     {
         private WeakReference<UserBL> userBLWeakReference;
         private WeakReference<IAppointmentsContract> iAppointmentsContractWeakReference;
@@ -53,19 +53,27 @@ public class AppointmentListPresenter
         }
 
         @Override
-        protected Void doInBackground(Void... voids)
+        protected UserTO doInBackground(Void... voids)
         {
             UserTO userTO = userBLWeakReference.get().fetchLoginAccountSP();
             if (userTO == null || userTO.getEmail() == null) {
-                iAppointmentsContractWeakReference.get().fillAppointmentsRecycleView(null);
                 return null;
             }
             userTO = userBLWeakReference.get().fetchUser(userTO.getEmail());
             if (userTO == null || userTO.getToken() == null) {
-                iAppointmentsContractWeakReference.get().fillAppointmentsRecycleView(null);
                 return null;
             }
+            return userTO;
+        }
 
+        @Override
+        protected void onPostExecute(UserTO userTO) {
+            super.onPostExecute(userTO);
+            if(userTO==null)
+            {
+                iAppointmentsContractWeakReference.get().fillAppointmentsRecycleView(null);
+                return;
+            }
             appointmentServerApiWeakReference.get().getAllAppointments(userTO.getToken(), new Callback<List<AppointmentTO>>() {
                 @Override
                 public void onResponse(Call<List<AppointmentTO>> call, Response<List<AppointmentTO>> response) {
@@ -83,7 +91,6 @@ public class AppointmentListPresenter
                     iAppointmentsContractWeakReference.get().fillAppointmentsRecycleView(null);
                 }
             });
-            return null;
         }
     }
 }

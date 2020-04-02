@@ -5,7 +5,9 @@ import com.google.gson.GsonBuilder;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
@@ -15,7 +17,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class CoreServerApi {
-    public List<String> tokenNotRequirePath=new ArrayList<>();
+    public Map<String,String> tokenNotRequirePath=new HashMap<>();
     public static final String BASE_URL = "https://rentspace.azurewebsites.net/";
     private Retrofit retrofit;
     private String token;
@@ -23,8 +25,8 @@ public class CoreServerApi {
     public CoreServerApi(String baseUrl, String token)
     {
         this.token = token;
-        tokenNotRequirePath.add(String.format("%s%s",BASE_URL,"login"));
-        tokenNotRequirePath.add(String.format("%s%s",BASE_URL,"user"));
+        tokenNotRequirePath.put(String.format("%s%s",BASE_URL,"login"),"POST");
+        tokenNotRequirePath.put(String.format("%s%s",BASE_URL,"user"),"POST");
         Gson gson = new GsonBuilder().setLenient().create();
 
         OkHttpClient okHttpClient = new OkHttpClient()
@@ -49,7 +51,8 @@ public class CoreServerApi {
         @Override
         public Response intercept(Chain chain) throws IOException {
             Request originalRequest = chain.request();
-            if (!tokenNotRequirePath.contains(originalRequest.url().toString()))
+            if (!(tokenNotRequirePath.containsKey(originalRequest.url().toString()) &&
+                tokenNotRequirePath.get(originalRequest.url().toString()).equalsIgnoreCase(originalRequest.method())))
             {
                 Request newRequest = originalRequest.newBuilder()
                         .header("Content-Type", "application/json")

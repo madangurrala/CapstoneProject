@@ -45,7 +45,7 @@ public class MainPropertyPresenter {
     }
 
 
-    private static class AsyncTaskGetAction extends AsyncTask<Void,Void,Void>
+    private static class AsyncTaskGetAction extends AsyncTask<Void,Void,UserTO>
     {
         private WeakReference<UserBL> userBLWeakReference;
         private WeakReference<IPropertiesContract> iPropertiesContractWeakReference;
@@ -57,16 +57,25 @@ public class MainPropertyPresenter {
             propertyServerApiWeakReference=new WeakReference<>(propertyServerApi);
         }
         @Override
-        protected Void doInBackground(Void... voids) {
+        protected UserTO doInBackground(Void... voids) {
             UserTO userTO = userBLWeakReference.get().fetchLoginAccountSP();
             if (userTO == null || userTO.getEmail() == null) {
-                iPropertiesContractWeakReference.get().fillPropertiesRecycleView(null);
                 return null;
             }
             userTO = userBLWeakReference.get().fetchUser(userTO.getEmail());
             if (userTO == null || userTO.getToken() == null) {
-                iPropertiesContractWeakReference.get().fillPropertiesRecycleView(null);
                 return null;
+            }
+            return userTO;
+        }
+
+        @Override
+        protected void onPostExecute(UserTO userTO) {
+            super.onPostExecute(userTO);
+            if(userTO==null)
+            {
+                iPropertiesContractWeakReference.get().fillPropertiesRecycleView(null);
+                return;
             }
             propertyServerApiWeakReference.get().getProperties(userTO.getToken(), new Callback<List<PropertyTO>>() {
                 @Override
@@ -85,12 +94,12 @@ public class MainPropertyPresenter {
                     iPropertiesContractWeakReference.get().fillPropertiesRecycleView(null);
                 }
             });
-            return null;
         }
     }
 
-    private static class AsyncTaskAddAction extends AsyncTask<PropertyTO,Void,Void>
+    private static class AsyncTaskAddAction extends AsyncTask<PropertyTO,Void,UserTO>
     {
+        private PropertyTO propertyTO;
         private WeakReference<UserBL> userBLWeakReference;
         private WeakReference<IPropertiesContract> iPropertiesContractWeakReference;
         private WeakReference<PropertyServerApi> propertyServerApiWeakReference;
@@ -101,18 +110,28 @@ public class MainPropertyPresenter {
             propertyServerApiWeakReference=new WeakReference<>(propertyServerApi);
         }
         @Override
-        protected Void doInBackground(PropertyTO... propertyTOs) {
+        protected UserTO doInBackground(PropertyTO... propertyTOs) {
             UserTO userTO = userBLWeakReference.get().fetchLoginAccountSP();
             if (userTO == null || userTO.getEmail() == null) {
-                iPropertiesContractWeakReference.get().fillPropertiesRecycleView(null);
                 return null;
             }
             userTO = userBLWeakReference.get().fetchUser(userTO.getEmail());
             if (userTO == null || userTO.getToken() == null) {
-                iPropertiesContractWeakReference.get().fillPropertiesRecycleView(null);
                 return null;
             }
-            propertyServerApiWeakReference.get().registerProperty(userTO.getToken(), propertyTOs[0], new Callback<PropertyTO>() {
+            propertyTO=propertyTOs[0];
+            return userTO;
+        }
+
+        @Override
+        protected void onPostExecute(UserTO userTO) {
+            super.onPostExecute(userTO);
+            if(userTO==null)
+            {
+                iPropertiesContractWeakReference.get().fillPropertiesRecycleView(null);
+                return;
+            }
+            propertyServerApiWeakReference.get().registerProperty(userTO.getToken(),propertyTO, new Callback<PropertyTO>() {
                 @Override
                 public void onResponse(Call<PropertyTO> call, Response<PropertyTO> response) {
                     if(response.code()!=200)
@@ -129,7 +148,6 @@ public class MainPropertyPresenter {
                     iPropertiesContractWeakReference.get().addProperty(false);
                 }
             });
-            return null;
         }
     }
 }
