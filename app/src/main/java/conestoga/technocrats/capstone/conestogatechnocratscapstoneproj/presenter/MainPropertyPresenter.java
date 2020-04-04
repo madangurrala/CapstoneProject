@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.AsyncTask;
 
 import java.lang.ref.WeakReference;
+import java.util.Date;
 import java.util.List;
 
 import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.model.local.bl.UserBL;
@@ -29,7 +30,7 @@ public class MainPropertyPresenter {
     }
 
     public void getPropertiesList() {
-        new AsyncTaskGetAction(userBL,iPropertiesContract,propertyServerApi).execute();
+        new AsyncTaskGetUserAction(userBL,iPropertiesContract,propertyServerApi).execute();
     }
 
     public void addPropertyValidation(PropertyTO propertyTO)
@@ -45,12 +46,12 @@ public class MainPropertyPresenter {
     }
 
 
-    private static class AsyncTaskGetAction extends AsyncTask<Void,Void,UserTO>
+    private static class AsyncTaskGetUserAction extends AsyncTask<Void,Void,UserTO>
     {
         private WeakReference<UserBL> userBLWeakReference;
         private WeakReference<IPropertiesContract> iPropertiesContractWeakReference;
         private WeakReference<PropertyServerApi> propertyServerApiWeakReference;
-        public AsyncTaskGetAction(UserBL userBL,IPropertiesContract iPropertiesContract,PropertyServerApi propertyServerApi)
+        public AsyncTaskGetUserAction(UserBL userBL,IPropertiesContract iPropertiesContract,PropertyServerApi propertyServerApi)
         {
             userBLWeakReference=new WeakReference<>(userBL);
             iPropertiesContractWeakReference=new WeakReference<>(iPropertiesContract);
@@ -120,6 +121,11 @@ public class MainPropertyPresenter {
                 return null;
             }
             propertyTO=propertyTOs[0];
+            propertyTO.setUserId(userTO.getId());
+            propertyTO.setUser(userTO.getName());
+            propertyTO.setRegisterDate(new Date().getTime());
+            propertyTO.setRate(0.0f);
+            propertyTO.setViewCount(0);
             return userTO;
         }
 

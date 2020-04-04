@@ -37,28 +37,28 @@
         External Storage Access\n
     </string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="enter_message">Write Your Message</string>
 
-    <string name="sample_text">
-        Sample Property Text Is Here. Sample Property Text Is Here. Sample Property Text Is Here.
-        Sample Property Text Is Here. Sample Property Text Is Here. Sample Property Text Is Here.
-        Sample Property Text Is Here. Sample Property Text Is Here. Sample Property Text Is Here.
-        Sample Property Text Is Here. Sample Property Text Is Here. Sample Property Text Is Here.
-        Sample Property Text Is Here. Sample Property Text Is Here. Sample Property Text Is Here.
-        Sample Property Text Is Here. Sample Property Text Is Here. Sample Property Text Is Here.
-        Sample Property Text Is Here. Sample Property Text Is Here. Sample Property Text Is Here.
-        Sample Property Text Is Here. Sample Property Text Is Here. Sample Property Text Is Here.
-        Sample Property Text Is Here. Sample Property Text Is Here. Sample Property Text Is Here.
-        Sample Property Text Is Here. Sample Property Text Is Here. Sample Property Text Is Here.
-        Sample Property Text Is Here. Sample Property Text Is Here. Sample Property Text Is Here.
-        Sample Property Text Is Here. Sample Property Text Is Here. Sample Property Text Is Here.
-        Sample Property Text Is Here. Sample Property Text Is Here. Sample Property Text Is Here.
-        Sample Property Text Is Here. Sample Property Text Is Here. Sample Property Text Is Here.
+
+    <string name="property_short_description">
+        The house has %s bedroom(s) and %s bathroom(s), also the contract will be for %s months.
+    </string>
+
+    <string name="property_long_description">
+        The house has %s bedroom(s) and %s bathroom(s), also the contract will be for %s months.\n
+        Does the contract include hydro? %s\n
+        Does the contract include internet? %s\n
+        Does the contract include gas? %s\n
+        Does the contract include furnished? %s\n
+        Does the contract include laundry? %s\n
+        Does the contract include gym? %s\n
     </string>
 
 
+
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="enter_message">Write Your Message</string>
 
     <string name="chat_channel_id">aPW8b55fudzKTWZm</string>
     <string name="chat_channel_security_key">vvFUCmVCNJjN8SbIOPcq9zwlI8L7FGFe</string>
