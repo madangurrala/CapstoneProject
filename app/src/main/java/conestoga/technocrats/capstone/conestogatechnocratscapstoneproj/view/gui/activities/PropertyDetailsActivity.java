@@ -7,6 +7,7 @@ import android.os.Parcelable;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -30,6 +31,7 @@ import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.view.impl
 public class PropertyDetailsActivity extends AppCompatActivity implements IPropertyDetailsContract
 {
     private PropertyTO propertyTO;
+    private UserTO userTO;
     private PropertyDetailsPresenter propertyDetailsPresenter;
     private AppImagePresenter appImagePresenter;
 
@@ -54,6 +56,8 @@ public class PropertyDetailsActivity extends AppCompatActivity implements IPrope
     public MaterialTextView txtPropertyDesc;
     @BindView(value = R.id.btnShowMap)
     public MaterialButton btnShowMap;
+    @BindView(value = R.id.btnRequestAppointment)
+    public MaterialButton btnRequestAppointment;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,17 +69,30 @@ public class PropertyDetailsActivity extends AppCompatActivity implements IPrope
         propertyDetailsPresenter.getUserDetails(propertyTO);
     }
 
-    @OnClick(value = {R.id.btnShowMap})
+    @OnClick(value = {R.id.btnShowMap,R.id.btnRequestAppointment})
     public void doClick(View view)
     {
-        Intent intent=new Intent(this,PropertyMapActivity.class);
-        intent.putExtra(PropertyMapActivity.KEY.LAT,propertyTO.getLatitude());
-        intent.putExtra(PropertyMapActivity.KEY.LNG,propertyTO.getLongitude());
-        startActivity(intent);
+        switch (view.getId())
+        {
+            case R.id.btnShowMap:
+            {
+                Intent intent=new Intent(this,PropertyMapActivity.class);
+                intent.putExtra(PropertyMapActivity.KEY.LAT,propertyTO.getLatitude());
+                intent.putExtra(PropertyMapActivity.KEY.LNG,propertyTO.getLongitude());
+                startActivity(intent);
+                break;
+            }
+            case R.id.btnRequestAppointment:
+            {
+                propertyDetailsPresenter.requestAppointment(userTO,propertyTO);
+                break;
+            }
+        }
     }
 
     @Override
     public void setUserDetails(UserTO userTO) {
+        this.userTO=userTO;
         propertyDetailsPresenter.getPropertyOwnerDetails(userTO,propertyTO);
     }
 
@@ -95,5 +112,17 @@ public class PropertyDetailsActivity extends AppCompatActivity implements IPrope
         txtPropertyRegisterDate.setText(new SimpleDateFormat("yyyy/MM/dd hh:mm aa").format(new Date(propertyTO.getRegisterDate())));
         txtPropertyDesc.setText(propertyTO.getLongDescription());
         appImagePresenter.load(getApplicationContext(),userTO.getPhoto(),imgOwner);
+    }
+
+    @Override
+    public void setNewAppointment(boolean status) {
+        if(!status)
+        {
+            btnRequestAppointment.setEnabled(true);
+            Toast.makeText(this, "There is a problem, please try again", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        btnRequestAppointment.setEnabled(false);
+        Toast.makeText(this, "The appointment has requested successfully", Toast.LENGTH_SHORT).show();
     }
 }

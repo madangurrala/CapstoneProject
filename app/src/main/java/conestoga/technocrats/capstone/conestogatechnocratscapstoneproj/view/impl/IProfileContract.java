@@ -7,4 +7,5 @@ import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.model.to.
 public interface IProfileContract {
 
     public void setUserProfileData(UserTO userTO);
+    public void updateUserProfileData(boolean status,UserTO userTO);
 }

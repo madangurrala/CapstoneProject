@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.AsyncTask;
 
 import java.lang.ref.WeakReference;
+import java.util.Date;
 import java.util.List;
 
 import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.model.local.bl.UserBL;
@@ -29,7 +30,7 @@ public class MainPropertyPresenter {
     }
 
     public void getPropertiesList() {
-        new AsyncTaskGetAction(userBL,iPropertiesContract,propertyServerApi).execute();
+        new AsyncTaskGetUserAction(userBL,iPropertiesContract,propertyServerApi).execute();
     }
 
     public void addPropertyValidation(PropertyTO propertyTO)
@@ -45,28 +46,37 @@ public class MainPropertyPresenter {
     }
 
 
-    private static class AsyncTaskGetAction extends AsyncTask<Void,Void,Void>
+    private static class AsyncTaskGetUserAction extends AsyncTask<Void,Void,UserTO>
     {
         private WeakReference<UserBL> userBLWeakReference;
         private WeakReference<IPropertiesContract> iPropertiesContractWeakReference;
         private WeakReference<PropertyServerApi> propertyServerApiWeakReference;
-        public AsyncTaskGetAction(UserBL userBL,IPropertiesContract iPropertiesContract,PropertyServerApi propertyServerApi)
+        public AsyncTaskGetUserAction(UserBL userBL,IPropertiesContract iPropertiesContract,PropertyServerApi propertyServerApi)
         {
             userBLWeakReference=new WeakReference<>(userBL);
             iPropertiesContractWeakReference=new WeakReference<>(iPropertiesContract);
             propertyServerApiWeakReference=new WeakReference<>(propertyServerApi);
         }
         @Override
-        protected Void doInBackground(Void... voids) {
+        protected UserTO doInBackground(Void... voids) {
             UserTO userTO = userBLWeakReference.get().fetchLoginAccountSP();
             if (userTO == null || userTO.getEmail() == null) {
-                iPropertiesContractWeakReference.get().fillPropertiesRecycleView(null);
                 return null;
             }
             userTO = userBLWeakReference.get().fetchUser(userTO.getEmail());
             if (userTO == null || userTO.getToken() == null) {
-                iPropertiesContractWeakReference.get().fillPropertiesRecycleView(null);
                 return null;
+            }
+            return userTO;
+        }
+
+        @Override
+        protected void onPostExecute(UserTO userTO) {
+            super.onPostExecute(userTO);
+            if(userTO==null)
+            {
+                iPropertiesContractWeakReference.get().fillPropertiesRecycleView(null);
+                return;
             }
             propertyServerApiWeakReference.get().getProperties(userTO.getToken(), new Callback<List<PropertyTO>>() {
                 @Override
@@ -85,12 +95,12 @@ public class MainPropertyPresenter {
                     iPropertiesContractWeakReference.get().fillPropertiesRecycleView(null);
                 }
             });
-            return null;
         }
     }
 
-    private static class AsyncTaskAddAction extends AsyncTask<PropertyTO,Void,Void>
+    private static class AsyncTaskAddAction extends AsyncTask<PropertyTO,Void,UserTO>
     {
+        private PropertyTO propertyTO;
         private WeakReference<UserBL> userBLWeakReference;
         private WeakReference<IPropertiesContract> iPropertiesContractWeakReference;
         private WeakReference<PropertyServerApi> propertyServerApiWeakReference;
@@ -101,18 +111,33 @@ public class MainPropertyPresenter {
             propertyServerApiWeakReference=new WeakReference<>(propertyServerApi);
         }
         @Override
-        protected Void doInBackground(PropertyTO... propertyTOs) {
+        protected UserTO doInBackground(PropertyTO... propertyTOs) {
             UserTO userTO = userBLWeakReference.get().fetchLoginAccountSP();
             if (userTO == null || userTO.getEmail() == null) {
-                iPropertiesContractWeakReference.get().fillPropertiesRecycleView(null);
                 return null;
             }
             userTO = userBLWeakReference.get().fetchUser(userTO.getEmail());
             if (userTO == null || userTO.getToken() == null) {
-                iPropertiesContractWeakReference.get().fillPropertiesRecycleView(null);
                 return null;
             }
-            propertyServerApiWeakReference.get().registerProperty(userTO.getToken(), propertyTOs[0], new Callback<PropertyTO>() {
+            propertyTO=propertyTOs[0];
+            propertyTO.setUserId(userTO.getId());
+            propertyTO.setUser(userTO.getName());
+            propertyTO.setRegisterDate(new Date().getTime());
+            propertyTO.setRate(0.0f);
+            propertyTO.setViewCount(0);
+            return userTO;
+        }
+
+        @Override
+        protected void onPostExecute(UserTO userTO) {
+            super.onPostExecute(userTO);
+            if(userTO==null)
+            {
+                iPropertiesContractWeakReference.get().fillPropertiesRecycleView(null);
+                return;
+            }
+            propertyServerApiWeakReference.get().registerProperty(userTO.getToken(),propertyTO, new Callback<PropertyTO>() {
                 @Override
                 public void onResponse(Call<PropertyTO> call, Response<PropertyTO> response) {
                     if(response.code()!=200)
@@ -129,7 +154,6 @@ public class MainPropertyPresenter {
                     iPropertiesContractWeakReference.get().addProperty(false);
                 }
             });
-            return null;
         }
     }
 }

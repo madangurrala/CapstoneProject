@@ -1,10 +1,13 @@
 package conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.view.gui.adapters;
 
+import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -13,6 +16,8 @@ import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import butterknife.BindView;
@@ -21,23 +26,26 @@ import butterknife.OnClick;
 import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.R;
 import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.model.to.AppointmentTO;
 import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.model.to.MessageTO;
+import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.model.to.UserTO;
+import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.presenter.AppointmentListPresenter;
 import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.presenter.root.AppImagePresenter;
+import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.utils.FirebaseUtil;
 
 public class MainAppointmentRecycleAdapter extends RecyclerView.Adapter<MainAppointmentRecycleAdapter.ViewHolder> {
-    private Context ctx;
+    private Activity activity;
     private List<AppointmentTO> appointmentTOS;
-    private AppImagePresenter appImagePresenter;
+    private AppointmentListPresenter appointmentListPresenter;
 
-    public MainAppointmentRecycleAdapter(Context ctx, List<AppointmentTO> appointmentTOS) {
-        this.ctx = ctx;
+    public MainAppointmentRecycleAdapter(Activity activity, List<AppointmentTO> appointmentTOS,AppointmentListPresenter appointmentListPresenter) {
+        this.activity = activity;
         this.appointmentTOS = appointmentTOS;
-        appImagePresenter=new AppImagePresenter();
+        this.appointmentListPresenter = appointmentListPresenter;
     }
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(ctx).inflate(R.layout.recycle_item1, parent, false);
+        View view = LayoutInflater.from(activity).inflate(R.layout.recycle_item1, parent, false);
         return new ViewHolder(view);
     }
 
@@ -60,24 +68,42 @@ public class MainAppointmentRecycleAdapter extends RecyclerView.Adapter<MainAppo
         public TextView txtTitle;
         @BindView(R.id.txtSubTitle)
         public TextView txtSubTitle;
+        @BindView(R.id.imgBtn2)
+        public ImageButton imgBtn2;
+        @BindView(R.id.imgBtn3)
+        public ImageButton imgBtn3;
 
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
+            imgBtn2.setImageResource(R.drawable.ic_highlight_off);
+            imgBtn2.setVisibility(View.INVISIBLE);
+            imgBtn3.setImageResource(R.drawable.ic_done);
         }
 
         public void setData(int position) {
             AppointmentTO appointmentTO=appointmentTOS.get(position);
-            txtTitle.setText("Item Text "+position);
-            txtSubTitle.setText("Item Subtitle "+position);
-            appImagePresenter.load(ctx,appointmentTO.getAppointmentIcon(),imgItem);
+            txtTitle.setText(appointmentTO.getPeerTitle());
+            txtSubTitle.setText(new SimpleDateFormat("yyyy/MM/dd hh:mm").format(new Date(appointmentTO.getAppointmentDate())));
+            imgItem.setImageResource(R.drawable.ic_business_center);
+            imgBtn3.setTag(position);
         }
 
-        @OnClick(R.id.rootConstraint)
+        @OnClick({R.id.imgBtn3})
         public void onClick(View view)
         {
-            Toast.makeText(ctx, "We still are working to complete this part", Toast.LENGTH_SHORT).show();
+            int position = Integer.parseInt(view.getTag().toString());
+            AppointmentTO appointmentTO=appointmentTOS.get(position);
+            switch (view.getId())
+            {
+                case R.id.imgBtn3:
+                {
+                    ((ImageButton)view).setImageResource(R.drawable.ic_done_all);
+                    appointmentListPresenter.acceptAppointmentRequest(activity,appointmentTO);
+                    break;
+                }
+            }
         }
     }
 

@@ -12,16 +12,21 @@ import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
+import com.google.android.material.textfield.TextInputEditText;
 
 import java.nio.charset.CharacterCodingException;
 import java.util.Date;
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.R;
 import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.model.to.PropertyTO;
 import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.presenter.MainPropertyPresenter;
@@ -30,6 +35,31 @@ import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.view.impl
 public class PostPropertyActivity extends AppCompatActivity implements IPropertiesContract {
 
     private MainPropertyPresenter mainPropertyPresenter;
+
+    @BindView(R.id.editTitle)
+    public TextInputEditText editTitle;
+    @BindView(R.id.editRent)
+    public TextInputEditText editRent;
+    @BindView(R.id.editSize)
+    public TextInputEditText editSize;
+    @BindView(R.id.editDuration)
+    public TextInputEditText editDuration;
+    @BindView(R.id.editBedroomCount)
+    public TextInputEditText editBedroomCount;
+    @BindView(R.id.editBathroomCount)
+    public TextInputEditText editBathroomCount;
+    @BindView(R.id.hydroId)
+    public CheckBox hydroId;
+    @BindView(R.id.gasId)
+    public CheckBox gasId;
+    @BindView(R.id.internetId)
+    public CheckBox internetId;
+    @BindView(R.id.gymId)
+    public CheckBox gymId;
+    @BindView(R.id.furnishedId)
+    public CheckBox furnishedId;
+    @BindView(R.id.laundryId)
+    public CheckBox laundryId;
 
     private MaterialButton cancelButton, submitButton, imageButton;
     private Intent cancelPostIntent;
@@ -43,6 +73,7 @@ public class PostPropertyActivity extends AppCompatActivity implements IProperti
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_post_property);
+        ButterKnife.bind(this);
 
         cancelButton = findViewById(R.id.btnCancel);
         submitButton = findViewById(R.id.btnSubmit);
@@ -117,24 +148,33 @@ public class PostPropertyActivity extends AppCompatActivity implements IProperti
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String shortDesc= String.format(getResources().getString(R.string.property_short_description),
+                        editBedroomCount.getText().toString(),
+                        editBathroomCount.getText().toString(),
+                        editDuration.getText().toString());
+
+                String longDesc=String.format(getResources().getString(R.string.property_long_description),
+                        editBedroomCount.getText().toString(),
+                        editBathroomCount.getText().toString(),
+                        editDuration.getText().toString(),
+                        hydroId.isChecked(),
+                        internetId.isChecked(),
+                        gasId.isChecked(),
+                        furnishedId.isChecked(),
+                        laundryId.isChecked(),
+                        gymId.isChecked());
                 PropertyTO propertyTO=new PropertyTO();
-                propertyTO.setTitle("Title 1");
+                propertyTO.setTitle(editTitle.getText().toString());
                 propertyTO.setSmallImagePath("Small Image Path");
                 propertyTO.setBigImagePath("Big Image Path");
-                propertyTO.setShortDescription("Short Description");
-                propertyTO.setLongDescription("Long Description");
-                propertyTO.setStatus("Status 1");
-                propertyTO.setUserId(1);
-                propertyTO.setUser("User Name");
-                propertyTO.setRegisterDate(new Date().getTime());
+                propertyTO.setShortDescription(shortDesc);
+                propertyTO.setLongDescription(longDesc);
+                propertyTO.setStatus("Renting");
                 propertyTO.setLatitude(0.0);
                 propertyTO.setLongitude(0.0);
                 propertyTO.setAddress("Address 1");
-                propertyTO.setSize("500");
-                propertyTO.setPrice("10000");
-                propertyTO.setRate(10.0f);
-                propertyTO.setViewCount(0);
-
+                propertyTO.setSize(editSize.getText().toString());
+                propertyTO.setPrice(editRent.getText().toString());
                 mainPropertyPresenter.addPropertyValidation(propertyTO);
             }
         });

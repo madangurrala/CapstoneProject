@@ -17,11 +17,12 @@
         android:layout_margin="8dp"/>
 
     <TextView
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:id="@+id/txtMsg"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toRightOf="@id/imgAvatar"
+        app:layout_constraintRight_toRightOf="parent"
         android:layout_margin="8dp"
         android:padding="8dp"
         android:textColor="@android:color/white"

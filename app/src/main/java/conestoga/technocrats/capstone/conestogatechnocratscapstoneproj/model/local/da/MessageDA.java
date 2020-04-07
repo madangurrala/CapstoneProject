@@ -22,6 +22,6 @@ public interface MessageDA
     public void delete(MessageTO messageTO);
     @Query(value = "SELECT * FROM TBL_MESSAGES ORDER BY registerDate DESC")
     public LiveData<List<MessageTO>> selectAll();
-    @Query(value = "SELECT * FROM TBL_MESSAGES WHERE senderId=:userId or receiverId=:userId ORDER BY registerDate DESC")
-    public LiveData<List<MessageTO>> selectByOwner(long userId);
+    /*@Query(value = "SELECT * FROM TBL_MESSAGES WHERE senderId=:userId or receiverId=:userId ORDER BY registerDate DESC")
+    public LiveData<List<MessageTO>> selectByOwner(long userId);*/
 }

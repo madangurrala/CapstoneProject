@@ -4,25 +4,30 @@ import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+import com.google.firebase.firestore.Exclude;
+
 
 @Entity(tableName = "TBL_MESSAGES")
 public class MessageTO
 {
+    public class KEY
+    {
+        public static final String MESSAGE_ID_KEY="messageId";
+        public static final String SENDER_ID_KEY="senderId";
+        public static final String RECEIVER_ID_KEY="receiverId";
+        public static final String MESSAGE_KEY="message";
+        public static final String REGISTER_DATE_KEY="registerDate";
+        public static final String UPDATE_DATE_KEY="updateDate";
+        public static final String SEEN_DATE_KEY="seenDate";
+        public static final String DELETE_DATE_KEY="deleteDate";
+    }
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "messageId")
     private long messageId;
-    @ColumnInfo(name = "id")
-    private long id;
     @ColumnInfo(name = "senderId")
-    private long senderId;
+    private int senderId;
     @ColumnInfo(name = "receiverId")
-    private long receiverId;
-    @ColumnInfo(name = "senderTitle")
-    private long senderTitle;
-    @ColumnInfo(name = "receiverTitle")
-    private long receiverTitle;
-    @ColumnInfo(name = "messageIcon")
-    private String messageIcon;
+    private int receiverId;
     @ColumnInfo(name = "message")
     private String message;
     @ColumnInfo(name = "registerDate")
@@ -34,6 +39,10 @@ public class MessageTO
     @ColumnInfo(name = "deleteDate")
     private long deleteDate;
 
+    public MessageTO() {
+    }
+
+    @Exclude
     public long getMessageId() {
         return messageId;
     }
@@ -42,52 +51,20 @@ public class MessageTO
         this.messageId = messageId;
     }
 
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public long getSenderId() {
+    public int getSenderId() {
         return senderId;
     }
 
-    public void setSenderId(long senderId) {
+    public void setSenderId(int senderId) {
         this.senderId = senderId;
     }
 
-    public long getReceiverId() {
+    public int getReceiverId() {
         return receiverId;
     }
 
-    public void setReceiverId(long receiverId) {
+    public void setReceiverId(int receiverId) {
         this.receiverId = receiverId;
-    }
-
-    public long getSenderTitle() {
-        return senderTitle;
-    }
-
-    public void setSenderTitle(long senderTitle) {
-        this.senderTitle = senderTitle;
-    }
-
-    public long getReceiverTitle() {
-        return receiverTitle;
-    }
-
-    public void setReceiverTitle(long receiverTitle) {
-        this.receiverTitle = receiverTitle;
-    }
-
-    public String getMessageIcon() {
-        return messageIcon;
-    }
-
-    public void setMessageIcon(String messageIcon) {
-        this.messageIcon = messageIcon;
     }
 
     public String getMessage() {

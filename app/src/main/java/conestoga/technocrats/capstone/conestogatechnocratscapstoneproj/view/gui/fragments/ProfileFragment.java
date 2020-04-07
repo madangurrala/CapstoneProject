@@ -32,6 +32,7 @@ import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.view.impl
 public class ProfileFragment extends Fragment  implements IProfileContract, SwipeRefreshLayout.OnRefreshListener {
 
     private ProfilePresenter profilePresenter=null;
+    private UserTO userTO;
 
     private View view;
     @BindView(R.id.swipeRefreshLayout)
@@ -61,15 +62,12 @@ public class ProfileFragment extends Fragment  implements IProfileContract, Swip
         btnEditProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                emailText.setEnabled(true);
+                //emailText.setEnabled(true);
                 fNameText.setEnabled(true);
                 lNameText.setEnabled(true);
                 phoneText.setEnabled(true);
                 btnEditProfile.setEnabled(false);
                 btnUpdateProfile.setEnabled(true);
-
-
                 Toast.makeText(getActivity(), "Your profile can be updated now", Toast.LENGTH_LONG).show();
 
             }
@@ -78,7 +76,12 @@ public class ProfileFragment extends Fragment  implements IProfileContract, Swip
         btnUpdateProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                emailText.setEnabled(false);
+                ProfileFragment.this.userTO.setName(fNameText.getText().toString());
+                ProfileFragment.this.userTO.setFamily(lNameText.getText().toString());
+                ProfileFragment.this.userTO.setPhone(phoneText.getText().toString());
+                ProfileFragment.this.userTO.setEmail(emailText.getText().toString());
+                profilePresenter.updateUserProfile(userTO);
+                //emailText.setEnabled(false);
                 fNameText.setEnabled(false);
                 lNameText.setEnabled(false);
                 phoneText.setEnabled(false);
@@ -105,10 +108,16 @@ public class ProfileFragment extends Fragment  implements IProfileContract, Swip
         {
             return;
         }
+        this.userTO=userTO;
         fNameText.setText(userTO.getName());
         lNameText.setText(userTO.getFamily());
         emailText.setText(userTO.getEmail());
         phoneText.setText(userTO.getPhone());
+    }
+
+    @Override
+    public void updateUserProfileData(boolean status, UserTO userTO) {
+
     }
 
     @Override

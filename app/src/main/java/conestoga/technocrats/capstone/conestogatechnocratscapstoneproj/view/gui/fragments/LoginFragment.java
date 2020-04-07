@@ -18,6 +18,7 @@ import com.google.android.material.textfield.TextInputEditText;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.ProjApplication;
 import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.R;
 import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.model.local.bl.UserBL;
 import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.model.to.UserTO;
@@ -51,6 +52,11 @@ public class LoginFragment extends Fragment implements View.OnClickListener, ILo
 
         UserBL userBL=new UserBL(getActivity().getApplicationContext());
         UserTO loginUserTO=userBL.fetchLoginAccountSP();
+        //todo remove these lines later
+        if(loginUserTO==null)
+        {
+            loginUserTO=new UserTO();
+        }
         loginUserTO.setEmail("test2@gmail.com");
         loginUserTO.setPasswd("test");
         if(loginUserTO!=null && loginUserTO.getEmail()!=null)

@@ -40,7 +40,7 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="50dp"
-            android:id="@+id/viewSendMsg"
+            android:id="@+id/imgSendMsg"
             android:layout_weight="1"
             android:layout_margin="8dp"
             android:src="@drawable/ic_send"

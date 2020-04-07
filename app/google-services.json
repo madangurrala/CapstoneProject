@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "507959711851",
+    "firebase_url": "https://conestogatechnocratscapstonepr.firebaseio.com",
+    "project_id": "conestogatechnocratscapstonepr",
+    "storage_bucket": "conestogatechnocratscapstonepr.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:507959711851:android:719332ff39459a86fdb92e",
+        "android_client_info": {
+          "package_name": "conestoga.technocrats.capstone.conestogatechnocratscapstoneproj"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "507959711851-po9cvs85q0ej8bl7mmms9375ml2vlq3u.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "conestoga.technocrats.capstone.conestogatechnocratscapstoneproj",
+            "certificate_hash": "6d774584b126bc153cbae6b0b4f282f629fde76b"
+          }
+        },
+        {
+          "client_id": "507959711851-bcbg1dq6goo2f60h21thifl8v2odedr3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBmZoUic-qnprjW8zQgzBpFKMkzCKl96d4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "507959711851-bcbg1dq6goo2f60h21thifl8v2odedr3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

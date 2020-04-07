@@ -4,9 +4,12 @@ import android.content.Context;
 import android.os.AsyncTask;
 
 import java.lang.ref.WeakReference;
+import java.util.Date;
 
 import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.model.local.bl.UserBL;
+import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.model.remote.server.AppointmentServerApi;
 import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.model.remote.server.UserServerApi;
+import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.model.to.AppointmentTO;
 import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.model.to.PropertyTO;
 import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.model.to.UserTO;
 import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.view.impl.IPropertyDetailsContract;
@@ -17,6 +20,7 @@ import retrofit2.Response;
 public class PropertyDetailsPresenter {
     private Context ctx;
     private UserBL userBL;
+    private UserTO userTO;
     private IPropertyDetailsContract iPropertyDetailsContract;
 
     public PropertyDetailsPresenter(Context ctx, IPropertyDetailsContract iPropertyDetailsContract) {
@@ -56,7 +60,28 @@ public class PropertyDetailsPresenter {
         });
     }
 
-    public static class AsyncTaskGetUserAction extends AsyncTask<Void, Void, UserTO> {
+    public void requestAppointment(UserTO userTO,PropertyTO propertyTO)
+    {
+        AppointmentServerApi appointmentServerApi=new AppointmentServerApi();
+        appointmentServerApi.addAppointment(userTO.getToken(), propertyTO.getUserId(), new Date().getTime(), new Callback<AppointmentTO>() {
+            @Override
+            public void onResponse(Call<AppointmentTO> call, Response<AppointmentTO> response) {
+                if(response.code()!=200)
+                {
+                    iPropertyDetailsContract.setNewAppointment(false);
+                    return;
+                }
+                iPropertyDetailsContract.setNewAppointment(true);
+            }
+
+            @Override
+            public void onFailure(Call<AppointmentTO> call, Throwable t) {
+                iPropertyDetailsContract.setNewAppointment(false);
+            }
+        });
+    }
+
+    private static class AsyncTaskGetUserAction extends AsyncTask<Void, Void, UserTO> {
         private WeakReference<PropertyTO> propertyTOWeakReference;
         private WeakReference<UserBL> userBLWeakReference;
         private WeakReference<IPropertyDetailsContract> iPropertyDetailsContractWeakReference;

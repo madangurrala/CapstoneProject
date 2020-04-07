@@ -10,6 +10,7 @@ import retrofit2.http.Field;
 import retrofit2.http.GET;
 import retrofit2.http.Headers;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
 import retrofit2.http.Path;
 
 public interface IUserServiceAPI {
@@ -24,4 +25,7 @@ public interface IUserServiceAPI {
 
     @GET(value = "user/{id}")
     Call<UserTO> selectUserById(@Path(value = "id") int id);
+
+    @PUT(value = "user")
+    Call<UserTO> update(@Body RequestBody requestBody);
 }
