@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -19,6 +20,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.R;
 import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.model.to.AppointmentTO;
+import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.model.to.UserTO;
 import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.presenter.AppointmentListPresenter;
 import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.view.gui.adapters.MainAppointmentRecycleAdapter;
 import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.view.impl.IAppointmentsContract;
@@ -51,8 +53,22 @@ public class AppointmentsFragment extends Fragment implements IAppointmentsContr
     }
 
     @Override
-    public void fillAppointmentsRecycleView(List<AppointmentTO> appointmentTOS) {
-        recycleView.setAdapter(new MainAppointmentRecycleAdapter(getActivity(), appointmentTOS));
+    public void acceptAppointmentRequestResult(boolean status) {
+        if(status)
+        {
+            Toast.makeText(getActivity(), "Message sent successfully", Toast.LENGTH_SHORT).show();
+        }
+        else
+        {
+            Toast.makeText(getActivity(), "Message failed to send", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    @Override
+    public void fillAppointmentsRecycleView(UserTO userTO,List<AppointmentTO> appointmentTOS)
+    {
+        appointmentListPresenter.setUserTO(userTO);
+        recycleView.setAdapter(new MainAppointmentRecycleAdapter(getActivity(),appointmentTOS,appointmentListPresenter));
     }
 
     @Override

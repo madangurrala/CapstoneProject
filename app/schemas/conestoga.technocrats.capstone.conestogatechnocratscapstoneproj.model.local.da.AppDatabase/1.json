@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "2334c6e3d0dff920d4ff0cd97aafb6ff",
+    "identityHash": "4b8bca59c6fd28ff8f45ab51b6bc2864",
     "entities": [
       {
         "tableName": "TBL_USERS",
@@ -196,17 +196,11 @@
       },
       {
         "tableName": "TBL_MESSAGES",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`messageId` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `id` INTEGER NOT NULL, `senderId` INTEGER NOT NULL, `receiverId` INTEGER NOT NULL, `senderTitle` INTEGER NOT NULL, `receiverTitle` INTEGER NOT NULL, `messageIcon` TEXT, `message` TEXT, `registerDate` INTEGER NOT NULL, `updateDate` INTEGER NOT NULL, `seenDate` INTEGER NOT NULL, `deleteDate` INTEGER NOT NULL)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`messageId` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `senderId` INTEGER NOT NULL, `receiverId` INTEGER NOT NULL, `message` TEXT, `registerDate` INTEGER NOT NULL, `updateDate` INTEGER NOT NULL, `seenDate` INTEGER NOT NULL, `deleteDate` INTEGER NOT NULL)",
         "fields": [
           {
             "fieldPath": "messageId",
             "columnName": "messageId",
-            "affinity": "INTEGER",
-            "notNull": true
-          },
-          {
-            "fieldPath": "id",
-            "columnName": "id",
             "affinity": "INTEGER",
             "notNull": true
           },
@@ -221,24 +215,6 @@
             "columnName": "receiverId",
             "affinity": "INTEGER",
             "notNull": true
-          },
-          {
-            "fieldPath": "senderTitle",
-            "columnName": "senderTitle",
-            "affinity": "INTEGER",
-            "notNull": true
-          },
-          {
-            "fieldPath": "receiverTitle",
-            "columnName": "receiverTitle",
-            "affinity": "INTEGER",
-            "notNull": true
-          },
-          {
-            "fieldPath": "messageIcon",
-            "columnName": "messageIcon",
-            "affinity": "TEXT",
-            "notNull": false
           },
           {
             "fieldPath": "message",
@@ -340,7 +316,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '2334c6e3d0dff920d4ff0cd97aafb6ff')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '4b8bca59c6fd28ff8f45ab51b6bc2864')"
     ]
   }
 }

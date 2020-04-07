@@ -16,7 +16,6 @@ import androidx.viewpager.widget.ViewPager;
 import com.google.android.material.badge.BadgeDrawable;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
-import com.sendbird.android.SendBird;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -162,18 +161,5 @@ public class MainActivity extends AppCompatActivity implements IMainContract, Vi
             super.onBackPressed();
         }
 
-    }
-
-
-    //Deactive chat Api
-    @Override
-    protected void onDestroy() {
-        SendBird.disconnect(new SendBird.DisconnectHandler() {
-            @Override
-            public void onDisconnected() {
-                // A current user is disconnected from SendBird server.
-            }
-        });
-        super.onDestroy();
     }
 }

@@ -23,6 +23,7 @@
         <activity android:name=".view.gui.activities.ProfileActivity" />
         <activity
             android:name=".view.gui.activities.SplashActivity"
+            android:icon="@mipmap/ic_launcher"
             android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

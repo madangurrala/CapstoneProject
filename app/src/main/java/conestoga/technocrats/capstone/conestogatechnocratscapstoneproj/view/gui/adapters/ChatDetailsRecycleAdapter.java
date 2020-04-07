@@ -75,11 +75,14 @@ public class ChatDetailsRecycleAdapter extends RecyclerView.Adapter<ChatDetailsR
         return messageTOS.size();
     }
 
+    public void setMessageTOS(List<MessageTO> messageTOS)
+    {
+        this.messageTOS=messageTOS;
+    }
+
     @Override
     public int getItemViewType(int position) {
-        //todo update this method later
-        //return messageTOS.get(position).getSenderId()==userOwnerTO.getId()?SENDER_TYPE:RECEIVER_TYPE;
-        return position%2==0?SENDER_TYPE:RECEIVER_TYPE;
+        return messageTOS.get(position).getSenderId()==userOwnerTO.getId()?SENDER_TYPE:RECEIVER_TYPE;
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder
@@ -98,26 +101,28 @@ public class ChatDetailsRecycleAdapter extends RecyclerView.Adapter<ChatDetailsR
 
         public void setData(int position)
         {
+            MessageTO messageTO=messageTOS.get(position);
             if(getItemViewType()==SENDER_TYPE)
             {
-                setSenderData(position);
+                setSenderData(messageTO);
             }
             else
             {
-                setReceiverData(position);
+                setReceiverData(messageTO);
             }
         }
 
-        private void setSenderData(int position)
+        private void setSenderData(MessageTO messageTO)
         {
+
             appImagePresenter.loadCircle(ctx,userOwnerTO.getPhoto(),imgAvatar);
-            txtMsg.setText("Sender Message : "+position);
+            txtMsg.setText(messageTO.getMessage());
         }
 
-        private void setReceiverData(int position)
+        private void setReceiverData(MessageTO messageTO)
         {
             appImagePresenter.loadCircle(ctx,userPeerTO.getPhoto(),imgAvatar);
-            txtMsg.setText("Receiver Message : "+position);
+            txtMsg.setText(messageTO.getMessage());
         }
 
 
