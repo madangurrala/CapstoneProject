@@ -69,10 +69,16 @@ public class ChatDetailsActivity extends AppCompatActivity implements IChatDetai
     }
 
     @Override
-    public void chatListResult(UserTO userOwnerTO, UserTO userPeerTO, List<MessageTO> messageTOList) {
+    public void chatListResult(UserTO userOwnerTO, UserTO userPeerTO, List<MessageTO> messageTOList)
+    {
+        if(messageTOList==null)
+        {
+            return;
+        }
         chatDetailsRecycleAdapter = new ChatDetailsRecycleAdapter(getApplicationContext(), userOwnerTO, userPeerTO, messageTOList);
         recycleViewMessages.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         recycleViewMessages.setAdapter(chatDetailsRecycleAdapter);
+        recycleViewMessages.scrollToPosition(messageTOList.size()-1);
     }
 
     @Override

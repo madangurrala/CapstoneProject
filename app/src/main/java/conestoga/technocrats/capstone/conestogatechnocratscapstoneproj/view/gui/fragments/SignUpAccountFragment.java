@@ -94,7 +94,9 @@ public class SignUpAccountFragment extends Fragment implements View.OnClickListe
             Toast.makeText(getActivity(), "Try again!", Toast.LENGTH_SHORT).show();
             return;
         }
-        startActivity(new Intent(getActivity(), MainActivity.class));
+        Intent intent=new Intent(getActivity(),MainActivity.class);
+        intent.putExtra(UserTO.KEY.ID_KEY,userTO.getId());
+        startActivity(intent);
         getActivity().finish();
     }
 

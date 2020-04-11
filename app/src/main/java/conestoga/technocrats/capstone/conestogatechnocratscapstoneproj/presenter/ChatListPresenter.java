@@ -3,10 +3,6 @@ package conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.presente
 import android.app.Activity;
 import android.os.AsyncTask;
 
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
-
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,8 +13,9 @@ import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.model.to.
 import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.model.to.UserTO;
 import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.utils.FirebaseUtil;
 import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.view.impl.IChatListContract;
+import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.view.impl.IMessageTask;
 
-public class ChatListPresenter
+public class ChatListPresenter implements IMessageTask
 {
     private Activity activity;
     private UserBL userBL;
@@ -35,28 +32,28 @@ public class ChatListPresenter
     {
         new AsyncTaskGetUserAction(userBL, iChatListContract).execute();
     }
+
     public void getChatList(UserTO userTO)
     {
-        FirebaseUtil.getInstance(activity).getChatList(activity, userTO, new OnSuccessListener<List<QuerySnapshot>>() {
-            @Override
-            public void onSuccess(List<QuerySnapshot> querySnapshots) {
-                for(QuerySnapshot querySnapshot: querySnapshots)
-                {
-                    List<DocumentSnapshot> documentSnapshotList=querySnapshot.getDocuments();
-                    for(DocumentSnapshot snapshot:documentSnapshotList)
-                    {
-                        MessageTO messageTO=snapshot.toObject(MessageTO.class);
-                        long key=messageTO.getSenderId()!=userTO.getId()?messageTO.getSenderId():messageTO.getReceiverId();
-                        if(!ProjApplication.allUsersMessage.containsKey(key))
-                        {
-                            ProjApplication.allUsersMessage.put(key,new ArrayList<>());
-                        }
-                        ProjApplication.allUsersMessage.get(key).add(messageTO);
-                    }
-                }
-                iChatListContract.chatListResult(ProjApplication.allUsersMessage);
+        FirebaseUtil.getInstance(activity).startChatMessageListener(activity,userTO,this);
+    }
+
+    @Override
+    public void messageListTask(UserTO userTO,List<MessageTO> messageTOList) {
+        if(messageTOList==null)
+        {
+            return;
+        }
+        for(MessageTO messageTO:messageTOList)
+        {
+            long key=messageTO.getSenderId()!=userTO.getId()?messageTO.getSenderId():messageTO.getReceiverId();
+            if(!ProjApplication.allUsersMessage.containsKey(key))
+            {
+                ProjApplication.allUsersMessage.put(key,new ArrayList<>());
             }
-        });
+            ProjApplication.allUsersMessage.get(key).add(messageTO);
+        }
+        iChatListContract.chatListResult(ProjApplication.allUsersMessage);
     }
 
 

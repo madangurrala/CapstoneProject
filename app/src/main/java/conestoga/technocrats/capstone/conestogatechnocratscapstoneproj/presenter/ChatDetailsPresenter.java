@@ -21,11 +21,12 @@ import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.model.to.
 import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.utils.FirebaseUtil;
 import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.view.impl.IChatDetailsContract;
 import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.view.impl.IChatListContract;
+import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.view.impl.IMessageTask;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class ChatDetailsPresenter
+public class ChatDetailsPresenter implements IMessageTask
 {
     private Activity activity;
     private UserTO userTO;
@@ -51,7 +52,7 @@ public class ChatDetailsPresenter
     }
     public void getChatList(UserTO userTO)
     {
-        iChatDetailsContract.chatListResult(userTO,peerUserTO,ProjApplication.allUsersMessage.get(peerUserTO.getId()));
+        FirebaseUtil.getInstance(activity).startChatMessageListener(activity,userTO,this);
     }
 
     public void sendMessage(String msg)
@@ -65,10 +66,29 @@ public class ChatDetailsPresenter
             @Override
             public void onSuccess(DocumentReference documentReference)
             {
-                ProjApplication.allUsersMessage.get(peerUserTO.getId()).add(messageTO);
-                iChatDetailsContract.sendMessageResult(true,ProjApplication.allUsersMessage.get(peerUserTO.getId()));
+                //ProjApplication.allUsersMessage.get(peerUserTO.getId()).add(messageTO);
+                //iChatDetailsContract.sendMessageResult(true,ProjApplication.allUsersMessage.get(peerUserTO.getId()));
             }
         });
+    }
+
+
+    @Override
+    public void messageListTask(UserTO userTO,List<MessageTO> messageTOList) {
+        if(messageTOList==null)
+        {
+            return;
+        }
+        for(MessageTO messageTO:messageTOList)
+        {
+            long key=messageTO.getSenderId()!=userTO.getId()?messageTO.getSenderId():messageTO.getReceiverId();
+            if(!ProjApplication.allUsersMessage.containsKey(key))
+            {
+                ProjApplication.allUsersMessage.put(key,new ArrayList<>());
+            }
+            ProjApplication.allUsersMessage.get(key).add(messageTO);
+        }
+        iChatDetailsContract.chatListResult(userTO,peerUserTO,ProjApplication.allUsersMessage.get(peerUserTO.getId()));
     }
 
 

@@ -3,7 +3,6 @@ package conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.view.gui
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Toast;
 
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
@@ -22,18 +21,20 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.R;
+import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.model.to.UserTO;
+import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.utils.FirebaseUtil;
 import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.view.gui.adapters.MainActivityTabLayoutAdapter;
 import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.view.gui.fragments.AppointmentsFragment;
 import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.view.gui.fragments.ChatListFragment;
 import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.view.gui.fragments.ProfileFragment;
 import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.view.gui.fragments.PropertiesFragment;
 import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.view.impl.IMainContract;
+import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.view.impl.IMessageTask;
 
-public class MainActivity extends AppCompatActivity implements IMainContract, ViewPager.OnPageChangeListener,
-        TabLayout.OnTabSelectedListener {
+public class MainActivity extends AppCompatActivity implements IMainContract, ViewPager.OnPageChangeListener, TabLayout.OnTabSelectedListener {
 
+    private FirebaseUtil firebaseUtil;
 
     private MainActivityTabLayoutAdapter tabLayoutAdapter = null;
     private Toolbar toolbar;
@@ -53,6 +54,7 @@ public class MainActivity extends AppCompatActivity implements IMainContract, Vi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        firebaseUtil=FirebaseUtil.getInstance(getApplicationContext());
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         drawer = findViewById(R.id.drawer_layout);
@@ -162,4 +164,5 @@ public class MainActivity extends AppCompatActivity implements IMainContract, Vi
         }
 
     }
+
 }

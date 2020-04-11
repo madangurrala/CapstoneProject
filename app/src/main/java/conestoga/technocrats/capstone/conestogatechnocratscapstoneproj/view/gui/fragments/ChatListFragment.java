@@ -45,22 +45,20 @@ public class ChatListFragment extends Fragment implements IChatListContract, Swi
         rootConstraint = (ConstraintLayout) inflater.inflate(R.layout.recycle_view_layout, container, false);
         ButterKnife.bind(this, rootConstraint);
         initChatListRecycle();
-        chatListPresenter=new ChatListPresenter(getActivity(),this);
+        chatListPresenter = new ChatListPresenter(getActivity(), this);
         swipeRefreshLayout.setOnRefreshListener(this);
         onRefresh();
         return rootConstraint;
     }
 
-    private void initChatListRecycle()
-    {
-        linearLayoutManager=new LinearLayoutManager(getActivity(),LinearLayoutManager.VERTICAL,false);
+    private void initChatListRecycle() {
+        linearLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
         recycleView.setLayoutManager(linearLayoutManager);
     }
 
     @Override
     public void userValidationResult(UserTO userTO) {
-        if(userTO==null)
-        {
+        if (userTO == null) {
             return;
         }
         chatListPresenter.getChatList(userTO);
@@ -68,7 +66,7 @@ public class ChatListFragment extends Fragment implements IChatListContract, Swi
 
     @Override
     public void chatListResult(Map<Long, List<MessageTO>> allUsersMessage) {
-        adapter=new MainChatRecycleAdapter(getActivity(),allUsersMessage);
+        adapter = new MainChatRecycleAdapter(getActivity(), allUsersMessage);
         recycleView.setAdapter(adapter);
     }
 
