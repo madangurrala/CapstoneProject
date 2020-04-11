@@ -56,6 +56,8 @@ public class PropertyDetailsActivity extends AppCompatActivity implements IPrope
     public MaterialTextView txtPropertyDesc;
     @BindView(value = R.id.btnShowMap)
     public MaterialButton btnShowMap;
+    @BindView(value = R.id.btnPropertyRented)
+    public MaterialButton btnPropertyRented;
     @BindView(value = R.id.btnRequestAppointment)
     public MaterialButton btnRequestAppointment;
     @Override
@@ -69,7 +71,7 @@ public class PropertyDetailsActivity extends AppCompatActivity implements IPrope
         propertyDetailsPresenter.getUserDetails(propertyTO);
     }
 
-    @OnClick(value = {R.id.btnShowMap,R.id.btnRequestAppointment})
+    @OnClick(value = {R.id.btnShowMap,R.id.btnPropertyRented,R.id.btnRequestAppointment})
     public void doClick(View view)
     {
         switch (view.getId())
@@ -80,6 +82,17 @@ public class PropertyDetailsActivity extends AppCompatActivity implements IPrope
                 intent.putExtra(PropertyMapActivity.KEY.LAT,propertyTO.getLatitude());
                 intent.putExtra(PropertyMapActivity.KEY.LNG,propertyTO.getLongitude());
                 startActivity(intent);
+                break;
+            }
+            case R.id.btnPropertyRented:
+            {
+                if(userTO.getId()!=propertyTO.getUserId())
+                {
+                    Toast.makeText(this, "You are not the property owner, so you cannot change it.", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                propertyTO.setStatus("Rented");
+                propertyDetailsPresenter.updatePropertyStatusRented(userTO,propertyTO);
                 break;
             }
             case R.id.btnRequestAppointment:
@@ -102,22 +115,34 @@ public class PropertyDetailsActivity extends AppCompatActivity implements IPrope
     }
 
     @Override
-    public void setOwnerPropertyData(UserTO userTO, PropertyTO propertyTO)
+    public void setOwnerPropertyData(UserTO ownerUser, PropertyTO propertyTO)
     {
-        if(userTO==null || propertyTO==null)
+        if(ownerUser==null || propertyTO==null)
         {
             return;
         }
-        txtOwnerName.setText(userTO.getName());
-        txtOwnerPhone.setText(userTO.getPhone());
-        txtOwnerEmail.setText(userTO.getEmail());
+        btnPropertyRented.setVisibility(userTO.getId()==propertyTO.getUserId()?View.VISIBLE:View.INVISIBLE);
+        txtOwnerName.setText(ownerUser.getName());
+        txtOwnerPhone.setText(ownerUser.getPhone());
+        txtOwnerEmail.setText(ownerUser.getEmail());
         txtPropertySize.setText("Size: "+propertyTO.getSize());
         txtPropertyStatus.setText("Status: "+propertyTO.getStatus());
         txtPropertyPrice.setText("Price: "+propertyTO.getPrice());
         txtPropertyRegisterDate.setText("Register Date: "+new SimpleDateFormat("yyyy/MM/dd").format(new Date(propertyTO.getRegisterDate())));
         txtPropertyDesc.setText(propertyTO.getLongDescription());
-        appImagePresenter.load(getApplicationContext(),userTO.getPhoto(),imgOwner);
+        appImagePresenter.load(getApplicationContext(),ownerUser.getPhoto(),imgOwner);
         btnRequestAppointment.setEnabled(!propertyTO.isAppointmentRequested());
+    }
+
+    @Override
+    public void updatePropertyData(boolean status,UserTO userTO, PropertyTO propertyTO) {
+        setOwnerPropertyData(userTO,propertyTO);
+        if(status)
+        {
+            Toast.makeText(this, "Property updated successfully", Toast.LENGTH_SHORT).show();
+        }else{
+            Toast.makeText(this, "Please try again", Toast.LENGTH_SHORT).show();
+        }
     }
 
     @Override

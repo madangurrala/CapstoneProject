@@ -48,4 +48,18 @@ public class PropertyServerApi {
         Call<PropertyTO> call = iPropertyServiceAPI.registerProperty(requestBody);
         call.enqueue(callback);
     }
+
+    public void updatePropertyStatusRented(String token,PropertyTO propertyTO, Callback<PropertyTO> callback) {
+        if (callback == null) {
+            return;
+        }
+        Retrofit retrofit = new CoreServerApi(baseUrl,token).getRetrofit();
+        iPropertyServiceAPI = retrofit.create(IPropertyServiceAPI.class);
+        JsonObject jsonObject=new JsonObject();
+        jsonObject.addProperty("Status",propertyTO.getStatus());
+
+        RequestBody requestBody = RequestBody.create(MediaType.parse("application/json"), jsonObject.toString());
+        Call<PropertyTO> call = iPropertyServiceAPI.updateProperty((int)propertyTO.getId(),requestBody);
+        call.enqueue(callback);
+    }
 }
