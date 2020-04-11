@@ -8,6 +8,7 @@ import java.util.Date;
 
 import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.model.local.bl.UserBL;
 import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.model.remote.server.AppointmentServerApi;
+import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.model.remote.server.PropertyServerApi;
 import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.model.remote.server.UserServerApi;
 import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.model.to.AppointmentTO;
 import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.model.to.PropertyTO;
@@ -56,6 +57,28 @@ public class PropertyDetailsPresenter {
             @Override
             public void onFailure(Call<UserTO> call, Throwable t) {
                 iPropertyDetailsContract.setOwnerPropertyData(null,null);
+            }
+        });
+    }
+
+
+    public void updatePropertyStatusRented(UserTO userTO,PropertyTO propertyTO)
+    {
+        PropertyServerApi propertyServerApi=new PropertyServerApi();
+        propertyServerApi.updatePropertyStatusRented(userTO.getToken(), propertyTO, new Callback<PropertyTO>() {
+            @Override
+            public void onResponse(Call<PropertyTO> call, Response<PropertyTO> response) {
+                if(response.code()!=200)
+                {
+                    iPropertyDetailsContract.updatePropertyData(false,userTO,propertyTO);
+                    return;
+                }
+                iPropertyDetailsContract.updatePropertyData(true,userTO,propertyTO);
+            }
+
+            @Override
+            public void onFailure(Call<PropertyTO> call, Throwable t) {
+                iPropertyDetailsContract.updatePropertyData(false,userTO,propertyTO);
             }
         });
     }

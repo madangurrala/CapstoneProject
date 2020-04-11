@@ -134,16 +134,37 @@
                 android:layout_weight="1"/>
         </LinearLayout>
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnShowMap"
-            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:drawableLeft="@drawable/ic_location_on"
-            android:text="Show On Map"
-            android:layout_margin="16dp"
+            android:id="@+id/linearPropertyProfile3"
+            android:orientation="horizontal"
+            android:weightSum="2"
+            android:layout_margin="8dp"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/linearPropertyProfile2"/>
+            app:layout_constraintTop_toBottomOf="@id/linearPropertyProfile2">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnShowMap"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/ic_location_on"
+                android:layout_weight="1"
+                android:text="Show On Map"
+                android:layout_margin="16dp"/>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnPropertyRented"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Property Rented"
+                android:layout_margin="16dp"
+                android:visibility="invisible"/>
+
+        </LinearLayout>
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnRequestAppointment"
@@ -153,7 +174,7 @@
             android:text="Request Appointment"
             android:layout_margin="16dp"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/btnShowMap"
+            app:layout_constraintTop_toBottomOf="@id/linearPropertyProfile3"
             app:layout_constraintRight_toRightOf="parent"/>
 
         <TextView

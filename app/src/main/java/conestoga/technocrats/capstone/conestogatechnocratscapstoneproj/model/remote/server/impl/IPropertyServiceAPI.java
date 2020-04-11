@@ -11,6 +11,8 @@ import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.Headers;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
+import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 public interface IPropertyServiceAPI {
@@ -20,4 +22,7 @@ public interface IPropertyServiceAPI {
 
     @POST(value = "property")
     Call<PropertyTO> registerProperty(@Body RequestBody requestBody);
+
+    @PUT(value = "property/{id}")
+    Call<PropertyTO> updateProperty(@Path("id") int id, @Body RequestBody requestBody);
 }

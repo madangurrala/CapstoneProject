@@ -7,5 +7,6 @@ public interface IPropertyDetailsContract
 {
     public void setUserDetails(UserTO userTO);
     public void setOwnerPropertyData(UserTO userTO, PropertyTO propertyTO);
+    public void updatePropertyData(boolean status,UserTO userTO, PropertyTO propertyTO);
     public void setNewAppointment(boolean status);
 }
