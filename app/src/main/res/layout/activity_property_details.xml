@@ -8,14 +8,16 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <androidx.viewpager2.widget.ViewPager2
+
+        <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="250dp"
-            android:id="@+id/viewPagerImgSlider"
+            android:id="@+id/frameHeader"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            android:background="@color/colorAccent"/>
+            app:layout_constraintRight_toRightOf="parent">
+            <include layout="@layout/activity_splash"/>
+        </FrameLayout>
 
         <TextView
             android:layout_width="wrap_content"
@@ -23,7 +25,7 @@
             android:id="@+id/txtOwnerHeader"
             android:layout_margin="8dp"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/viewPagerImgSlider"
+            app:layout_constraintTop_toBottomOf="@id/frameHeader"
             android:textColor="@color/colorGrayFG"
             android:text="Owner Profile"/>
 

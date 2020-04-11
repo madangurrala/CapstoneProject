@@ -41,7 +41,8 @@ public class PropertyMapActivity extends FragmentActivity implements OnMapReadyC
     }
 
     @Override
-    public void onMapReady(GoogleMap googleMap) {
+    public void onMapReady(GoogleMap googleMap)
+    {
         this.googleMap=googleMap;
         showLocation(this.googleMap,lat,lng,"Property Location");
     }
@@ -50,7 +51,8 @@ public class PropertyMapActivity extends FragmentActivity implements OnMapReadyC
     {
         LatLng latLng=new LatLng(lat,lng);
         googleMap.addMarker(new MarkerOptions().position(latLng).title(title));
-        googleMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
+        //googleMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
+        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng,18.0f));
     }
 
 }

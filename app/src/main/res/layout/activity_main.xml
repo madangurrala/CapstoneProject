@@ -63,7 +63,8 @@
             android:src="@drawable/ic_add_circle_black_24dp"
             app:layout_constraintBottom_toTopOf="@id/tabLayout"
             app:layout_constraintRight_toRightOf="parent"
-            android:layout_marginBottom="10dp"
+            android:layout_margin="32dp"
+            android:padding="8dp"
             android:backgroundTint="@color/colorPrimary"
             app:tint="#FFFFFF"
             app:maxImageSize="35dp">

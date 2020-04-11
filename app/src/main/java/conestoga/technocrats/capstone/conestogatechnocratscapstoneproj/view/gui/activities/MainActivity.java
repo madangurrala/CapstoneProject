@@ -83,9 +83,9 @@ public class MainActivity extends AppCompatActivity implements IMainContract, Vi
         drawer.addDrawerListener(drawerToggle);
         drawerToggle.syncState();
 
-        updateTabLayoutBadge(0, 10);
+        /*updateTabLayoutBadge(0, 10);
         updateTabLayoutBadge(1, 99);
-        updateTabLayoutBadge(2, 2);
+        updateTabLayoutBadge(2, 2);*/
 
         postAddButton.setOnClickListener(new View.OnClickListener() {
             @Override

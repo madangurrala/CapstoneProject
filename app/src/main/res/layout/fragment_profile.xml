@@ -25,7 +25,7 @@
                     android:layout_width="202dp"
                     android:layout_height="109dp"
                     android:contentDescription="@string/account_icon"
-                    android:src="@drawable/ic_account_circle_black_24dp"
+                    android:src="@drawable/ic_account_circle"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"

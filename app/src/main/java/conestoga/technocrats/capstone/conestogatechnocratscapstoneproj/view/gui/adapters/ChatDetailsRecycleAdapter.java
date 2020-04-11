@@ -114,13 +114,14 @@ public class ChatDetailsRecycleAdapter extends RecyclerView.Adapter<ChatDetailsR
 
         private void setSenderData(MessageTO messageTO)
         {
-
+            appImagePresenter.setIc_broken_image(R.drawable.ic_perm_identity);
             appImagePresenter.loadCircle(ctx,userOwnerTO.getPhoto(),imgAvatar);
             txtMsg.setText(messageTO.getMessage());
         }
 
         private void setReceiverData(MessageTO messageTO)
         {
+            appImagePresenter.setIc_broken_image(R.drawable.ic_perm_identity2);
             appImagePresenter.loadCircle(ctx,userPeerTO.getPhoto(),imgAvatar);
             txtMsg.setText(messageTO.getMessage());
         }
