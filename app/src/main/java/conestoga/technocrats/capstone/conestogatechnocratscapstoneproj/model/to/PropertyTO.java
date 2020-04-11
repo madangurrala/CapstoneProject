@@ -11,7 +11,7 @@ import androidx.room.PrimaryKey;
 public class PropertyTO implements Parcelable
 {
     public PropertyTO(){}
-    public PropertyTO(Parcel in) {
+    protected PropertyTO(Parcel in) {
         propertyId = in.readLong();
         id = in.readLong();
         title = in.readString();
@@ -30,6 +30,7 @@ public class PropertyTO implements Parcelable
         price = in.readString();
         rate = in.readFloat();
         viewCount = in.readInt();
+        appointmentRequested = in.readByte() != 0;
     }
 
     public static final Creator<PropertyTO> CREATOR = new Creator<PropertyTO>() {
@@ -69,6 +70,7 @@ public class PropertyTO implements Parcelable
         dest.writeString(price);
         dest.writeFloat(rate);
         dest.writeInt(viewCount);
+        dest.writeByte((byte) (appointmentRequested ? 1 : 0));
     }
 
     public static final class KEY
@@ -91,6 +93,7 @@ public class PropertyTO implements Parcelable
             public static final String PRICE_KEY = "price";
             public static final String RATE_KEY = "rate";
             public static final String VIEW_COUNT_KEY = "viewCount";
+            public static final String APPOINTMENT_REQUESTED_KEY = "appointmentRequested";
     }
 
     @PrimaryKey(autoGenerate = true)
@@ -130,6 +133,8 @@ public class PropertyTO implements Parcelable
     private float rate;
     @ColumnInfo(name = "viewCount")
     private int viewCount;
+    @ColumnInfo(name = "appointmentRequested")
+    private boolean appointmentRequested;
 
     public long getPropertyId() {
         return propertyId;
@@ -273,5 +278,13 @@ public class PropertyTO implements Parcelable
 
     public void setViewCount(int viewCount) {
         this.viewCount = viewCount;
+    }
+
+    public boolean isAppointmentRequested() {
+        return appointmentRequested;
+    }
+
+    public void setAppointmentRequested(boolean appointmentRequested) {
+        this.appointmentRequested = appointmentRequested;
     }
 }

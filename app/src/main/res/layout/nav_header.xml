@@ -11,19 +11,24 @@
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@mipmap/ic_launcher_round" />
+        android:minWidth="100dp"
+        android:minHeight="100dp"
+        android:src="@drawable/ic_account_circle" />
 
-    <TextView
+    <!--<TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingTop="10dp"
         android:text="User Name"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body1"></TextView>
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"/>-->
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="User Email"></TextView>
+        android:id="@+id/txtUserEmail"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:text="Guest User"/>
 
 
 </LinearLayout>

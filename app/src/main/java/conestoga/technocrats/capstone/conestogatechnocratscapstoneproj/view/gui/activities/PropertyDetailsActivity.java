@@ -84,6 +84,11 @@ public class PropertyDetailsActivity extends AppCompatActivity implements IPrope
             }
             case R.id.btnRequestAppointment:
             {
+                if(propertyTO.isAppointmentRequested())
+                {
+                    Toast.makeText(this, "You already requested an appointment for this property.", Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 propertyDetailsPresenter.requestAppointment(userTO,propertyTO);
                 break;
             }
@@ -106,12 +111,13 @@ public class PropertyDetailsActivity extends AppCompatActivity implements IPrope
         txtOwnerName.setText(userTO.getName());
         txtOwnerPhone.setText(userTO.getPhone());
         txtOwnerEmail.setText(userTO.getEmail());
-        txtPropertySize.setText(propertyTO.getSize());
-        txtPropertyStatus.setText(propertyTO.getStatus());
-        txtPropertyPrice.setText(propertyTO.getPrice());
-        txtPropertyRegisterDate.setText(new SimpleDateFormat("yyyy/MM/dd hh:mm aa").format(new Date(propertyTO.getRegisterDate())));
+        txtPropertySize.setText("Size: "+propertyTO.getSize());
+        txtPropertyStatus.setText("Status: "+propertyTO.getStatus());
+        txtPropertyPrice.setText("Price: "+propertyTO.getPrice());
+        txtPropertyRegisterDate.setText("Register Date: "+new SimpleDateFormat("yyyy/MM/dd").format(new Date(propertyTO.getRegisterDate())));
         txtPropertyDesc.setText(propertyTO.getLongDescription());
         appImagePresenter.load(getApplicationContext(),userTO.getPhoto(),imgOwner);
+        btnRequestAppointment.setEnabled(!propertyTO.isAppointmentRequested());
     }
 
     @Override
@@ -119,10 +125,12 @@ public class PropertyDetailsActivity extends AppCompatActivity implements IPrope
         if(!status)
         {
             btnRequestAppointment.setEnabled(true);
+            propertyTO.setAppointmentRequested(false);
             Toast.makeText(this, "There is a problem, please try again", Toast.LENGTH_SHORT).show();
             return;
         }
         btnRequestAppointment.setEnabled(false);
+        propertyTO.setAppointmentRequested(true);
         Toast.makeText(this, "The appointment has requested successfully", Toast.LENGTH_SHORT).show();
     }
 }

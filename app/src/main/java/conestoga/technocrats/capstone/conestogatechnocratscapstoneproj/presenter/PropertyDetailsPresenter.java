@@ -63,7 +63,7 @@ public class PropertyDetailsPresenter {
     public void requestAppointment(UserTO userTO,PropertyTO propertyTO)
     {
         AppointmentServerApi appointmentServerApi=new AppointmentServerApi();
-        appointmentServerApi.addAppointment(userTO.getToken(), propertyTO.getUserId(), new Date().getTime(), new Callback<AppointmentTO>() {
+        appointmentServerApi.addAppointment(userTO.getToken(), propertyTO.getId(), new Date().getTime(), new Callback<AppointmentTO>() {
             @Override
             public void onResponse(Call<AppointmentTO> call, Response<AppointmentTO> response) {
                 if(response.code()!=200)

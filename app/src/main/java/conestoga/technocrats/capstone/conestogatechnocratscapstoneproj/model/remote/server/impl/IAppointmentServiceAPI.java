@@ -8,6 +8,8 @@ import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
+import retrofit2.http.Path;
 
 public interface IAppointmentServiceAPI
 {
@@ -16,4 +18,7 @@ public interface IAppointmentServiceAPI
 
     @POST(value = "appointment")
     public Call<AppointmentTO> registerAppointment(@Body RequestBody requestBody);
+
+    @PUT(value = "appointment/{id}")
+    public Call<AppointmentTO> updateAppointmentStatus(@Path(value = "id")int id, @Body RequestBody requestBody);
 }

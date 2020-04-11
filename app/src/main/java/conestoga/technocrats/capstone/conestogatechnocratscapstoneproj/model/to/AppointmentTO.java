@@ -7,6 +7,19 @@ import androidx.room.PrimaryKey;
 @Entity(tableName = "TBL_APPOINTMENTS")
 public class AppointmentTO
 {
+    public enum EAppointmentStatus
+    {
+        Accepted("Accepted"),Rejected("Rejected");
+        private String value;
+        EAppointmentStatus(String value)
+        {
+            this.value=value;
+        }
+
+        public String getValue() {
+            return value;
+        }
+    }
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "appointmentId")
     private long appointmentId;
@@ -22,6 +35,8 @@ public class AppointmentTO
     private long registerDate;
     @ColumnInfo(name = "appointmentDate")
     private long appointmentDate;
+    @ColumnInfo(name = "status")
+    private String status;
 
     public long getAppointmentId() {
         return appointmentId;
@@ -77,5 +92,13 @@ public class AppointmentTO
 
     public void setAppointmentDate(long appointmentDate) {
         this.appointmentDate = appointmentDate;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 }

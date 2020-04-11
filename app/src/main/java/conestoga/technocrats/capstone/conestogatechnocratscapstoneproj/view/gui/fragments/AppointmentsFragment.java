@@ -53,7 +53,12 @@ public class AppointmentsFragment extends Fragment implements IAppointmentsContr
     }
 
     @Override
-    public void acceptAppointmentRequestResult(boolean status) {
+    public void acceptAppointmentRequestResult(boolean status)
+    {
+        if(recycleView.getAdapter()!=null)
+        {
+            recycleView.getAdapter().notifyDataSetChanged();
+        }
         if(status)
         {
             Toast.makeText(getActivity(), "Message sent successfully", Toast.LENGTH_SHORT).show();

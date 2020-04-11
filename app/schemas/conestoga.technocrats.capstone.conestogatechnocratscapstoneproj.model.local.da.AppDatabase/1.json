@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "4b8bca59c6fd28ff8f45ab51b6bc2864",
+    "identityHash": "b283ed133c9613aff7d3f222c9902cd5",
     "entities": [
       {
         "tableName": "TBL_USERS",
@@ -74,7 +74,7 @@
       },
       {
         "tableName": "TBL_PROPERTIES",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`propertyId` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `id` INTEGER NOT NULL, `title` TEXT, `smallImagePath` TEXT, `bigImagePath` TEXT, `shortDescription` TEXT, `longDescription` TEXT, `status` TEXT, `userId` INTEGER NOT NULL, `user` TEXT, `registerDate` INTEGER NOT NULL, `latitude` REAL NOT NULL, `longitude` REAL NOT NULL, `address` TEXT, `size` TEXT, `price` TEXT, `rate` REAL NOT NULL, `viewCount` INTEGER NOT NULL)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`propertyId` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `id` INTEGER NOT NULL, `title` TEXT, `smallImagePath` TEXT, `bigImagePath` TEXT, `shortDescription` TEXT, `longDescription` TEXT, `status` TEXT, `userId` INTEGER NOT NULL, `user` TEXT, `registerDate` INTEGER NOT NULL, `latitude` REAL NOT NULL, `longitude` REAL NOT NULL, `address` TEXT, `size` TEXT, `price` TEXT, `rate` REAL NOT NULL, `viewCount` INTEGER NOT NULL, `appointmentRequested` INTEGER NOT NULL)",
         "fields": [
           {
             "fieldPath": "propertyId",
@@ -183,6 +183,12 @@
             "columnName": "viewCount",
             "affinity": "INTEGER",
             "notNull": true
+          },
+          {
+            "fieldPath": "appointmentRequested",
+            "columnName": "appointmentRequested",
+            "affinity": "INTEGER",
+            "notNull": true
           }
         ],
         "primaryKey": {
@@ -258,7 +264,7 @@
       },
       {
         "tableName": "TBL_APPOINTMENTS",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`appointmentId` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `id` INTEGER NOT NULL, `peerId` INTEGER NOT NULL, `peerTitle` TEXT, `appointmentIcon` TEXT, `registerDate` INTEGER NOT NULL, `appointmentDate` INTEGER NOT NULL)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`appointmentId` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `id` INTEGER NOT NULL, `peerId` INTEGER NOT NULL, `peerTitle` TEXT, `appointmentIcon` TEXT, `registerDate` INTEGER NOT NULL, `appointmentDate` INTEGER NOT NULL, `status` TEXT)",
         "fields": [
           {
             "fieldPath": "appointmentId",
@@ -301,6 +307,12 @@
             "columnName": "appointmentDate",
             "affinity": "INTEGER",
             "notNull": true
+          },
+          {
+            "fieldPath": "status",
+            "columnName": "status",
+            "affinity": "TEXT",
+            "notNull": false
           }
         ],
         "primaryKey": {
@@ -316,7 +328,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '4b8bca59c6fd28ff8f45ab51b6bc2864')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'b283ed133c9613aff7d3f222c9902cd5')"
     ]
   }
 }
