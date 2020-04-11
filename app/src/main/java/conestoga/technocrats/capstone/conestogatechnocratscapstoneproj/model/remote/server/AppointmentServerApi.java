@@ -35,7 +35,7 @@ public class AppointmentServerApi
         call.enqueue(callback);
     }
 
-    public void addAppointment(String token,long peerId,long appointmentDate, Callback<AppointmentTO> callback)
+    public void addAppointment(String token,long propertyId,long appointmentDate, Callback<AppointmentTO> callback)
     {
         if(callback==null)
         {
@@ -45,12 +45,30 @@ public class AppointmentServerApi
         iAppointmentServiceAPI=retrofit.create(IAppointmentServiceAPI.class);
 
         JsonObject jsonObject=new JsonObject();
-        jsonObject.addProperty("PeerId",String.valueOf(peerId));
-        jsonObject.addProperty("AppointmentDate",String.valueOf(appointmentDate));
+        jsonObject.addProperty("PropertyId",(int)propertyId);
+        jsonObject.addProperty("AppointmentDate",appointmentDate);
 
         RequestBody requestBody = RequestBody.create(MediaType.parse("application/json"), jsonObject.toString());
 
         Call<AppointmentTO> call=iAppointmentServiceAPI.registerAppointment(requestBody);
+        call.enqueue(callback);
+    }
+
+    public void updateAppointmentStatus(String token,int appointmentId,String status, Callback<AppointmentTO> callback)
+    {
+        if(callback==null)
+        {
+            return;
+        }
+        Retrofit retrofit= new CoreServerApi(baseUrl,token).getRetrofit();
+        iAppointmentServiceAPI=retrofit.create(IAppointmentServiceAPI.class);
+
+        JsonObject jsonObject=new JsonObject();
+        jsonObject.addProperty("Status",status);
+
+        RequestBody requestBody = RequestBody.create(MediaType.parse("application/json"), jsonObject.toString());
+
+        Call<AppointmentTO> call=iAppointmentServiceAPI.updateAppointmentStatus(appointmentId,requestBody);
         call.enqueue(callback);
     }
 

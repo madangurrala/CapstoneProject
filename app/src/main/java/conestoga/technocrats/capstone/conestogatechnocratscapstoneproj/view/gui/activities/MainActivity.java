@@ -3,6 +3,7 @@ package conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.view.gui
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.TextView;
 
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,6 +15,7 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.badge.BadgeDrawable;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.tabs.TabLayout;
 
 import java.util.ArrayList;
@@ -22,6 +24,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.R;
+import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.model.local.bl.UserBL;
 import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.model.to.UserTO;
 import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.utils.FirebaseUtil;
 import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.view.gui.adapters.MainActivityTabLayoutAdapter;
@@ -48,19 +51,25 @@ public class MainActivity extends AppCompatActivity implements IMainContract, Vi
     public TabLayout tabLayout;
     @BindView(R.id.viewPager)
     public ViewPager viewPager;
+    @BindView(R.id.nav_view)
+    public NavigationView nav_view;
+
+    public TextView txtUserEmail;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        ButterKnife.bind(this);
         firebaseUtil=FirebaseUtil.getInstance(getApplicationContext());
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         drawer = findViewById(R.id.drawer_layout);
+        txtUserEmail=nav_view.getHeaderView(0).findViewById(R.id.txtUserEmail);
         //new UserBL(this).fetchLoginAccountSP().getEmail();
         postAddButton = findViewById(R.id.floatingButton);
-        ButterKnife.bind(this);
+
         setTitle(getResources().getString(R.string.app_name));
         tabLayoutAdapter = new MainActivityTabLayoutAdapter(getSupportFragmentManager(),
                 FragmentStatePagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
@@ -96,6 +105,14 @@ public class MainActivity extends AppCompatActivity implements IMainContract, Vi
 
             }
         });
+
+
+        UserBL userBL=new UserBL(this);
+        UserTO userTO=userBL.fetchLoginAccountSP();
+        if(userTO!=null)
+        {
+            txtUserEmail.setText(userTO.getEmail());
+        }
     }
 
 

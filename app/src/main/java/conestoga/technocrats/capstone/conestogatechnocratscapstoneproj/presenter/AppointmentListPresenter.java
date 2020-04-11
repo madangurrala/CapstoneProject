@@ -53,15 +53,35 @@ public class AppointmentListPresenter
 
     public void acceptAppointmentRequest(Activity activity,AppointmentTO appointmentTO)
     {
-        MessageTO messageTO=new MessageTO();
-        messageTO.setSenderId((int) userTO.getId());
-        messageTO.setReceiverId((int) appointmentTO.getPeerId());
-        messageTO.setMessage("Hello, I got your appointment request, so, let's start.....");
-        messageTO.setRegisterDate(new Date().getTime());
-        FirebaseUtil.getInstance(ctx).sendMessage(activity, messageTO, new OnSuccessListener<DocumentReference>() {
+        appointmentServerApi.updateAppointmentStatus(userTO.getToken(), (int) appointmentTO.getId(), appointmentTO.getStatus(), new Callback<AppointmentTO>() {
             @Override
-            public void onSuccess(DocumentReference documentReference) {
-                iAppointmentsContract.acceptAppointmentRequestResult(true);
+            public void onResponse(Call<AppointmentTO> call, Response<AppointmentTO> response)
+            {
+                if(response.code()!=200)
+                {
+                    appointmentTO.setStatus(AppointmentTO.EAppointmentStatus.Rejected.getValue());
+                    iAppointmentsContract.acceptAppointmentRequestResult(false);
+                    return;
+                }
+                MessageTO messageTO=new MessageTO();
+                messageTO.setSenderId((int) userTO.getId());
+                messageTO.setReceiverId((int) appointmentTO.getPeerId());
+                messageTO.setMessage("Hello, I got your appointment request, so, let's start.....");
+                messageTO.setRegisterDate(new Date().getTime());
+                FirebaseUtil.getInstance(ctx).sendMessage(activity, messageTO, new OnSuccessListener<DocumentReference>() {
+                    @Override
+                    public void onSuccess(DocumentReference documentReference) {
+                        appointmentTO.setStatus(AppointmentTO.EAppointmentStatus.Accepted.getValue());
+                        iAppointmentsContract.acceptAppointmentRequestResult(true);
+                    }
+                });
+
+            }
+
+            @Override
+            public void onFailure(Call<AppointmentTO> call, Throwable t) {
+                appointmentTO.setStatus(AppointmentTO.EAppointmentStatus.Rejected.getValue());
+                iAppointmentsContract.acceptAppointmentRequestResult(false);
             }
         });
     }
@@ -111,7 +131,6 @@ public class AppointmentListPresenter
                         return;
                     }
                     iAppointmentsContractWeakReference.get().fillAppointmentsRecycleView(userTO,response.body());
-                    //todo register all the available appointments in the local data base
                 }
 
                 @Override

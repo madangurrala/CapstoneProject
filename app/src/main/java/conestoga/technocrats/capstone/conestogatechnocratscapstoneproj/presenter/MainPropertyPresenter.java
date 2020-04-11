@@ -80,14 +80,14 @@ public class MainPropertyPresenter {
             }
             propertyServerApiWeakReference.get().getProperties(userTO.getToken(), new Callback<List<PropertyTO>>() {
                 @Override
-                public void onResponse(Call<List<PropertyTO>> call, Response<List<PropertyTO>> response) {
+                public void onResponse(Call<List<PropertyTO>> call, Response<List<PropertyTO>> response)
+                {
                     if(response.code()!=200)
                     {
                         iPropertiesContractWeakReference.get().fillPropertiesRecycleView(null);
                         return;
                     }
                     iPropertiesContractWeakReference.get().fillPropertiesRecycleView(response.body());
-                    //todo register all the available properties in local data base
                 }
 
                 @Override

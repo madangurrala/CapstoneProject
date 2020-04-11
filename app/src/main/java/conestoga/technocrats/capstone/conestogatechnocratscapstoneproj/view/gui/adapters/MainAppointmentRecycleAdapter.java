@@ -30,6 +30,7 @@ import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.model.to.
 import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.presenter.AppointmentListPresenter;
 import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.presenter.root.AppImagePresenter;
 import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.utils.FirebaseUtil;
+import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.view.impl.IAppointmentsContract;
 
 public class MainAppointmentRecycleAdapter extends RecyclerView.Adapter<MainAppointmentRecycleAdapter.ViewHolder> {
     private Activity activity;
@@ -87,6 +88,16 @@ public class MainAppointmentRecycleAdapter extends RecyclerView.Adapter<MainAppo
             txtTitle.setText(appointmentTO.getPeerTitle());
             txtSubTitle.setText(new SimpleDateFormat("yyyy/MM/dd hh:mm").format(new Date(appointmentTO.getAppointmentDate())));
             imgItem.setImageResource(R.drawable.ic_business_center);
+            if(appointmentTO.getStatus().equals(AppointmentTO.EAppointmentStatus.Accepted.getValue()))
+            {
+                imgBtn3.setImageResource(R.drawable.ic_done_all);
+                imgBtn3.setEnabled(false);
+            }
+            else
+            {
+                imgBtn3.setImageResource(R.drawable.ic_done);
+                imgBtn3.setEnabled(true);
+            }
             imgBtn3.setTag(position);
         }
 
@@ -99,7 +110,6 @@ public class MainAppointmentRecycleAdapter extends RecyclerView.Adapter<MainAppo
             {
                 case R.id.imgBtn3:
                 {
-                    ((ImageButton)view).setImageResource(R.drawable.ic_done_all);
                     appointmentListPresenter.acceptAppointmentRequest(activity,appointmentTO);
                     break;
                 }
