@@ -81,6 +81,7 @@ dependencies {
 
     // Core library
     androidTestImplementation 'androidx.test:core:1.0.0'
+    implementation 'com.google.guava:guava:28.1-android'
 
     // AndroidJUnitRunner and JUnit Rules
     androidTestImplementation 'androidx.test:runner:1.1.0'
@@ -89,7 +90,6 @@ dependencies {
     // Assertions
     androidTestImplementation 'androidx.test.ext:junit:1.0.0'
     androidTestImplementation 'androidx.test.ext:truth:1.0.0'
-    androidTestImplementation 'com.google.truth:truth:0.42'
 
     // Espresso dependencies
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0'
@@ -118,7 +118,6 @@ dependencies {
     implementation 'com.google.firebase:firebase-firestore:21.4.2'
     implementation 'com.google.android.gms:play-services-maps:17.0.0'
     implementation 'com.google.firebase:firebase-inappmessaging-display:17.2.0'
-    implementation 'com.google.guava:guava:27.0.1-android'
 
     // External libraries
     //implementation 'org.jsoup:jsoup:1.11.2'

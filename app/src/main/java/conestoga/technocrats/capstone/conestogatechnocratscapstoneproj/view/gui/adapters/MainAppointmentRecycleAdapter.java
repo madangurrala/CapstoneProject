@@ -110,6 +110,7 @@ public class MainAppointmentRecycleAdapter extends RecyclerView.Adapter<MainAppo
             {
                 case R.id.imgBtn3:
                 {
+                    appointmentTO.setStatus(AppointmentTO.EAppointmentStatus.Accepted.getValue());
                     appointmentListPresenter.acceptAppointmentRequest(activity,appointmentTO);
                     break;
                 }
