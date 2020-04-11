@@ -6,6 +6,9 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -14,14 +17,26 @@ import androidx.core.app.ActivityCompat;
 
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.R;
 
 public class SplashActivity extends AppCompatActivity {
+
+    @BindView(R.id.imgSplash)
+    public ImageView imgSplash;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
+        ButterKnife.bind(this);
         checkRequirePermissions();
+    }
+
+    private void startImgSplashAnim()
+    {
+        Animation animation=AnimationUtils.loadAnimation(this,R.anim.splash_icon_bounce);
+        imgSplash.startAnimation(animation);
     }
 
     @Override
@@ -68,13 +83,14 @@ public class SplashActivity extends AppCompatActivity {
 
     private void goNextActivity()
     {
+        startImgSplashAnim();
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
                 startActivity(new Intent(SplashActivity.this, AskAccountActivity.class));
                 SplashActivity.this.finish();
             }
-        }, 1000);
+        }, 5000);
     }
 
     @Override
