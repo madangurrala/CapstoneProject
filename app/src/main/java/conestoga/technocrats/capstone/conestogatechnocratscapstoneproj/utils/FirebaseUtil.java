@@ -93,6 +93,10 @@ public class FirebaseUtil {
         collectionReference.add(messageTO).addOnSuccessListener(activity, successListener);
     }
 
+    public void sendMessage(MessageTO messageTO, OnSuccessListener<DocumentReference> successListener) {
+        collectionReference.add(messageTO).addOnSuccessListener(successListener);
+    }
+
 
     private void arrangeMessages(UserTO userTO,List<MessageTO> messageTOList, IMessageTask iMessageTask)
     {
