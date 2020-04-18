@@ -134,6 +134,16 @@
                 android:layout_weight="1"/>
         </LinearLayout>
 
+        <com.google.android.material.textview.MaterialTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/txtPropertyAddress"
+            android:textColor="#000000"
+            android:text="Property Address"
+            android:layout_margin="8dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/linearPropertyProfile2"/>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -142,7 +152,7 @@
             android:weightSum="2"
             android:layout_margin="8dp"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/linearPropertyProfile2">
+            app:layout_constraintTop_toBottomOf="@id/txtPropertyAddress">
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnShowMap"

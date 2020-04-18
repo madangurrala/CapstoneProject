@@ -52,6 +52,8 @@ public class PropertyDetailsActivity extends AppCompatActivity implements IPrope
     public MaterialTextView txtPropertyPrice;
     @BindView(R.id.txtPropertyRegisterDate)
     public MaterialTextView txtPropertyRegisterDate;
+    @BindView(R.id.txtPropertyAddress)
+    public MaterialTextView txtPropertyAddress;
     @BindView(R.id.txtPropertyDesc)
     public MaterialTextView txtPropertyDesc;
     @BindView(value = R.id.btnShowMap)
@@ -129,6 +131,7 @@ public class PropertyDetailsActivity extends AppCompatActivity implements IPrope
         txtPropertyStatus.setText("Status: "+propertyTO.getStatus());
         txtPropertyPrice.setText("Price: "+propertyTO.getPrice());
         txtPropertyRegisterDate.setText("Register Date: "+new SimpleDateFormat("yyyy/MM/dd").format(new Date(propertyTO.getRegisterDate())));
+        txtPropertyAddress.setText(propertyTO.getAddress()!=null && !propertyTO.getAddress().isEmpty()?"Address: ".concat(propertyTO.getAddress()):"(Address is Not Available)");
         txtPropertyDesc.setText(propertyTO.getLongDescription());
         appImagePresenter.load(getApplicationContext(),ownerUser.getPhoto(),imgOwner);
         btnRequestAppointment.setEnabled(!propertyTO.isAppointmentRequested());

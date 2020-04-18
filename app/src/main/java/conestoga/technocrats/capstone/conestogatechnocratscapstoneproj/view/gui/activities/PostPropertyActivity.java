@@ -50,6 +50,8 @@ public class PostPropertyActivity extends AppCompatActivity implements IProperti
     public TextInputEditText editBedroomCount;
     @BindView(R.id.editBathroomCount)
     public TextInputEditText editBathroomCount;
+    @BindView(R.id.editAddress)
+    public TextInputEditText editAddress;
     @BindView(R.id.hydroId)
     public CheckBox hydroId;
     @BindView(R.id.gasId)
@@ -199,7 +201,7 @@ public class PostPropertyActivity extends AppCompatActivity implements IProperti
                 propertyTO.setStatus("Renting");
                 propertyTO.setLatitude(latitude);
                 propertyTO.setLongitude(longitude);
-                propertyTO.setAddress("Address 1");
+                propertyTO.setAddress(editAddress.getText().toString());
                 propertyTO.setSize(editSize.getText().toString());
                 propertyTO.setPrice(editRent.getText().toString());
                 mainPropertyPresenter.addPropertyValidation(propertyTO);
