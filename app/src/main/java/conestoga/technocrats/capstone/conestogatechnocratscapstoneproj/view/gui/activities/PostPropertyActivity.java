@@ -3,6 +3,7 @@ package conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.view.gui
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 
 import android.Manifest;
 import android.content.DialogInterface;
@@ -15,6 +16,7 @@ import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.button.MaterialButton;
@@ -60,12 +62,23 @@ public class PostPropertyActivity extends AppCompatActivity implements IProperti
     public CheckBox furnishedId;
     @BindView(R.id.laundryId)
     public CheckBox laundryId;
+    @BindView(R.id.btnUpdateLocation)
+    public MaterialButton btnUpdateLocation;
+    @BindView(R.id.txtLatitude)
+    public TextView txtLatitude;
+    @BindView(R.id.txtLongitude)
+    public TextView txtLongitude;
 
-    private MaterialButton cancelButton, submitButton, imageButton;
+    private MaterialButton cancelButton, submitButton;
     private Intent cancelPostIntent;
     private Spinner propertyType;
+
+
     private static final int IMAGE_PICK_CODE = 1000;
     private static final int PERMISSION_CODE = 1001;
+
+    private double latitude;
+    private double longitude;
 
 
 
@@ -77,7 +90,6 @@ public class PostPropertyActivity extends AppCompatActivity implements IProperti
 
         cancelButton = findViewById(R.id.btnCancel);
         submitButton = findViewById(R.id.btnSubmit);
-        imageButton = findViewById(R.id.btnImage);
         propertyType = findViewById(R.id.pType_spinner);
 
         mainPropertyPresenter=new MainPropertyPresenter(this,this);
@@ -119,26 +131,41 @@ public class PostPropertyActivity extends AppCompatActivity implements IProperti
             }
         });
 
-        imageButton.setOnClickListener(new View.OnClickListener() {
+        /*btnUpdateLocation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
                 if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
-                    if(checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE)
-                            == PackageManager.PERMISSION_DENIED){
-                        //Permission not granted
+                    if(checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_DENIED){
                         String[] permissions = {Manifest.permission.READ_EXTERNAL_STORAGE};
                         requestPermissions(permissions, PERMISSION_CODE);
-
-
                     }else{
-                        //Permission granted
                         pickImageFromGallery();
 
                     }
                 }else{
-                    //OS is less than marshmallow
                     pickImageFromGallery();
+                }
+
+            }
+        });*/
+
+
+        btnUpdateLocation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+                    if (ActivityCompat.checkSelfPermission(PostPropertyActivity.this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
+                            ActivityCompat.checkSelfPermission(PostPropertyActivity.this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                        String[] permissions = {Manifest.permission.ACCESS_FINE_LOCATION,Manifest.permission.ACCESS_COARSE_LOCATION};
+                        requestPermissions(permissions, PERMISSION_CODE);
+                    }else{
+                        mainPropertyPresenter.isGpsServiceAvailable();
+
+                    }
+                }else{
+                    mainPropertyPresenter.isGpsServiceAvailable();
                 }
 
             }
@@ -170,8 +197,8 @@ public class PostPropertyActivity extends AppCompatActivity implements IProperti
                 propertyTO.setShortDescription(shortDesc);
                 propertyTO.setLongDescription(longDesc);
                 propertyTO.setStatus("Renting");
-                propertyTO.setLatitude(0.0);
-                propertyTO.setLongitude(0.0);
+                propertyTO.setLatitude(latitude);
+                propertyTO.setLongitude(longitude);
                 propertyTO.setAddress("Address 1");
                 propertyTO.setSize(editSize.getText().toString());
                 propertyTO.setPrice(editRent.getText().toString());
@@ -182,27 +209,39 @@ public class PostPropertyActivity extends AppCompatActivity implements IProperti
     }
 
     private void pickImageFromGallery(){
-
         Intent intent = new Intent(Intent.ACTION_PICK);
         intent.setType("image/*");
         startActivityForResult(intent, IMAGE_PICK_CODE);
-
     }
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         switch (requestCode){
             case PERMISSION_CODE:{
-                if(grantResults.length>0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
-
-                    pickImageFromGallery();
+                if(permissions.length==grantResults.length && (grantResults[0] | grantResults[1]) == PackageManager.PERMISSION_GRANTED){
+                    mainPropertyPresenter.isGpsServiceAvailable();
                 }else {
-                    //Permission was denied
-                    Toast.makeText(this, "Permission to upload the image was denied !",
-                            Toast.LENGTH_LONG).show();
+                    Toast.makeText(PostPropertyActivity.this, "Application needs permission to have access to the location", Toast.LENGTH_SHORT).show();
                 }
             }
         }
+    }
+
+    @Override
+    public void isGpsServiceAvailable(boolean status) {
+        if(!status)
+        {
+            return;
+        }
+        mainPropertyPresenter.updateDeviceCurrentLocation();
+    }
+
+    @Override
+    public void updateProperLocation(double lat, double lng) {
+        this.latitude=lat;
+        this.longitude=lng;
+        txtLatitude.setText(String.format("%s: %f",getResources().getString(R.string.latitude),lat));
+        txtLongitude.setText(String.format("%s: %f",getResources().getString(R.string.longitude),lng));
     }
 
     @Override

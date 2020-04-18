@@ -1,7 +1,16 @@
 package conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.view.gui.fragments;
 
+import android.animation.AnimatorSet;
+import android.animation.ArgbEvaluator;
+import android.animation.ObjectAnimator;
+import android.animation.ValueAnimator;
 import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.ShapeDrawable;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +19,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 
 import com.google.android.material.button.MaterialButton;
@@ -29,7 +39,6 @@ import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.view.gui.
 import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.view.impl.ILoginContract;
 
 public class LoginFragment extends Fragment implements View.OnClickListener, ILoginContract {
-
     private LoginAccountPresenter loginAccountPresenter=null;
 
     private FrameLayout rootFrameLayout;
@@ -41,6 +50,9 @@ public class LoginFragment extends Fragment implements View.OnClickListener, ILo
     public MaterialButton btnLogin;
     @BindView(R.id.btnSignUp)
     public MaterialButton btnSignUp;
+
+
+
 
     @Nullable
     @Override
@@ -59,7 +71,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener, ILo
         }
         loginUserTO.setEmail("test2@gmail.com");
         loginUserTO.setPasswd("test");
-        if(loginUserTO!=null && loginUserTO.getEmail()!=null)
+        if(loginUserTO.getEmail()!=null)
         {
             editEmail.setText(loginUserTO.getEmail());
             editPasswd.setText(loginUserTO.getPasswd());

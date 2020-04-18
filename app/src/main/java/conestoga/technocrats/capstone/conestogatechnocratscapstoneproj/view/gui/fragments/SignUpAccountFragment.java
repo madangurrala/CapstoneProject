@@ -54,11 +54,11 @@ public class SignUpAccountFragment extends Fragment implements View.OnClickListe
         signUpAccountPresenter = new SignUpAccountPresenter(getActivity().getApplicationContext(),this);
 
         // TODO: 24/03/20 Remove these lines
-        editName.setText("Name Test");
+        /*editName.setText("Name Test");
         editFamily.setText("Family Test");
         editEmail.setText(String.format("%s%d%s","user.test",new Random().nextInt(500),"@gmail.com"));
         editPhone.setText("123456789");
-        editPasswd.setText("pass123");
+        editPasswd.setText("pass123");*/
         return rootFrameLayout;
     }
 

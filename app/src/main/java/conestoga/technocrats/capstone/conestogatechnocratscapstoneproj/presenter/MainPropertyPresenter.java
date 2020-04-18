@@ -1,7 +1,16 @@
 package conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.presenter;
 
+import android.Manifest;
 import android.content.Context;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.os.AsyncTask;
+import android.os.Bundle;
+
+import androidx.core.app.ActivityCompat;
 
 import java.lang.ref.WeakReference;
 import java.util.Date;
@@ -22,6 +31,9 @@ public class MainPropertyPresenter {
     private UserBL userBL;
     private IPropertiesContract iPropertiesContract;
 
+    private LocationManager locationManager;
+    private LocationListener locationListener;
+
     public MainPropertyPresenter(Context ctx, IPropertiesContract iPropertiesContract) {
         this.ctx = ctx;
         userBL = new UserBL(ctx);
@@ -30,8 +42,57 @@ public class MainPropertyPresenter {
     }
 
     public void getPropertiesList() {
-        new AsyncTaskGetUserAction(userBL,iPropertiesContract,propertyServerApi).execute();
+        new AsyncTaskGetUserAction(userBL, iPropertiesContract, propertyServerApi).execute();
     }
+
+    private void requestGpsProviderSettings() {
+        Intent intent = new Intent(android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        ctx.startActivity(intent);
+    }
+
+    public void isGpsServiceAvailable() {
+        boolean status = true;
+        locationManager = (LocationManager) ctx.getSystemService(Context.LOCATION_SERVICE);
+        if (!locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
+            status = false;
+            requestGpsProviderSettings();
+        }
+        iPropertiesContract.isGpsServiceAvailable(status);
+    }
+
+    public void updateDeviceCurrentLocation() {
+        locationListener = new LocationListener() {
+            @Override
+            public void onLocationChanged(Location location) {
+                iPropertiesContract.updateProperLocation(location.getLatitude(),location.getLongitude());
+            }
+
+            @Override
+            public void onStatusChanged(String provider, int status, Bundle extras) {
+
+            }
+
+            @Override
+            public void onProviderEnabled(String provider) {
+
+            }
+
+            @Override
+            public void onProviderDisabled(String provider) {
+
+            }
+        };
+        if (ActivityCompat.checkSelfPermission(ctx, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
+            ActivityCompat.checkSelfPermission(ctx, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            return;
+        }
+        locationManager.requestSingleUpdate(LocationManager.GPS_PROVIDER, locationListener, null);
+    }
+
+
+
+
 
     public void addPropertyValidation(PropertyTO propertyTO)
     {

@@ -280,28 +280,34 @@
                         android:text="Laundry"
                         app:useMaterialThemeColors="false"/>
 
-
-                        <TextView
-                            android:id="@+id/imageText"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:padding="10dp"
-                            android:layout_margin="10dp"
-                            android:textColor="@color/colorPrimary"
-                            android:layout_below="@+id/furnishedId"
-                            android:text="Select Image">
-
-                        </TextView>
-
                     <com.google.android.material.button.MaterialButton
-                        android:id="@+id/btnImage"
-                        style="@style/Widget.MaterialComponents.Button"
+                        android:id="@+id/btnUpdateLocation"
+                        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                         android:layout_width="wrap_content"
-                        android:layout_margin="5dp"
+                        android:layout_margin="10dp"
                         android:layout_height="wrap_content"
                         android:layout_below="@id/furnishedId"
-                        android:layout_toEndOf="@+id/imageText"
-                        android:text="Upload" />
+                        android:text="Update Location" />
+
+                    <TextView
+                        android:id="@+id/txtLatitude"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        android:layout_margin="10dp"
+                        android:textColor="@color/colorPrimary"
+                        android:layout_below="@+id/btnUpdateLocation"
+                        android:text="@string/latitude"/>
+
+                    <TextView
+                        android:id="@+id/txtLongitude"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        android:layout_margin="10dp"
+                        android:textColor="@color/colorPrimary"
+                        android:layout_below="@+id/txtLatitude"
+                        android:text="@string/longitude"/>
 
                     <LinearLayout
                         android:id="@+id/buttonsLayout"
@@ -310,7 +316,7 @@
                         android:layout_margin="10dp"
                         android:orientation="horizontal"
                         android:weightSum="2"
-                        android:layout_below="@id/imageText">
+                        android:layout_below="@id/txtLongitude">
 
                         <com.google.android.material.button.MaterialButton
                             android:id="@+id/btnCancel"
@@ -331,8 +337,6 @@
                             android:layout_weight="1"
                             android:text="Submit" />
                     </LinearLayout>
-
-
 
                 </RelativeLayout>
 

@@ -50,6 +50,16 @@ public class PropertiesFragment extends Fragment implements IPropertiesContract,
     }
 
     @Override
+    public void isGpsServiceAvailable(boolean status) {
+
+    }
+
+    @Override
+    public void updateProperLocation(double lat, double lng) {
+
+    }
+
+    @Override
     public void fillPropertiesRecycleView(List<PropertyTO> propertyTOS) {
         recycleView.setLayoutManager(new LinearLayoutManager(getActivity(),LinearLayoutManager.VERTICAL,false));
         recycleView.setAdapter(new MainPropertiesRecycleAdapter(getActivity(),propertyTOS));
