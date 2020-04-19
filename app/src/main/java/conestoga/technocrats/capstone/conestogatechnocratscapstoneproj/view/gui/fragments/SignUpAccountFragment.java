@@ -2,6 +2,8 @@ package conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.view.gui
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,13 +23,18 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.R;
+import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.model.local.sp.HelpShowCaseSP;
 import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.model.to.UserTO;
 import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.presenter.SignUpAccountPresenter;
 import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.view.gui.activities.AskAccountActivity;
 import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.view.gui.activities.MainActivity;
 import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.view.impl.ISignUpAccountContract;
+import smartdevelop.ir.eram.showcaseviewlib.GuideView;
+import smartdevelop.ir.eram.showcaseviewlib.config.DismissType;
+import smartdevelop.ir.eram.showcaseviewlib.listener.GuideListener;
 
 public class SignUpAccountFragment extends Fragment implements View.OnClickListener, ISignUpAccountContract {
+    private int showCaseStep=0;
     private SignUpAccountPresenter signUpAccountPresenter = null;
     private FrameLayout rootFrameLayout;
     @BindView(R.id.btnSignUp)
@@ -59,7 +66,17 @@ public class SignUpAccountFragment extends Fragment implements View.OnClickListe
         editEmail.setText(String.format("%s%d%s","user.test",new Random().nextInt(500),"@gmail.com"));
         editPhone.setText("123456789");
         editPasswd.setText("pass123");*/
+        showCaseStep=0;
         return rootFrameLayout;
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        if(new HelpShowCaseSP(getActivity()).isFirstLaunch())
+        {
+            handlerShowCase.sendEmptyMessageDelayed(showCaseStep,500);
+        }
     }
 
     @OnClick({R.id.btnSignUp,R.id.btnLogin})
@@ -107,4 +124,48 @@ public class SignUpAccountFragment extends Fragment implements View.OnClickListe
         }
         signUpAccountPresenter.registerUser(userTO);
     }
+
+
+    private void startHelpShowCase(View targetView,String title,String desc) {
+        new GuideView.Builder(getActivity())
+                .setTitle(title)
+                .setContentText(desc)
+                .setTargetView(targetView)
+                //.setContentTypeFace(Typeface)//optional
+                //.setTitleTypeFace(Typeface)//optional
+                .setDismissType(DismissType.outside) //optional - default dismissible by TargetView
+                .setGuideListener(new GuideListener() {
+                    @Override
+                    public void onDismiss(View view) {
+                        if(showCaseStep==0)
+                        {
+                            ++showCaseStep;
+                            handlerShowCase.sendEmptyMessageDelayed(1,500);
+                        }
+                    }
+                })
+                .build()
+                .show();
+    }
+
+    private Handler handlerShowCase=new Handler(new Handler.Callback() {
+        @Override
+        public boolean handleMessage(@NonNull Message msg) {
+            switch (msg.what)
+            {
+                case 0:
+                {
+                    startHelpShowCase(btnSignUp,"Sign Up A New Account","Make your own account and use it anytime, anywhere!");
+                    break;
+                }
+                case 1:
+                {
+                    startHelpShowCase(btnLogin,"Login To Your Account","Login into your account and start using application!");
+                    break;
+                }
+
+            }
+            return false;
+        }
+    });
 }

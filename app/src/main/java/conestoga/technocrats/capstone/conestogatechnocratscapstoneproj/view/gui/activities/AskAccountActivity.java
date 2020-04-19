@@ -19,11 +19,11 @@ import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.view.impl
 
 public class AskAccountActivity extends AppCompatActivity implements IAskAccountContract {
 
-    private AskAccountPresenter askAccountPresenter=null;
-    private LoginFragment loginFragment=null;
-    private SignUpAccountFragment signUpAccountFragment=null;
+    private AskAccountPresenter askAccountPresenter = null;
+    private LoginFragment loginFragment = null;
+    private SignUpAccountFragment signUpAccountFragment = null;
 
-    private FragmentManager fragmentManager=null;
+    private FragmentManager fragmentManager = null;
     @BindView(R.id.frame_content)
     public FrameLayout frame_content;
 
@@ -32,37 +32,33 @@ public class AskAccountActivity extends AppCompatActivity implements IAskAccount
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ask_account);
         ButterKnife.bind(this);
-        askAccountPresenter=new AskAccountPresenter(this,this);
-        askAccountPresenter.showRightFragment(null,null);
+        askAccountPresenter = new AskAccountPresenter(this, this);
+        askAccountPresenter.showRightFragment(null, null);
+
     }
 
-    public AskAccountPresenter getAskAccountPresenter()
-    {
+    public AskAccountPresenter getAskAccountPresenter() {
         return askAccountPresenter;
     }
 
     public LoginFragment getLoginFragment() {
-        if(loginFragment==null)
-        {
-            loginFragment=new LoginFragment();
+        if (loginFragment == null) {
+            loginFragment = new LoginFragment();
         }
         return loginFragment;
     }
 
     public SignUpAccountFragment getSignUpAccountFragment() {
-        if(signUpAccountFragment==null)
-        {
-            signUpAccountFragment=new SignUpAccountFragment();
+        if (signUpAccountFragment == null) {
+            signUpAccountFragment = new SignUpAccountFragment();
         }
         return signUpAccountFragment;
     }
 
     @Override
-    public void showFragment(Fragment fragment,String title)
-    {
+    public void showFragment(Fragment fragment, String title) {
         setTitle(title);
-        if(fragmentManager==null)
-        {
+        if (fragmentManager == null) {
             fragmentManager = getSupportFragmentManager();
         }
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();

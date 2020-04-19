@@ -65,6 +65,11 @@
     <string name="latitude">Latitude</string>
     <string name="longitude">Longitude</string>
 
+
+
+
+
+
     <string-array name="proprtyType_array">
         <item>Apartment</item>
         <item>House</item>

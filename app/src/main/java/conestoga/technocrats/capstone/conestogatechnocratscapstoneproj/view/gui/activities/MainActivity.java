@@ -2,9 +2,12 @@ package conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.view.gui
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.view.View;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -25,6 +28,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.R;
 import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.model.local.bl.UserBL;
+import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.model.local.sp.HelpShowCaseSP;
 import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.model.to.UserTO;
 import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.utils.FirebaseUtil;
 import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.view.gui.adapters.MainActivityTabLayoutAdapter;
@@ -33,9 +37,13 @@ import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.view.gui.
 import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.view.gui.fragments.ProfileFragment;
 import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.view.gui.fragments.PropertiesFragment;
 import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.view.impl.IMainContract;
-import conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.view.impl.IMessageTask;
+import smartdevelop.ir.eram.showcaseviewlib.GuideView;
+import smartdevelop.ir.eram.showcaseviewlib.config.DismissType;
+import smartdevelop.ir.eram.showcaseviewlib.config.Gravity;
+import smartdevelop.ir.eram.showcaseviewlib.listener.GuideListener;
 
 public class MainActivity extends AppCompatActivity implements IMainContract, ViewPager.OnPageChangeListener, TabLayout.OnTabSelectedListener {
+    private int showCaseStep=0;
 
     private FirebaseUtil firebaseUtil;
 
@@ -62,11 +70,11 @@ public class MainActivity extends AppCompatActivity implements IMainContract, Vi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-        firebaseUtil=FirebaseUtil.getInstance(getApplicationContext());
+        firebaseUtil = FirebaseUtil.getInstance(getApplicationContext());
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         drawer = findViewById(R.id.drawer_layout);
-        txtUserEmail=nav_view.getHeaderView(0).findViewById(R.id.txtUserEmail);
+        txtUserEmail = nav_view.getHeaderView(0).findViewById(R.id.txtUserEmail);
         //new UserBL(this).fetchLoginAccountSP().getEmail();
         postAddButton = findViewById(R.id.floatingButton);
 
@@ -107,11 +115,14 @@ public class MainActivity extends AppCompatActivity implements IMainContract, Vi
         });
 
 
-        UserBL userBL=new UserBL(this);
-        UserTO userTO=userBL.fetchLoginAccountSP();
-        if(userTO!=null)
-        {
+        UserBL userBL = new UserBL(this);
+        UserTO userTO = userBL.fetchLoginAccountSP();
+        if (userTO != null) {
             txtUserEmail.setText(userTO.getEmail());
+        }
+
+        if(new HelpShowCaseSP(this).isFirstLaunch()) {
+            handlerShowCase.sendEmptyMessageDelayed(showCaseStep,500);
         }
     }
 
@@ -170,6 +181,72 @@ public class MainActivity extends AppCompatActivity implements IMainContract, Vi
         // new UserBL(this).fetchLoginAccountSP().getEmail();
     }
 
+    private void startHelpShowCase(View targetView,String title,String desc) {
+        new GuideView.Builder(this)
+                .setTitle(title)
+                .setContentText(desc)
+                .setTargetView(targetView)
+                .setDismissType(DismissType.outside)
+                .setGuideListener(new GuideListener() {
+                    @Override
+                    public void onDismiss(View view) {
+                        ++showCaseStep;
+                        handlerShowCase.sendEmptyMessageDelayed(showCaseStep,500);
+                    }
+                })
+                .build()
+                .show();
+    }
+
+
+    private Handler handlerShowCase=new Handler(new Handler.Callback() {
+        @Override
+        public boolean handleMessage(@NonNull Message msg) {
+            switch (msg.what)
+            {
+                case 0:
+                {
+                    viewPager.setCurrentItem(0);
+                    startHelpShowCase(toolbar,getTitle().toString(),"You have access to all available properties that still you can apply for them or ask for an appointment");
+                    break;
+                }
+                case 1:
+                {
+                    viewPager.setCurrentItem(1);
+                    startHelpShowCase(toolbar,getTitle().toString(),"Start Chatting with other people and ask your question about the property");
+                    break;
+                }
+                case 2:
+                {
+                    viewPager.setCurrentItem(2);
+                    startHelpShowCase(toolbar,getTitle().toString(),"All your appointments are here and if you get a new appointment you can accept and the peer user with get your accepting message");
+                    break;
+                }
+                case 3:
+                {
+                    viewPager.setCurrentItem(3);
+                    startHelpShowCase(toolbar,getTitle().toString(),"See your profile and update it by clicking Edit Profile");
+                    break;
+                }
+                case 4:
+                {
+                    viewPager.setCurrentItem(0);
+                    startHelpShowCase(postAddButton,"Post Your Property","Do you have a property that you need to rent it? if yes, then click this button!");
+                    break;
+                }
+                case 5:
+                {
+                    if (!drawer.isDrawerOpen(GravityCompat.START)) {
+                        drawer.openDrawer(GravityCompat.START);
+                    }
+                    startHelpShowCase(nav_view.getHeaderView(0),"Application Help","You can have access to this help anytime that you want");
+                    new HelpShowCaseSP(MainActivity.this).updateFirstLaunch(false);
+                    break;
+                }
+            }
+            return false;
+        }
+    });
 
     @Override
     public void onBackPressed() {

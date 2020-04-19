@@ -90,7 +90,7 @@ public class SplashActivity extends AppCompatActivity {
                 startActivity(new Intent(SplashActivity.this, AskAccountActivity.class));
                 SplashActivity.this.finish();
             }
-        }, 5000);
+        }, 500);
     }
 
     @Override
