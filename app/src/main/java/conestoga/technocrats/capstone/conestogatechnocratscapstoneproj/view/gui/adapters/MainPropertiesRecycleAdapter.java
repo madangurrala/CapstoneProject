@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -34,6 +35,7 @@ public class MainPropertiesRecycleAdapter extends RecyclerView.Adapter<MainPrope
         this.ctx=ctx;
         this.propertyTOS=propertyTOS;
         appImagePresenter=new AppImagePresenter();
+        appImagePresenter.setIc_broken_image(R.drawable.default_property_image);
     }
     @NonNull
     @Override
@@ -63,11 +65,17 @@ public class MainPropertiesRecycleAdapter extends RecyclerView.Adapter<MainPrope
         public TextView txtTitle;
         @BindView(R.id.txtSubTitle)
         public TextView txtSubTitle;
+        @BindView(R.id.imgBtn2)
+        public ImageButton imgBtn2;
+        @BindView(R.id.imgBtn3)
+        public ImageButton imgBtn3;
 
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             ButterKnife.bind(this,itemView);
+            imgBtn2.setVisibility(View.INVISIBLE);
+            imgBtn3.setVisibility(View.INVISIBLE);
         }
 
         public void setData(int position)

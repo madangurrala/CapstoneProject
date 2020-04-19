@@ -46,6 +46,7 @@
             app:layout_constraintLeft_toRightOf="@id/imgOwner"
             app:layout_constraintTop_toBottomOf="@id/txtOwnerHeader"
             android:textColor="#000000"
+            android:textSize="16sp"
             android:text="Owner Full Name"/>
 
         <TextView
@@ -56,6 +57,7 @@
             app:layout_constraintLeft_toRightOf="@id/imgOwner"
             app:layout_constraintTop_toBottomOf="@id/txtOwnerName"
             android:textColor="#000000"
+            android:textSize="16sp"
             android:text="Phone: (***) *** ****"/>
 
         <TextView
@@ -66,6 +68,7 @@
             app:layout_constraintLeft_toRightOf="@id/imgOwner"
             app:layout_constraintTop_toBottomOf="@id/txtOwnerPhone"
             android:textColor="#000000"
+            android:textSize="16sp"
             android:text="Email: *****.*****@*****.***"/>
 
         <TextView
@@ -95,6 +98,7 @@
                 android:layout_margin="8dp"
                 android:textColor="#000000"
                 android:text="Property Size"
+                android:textSize="16sp"
                 android:layout_weight="1"/>
 
             <com.google.android.material.textview.MaterialTextView
@@ -104,6 +108,7 @@
                 android:layout_margin="8dp"
                 android:textColor="#000000"
                 android:text="Property Status"
+                android:textSize="16sp"
                 android:layout_weight="1"/>
 
         </LinearLayout>
@@ -123,6 +128,7 @@
                 android:layout_margin="8dp"
                 android:textColor="#000000"
                 android:text="Property Price"
+                android:textSize="16sp"
                 android:layout_weight="1"/>
             <com.google.android.material.textview.MaterialTextView
                 android:layout_width="wrap_content"
@@ -131,6 +137,7 @@
                 android:layout_margin="8dp"
                 android:textColor="#000000"
                 android:text="Property Register Date"
+                android:textSize="16sp"
                 android:layout_weight="1"/>
         </LinearLayout>
 
@@ -141,6 +148,7 @@
             android:textColor="#000000"
             android:text="Property Address"
             android:layout_margin="8dp"
+            android:textSize="16sp"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toBottomOf="@id/linearPropertyProfile2"/>
 
@@ -205,8 +213,10 @@
             android:padding="8dp"
             android:textColor="#000000"
             android:layout_weight="1"
+            android:textSize="18sp"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/txtPropertyDescHeader"/>
+            app:layout_constraintTop_toBottomOf="@id/txtPropertyDescHeader"
+            android:lineSpacingExtra="5dp"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

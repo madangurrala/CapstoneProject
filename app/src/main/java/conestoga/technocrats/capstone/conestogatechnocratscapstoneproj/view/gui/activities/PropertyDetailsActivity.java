@@ -133,6 +133,7 @@ public class PropertyDetailsActivity extends AppCompatActivity implements IPrope
         txtPropertyRegisterDate.setText("Register Date: "+new SimpleDateFormat("yyyy/MM/dd").format(new Date(propertyTO.getRegisterDate())));
         txtPropertyAddress.setText(propertyTO.getAddress()!=null && !propertyTO.getAddress().isEmpty()?"Address: ".concat(propertyTO.getAddress()):"(Address is Not Available)");
         txtPropertyDesc.setText(propertyTO.getLongDescription());
+        appImagePresenter.setIc_broken_image(R.drawable.user_default_avatar);
         appImagePresenter.load(getApplicationContext(),ownerUser.getPhoto(),imgOwner);
         btnRequestAppointment.setEnabled(!propertyTO.isAppointmentRequested());
     }

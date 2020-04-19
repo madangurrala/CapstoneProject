@@ -207,7 +207,6 @@ public class MainPropertyPresenter {
                         return;
                     }
                     iPropertiesContractWeakReference.get().addProperty(true);
-                    //todo register all the available property in local data base
                 }
 
                 @Override
