@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
@@ -42,7 +43,7 @@ import smartdevelop.ir.eram.showcaseviewlib.config.DismissType;
 import smartdevelop.ir.eram.showcaseviewlib.config.Gravity;
 import smartdevelop.ir.eram.showcaseviewlib.listener.GuideListener;
 
-public class MainActivity extends AppCompatActivity implements IMainContract, ViewPager.OnPageChangeListener, TabLayout.OnTabSelectedListener {
+public class MainActivity extends AppCompatActivity implements IMainContract, ViewPager.OnPageChangeListener, TabLayout.OnTabSelectedListener, NavigationView.OnNavigationItemSelectedListener {
     private int showCaseStep=0;
 
     private FirebaseUtil firebaseUtil;
@@ -103,6 +104,8 @@ public class MainActivity extends AppCompatActivity implements IMainContract, Vi
         /*updateTabLayoutBadge(0, 10);
         updateTabLayoutBadge(1, 99);
         updateTabLayoutBadge(2, 2);*/
+
+        nav_view.setNavigationItemSelectedListener(this);
 
         postAddButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -181,7 +184,7 @@ public class MainActivity extends AppCompatActivity implements IMainContract, Vi
         // new UserBL(this).fetchLoginAccountSP().getEmail();
     }
 
-    private void startHelpShowCase(View targetView,String title,String desc) {
+    private void startHelpShowCase(View targetView, String title, String desc) {
         new GuideView.Builder(this)
                 .setTitle(title)
                 .setContentText(desc)
@@ -259,4 +262,15 @@ public class MainActivity extends AppCompatActivity implements IMainContract, Vi
 
     }
 
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        if(item.getItemId()==R.id.menu_help)
+        {
+            if (drawer.isDrawerOpen(GravityCompat.START)) {
+                drawer.closeDrawer(GravityCompat.START);
+            }
+            handlerShowCase.sendEmptyMessageDelayed(0,500);
+        }
+        return false;
+    }
 }
