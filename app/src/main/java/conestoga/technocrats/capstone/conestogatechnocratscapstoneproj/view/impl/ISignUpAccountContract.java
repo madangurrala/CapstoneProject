@@ -6,4 +6,7 @@ public interface ISignUpAccountContract
 {
     public void signUpStatus(boolean status,UserTO userTO);
     public void userDataValidationStatus(boolean status,UserTO userTO);
+
+    public void signUpEmailInValid();
+    public void signUpPasswordInValid();
 }

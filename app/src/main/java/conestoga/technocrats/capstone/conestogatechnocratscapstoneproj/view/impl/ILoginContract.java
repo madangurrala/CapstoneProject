@@ -6,4 +6,7 @@ public interface ILoginContract
 {
     public void isUserDataValid(boolean status,UserTO userTO);
     public void userLoginStatus(boolean status, UserTO userTO);
+
+    public void loginEmailNotValid();
+    public void loginPassNotValid();
 }

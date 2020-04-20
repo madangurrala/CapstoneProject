@@ -2,6 +2,8 @@ package conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.presente
 
 import android.content.Context;
 import android.os.AsyncTask;
+import android.text.TextUtils;
+import android.util.Patterns;
 
 import java.lang.ref.WeakReference;
 
@@ -52,6 +54,23 @@ public class SignUpAccountPresenter
 
     public void validateUserData(UserTO userTO)
     {
+        boolean isaValid=true;
+        if(userTO==null)
+        {
+            iSignUpAccountContract.userDataValidationStatus(false,userTO);
+            return;
+        }
+        if(TextUtils.isEmpty(userTO.getEmail()) || !Patterns.EMAIL_ADDRESS.matcher(userTO.getEmail()).matches())
+        {
+            isaValid=false;
+            iSignUpAccountContract.signUpEmailInValid();
+        }
+        if(TextUtils.isEmpty(userTO.getPasswd()) || userTO.getPasswd().trim().length()<5)
+        {
+            isaValid=false;
+            iSignUpAccountContract.signUpPasswordInValid();
+        }
+
         iSignUpAccountContract.userDataValidationStatus(true,userTO);
     }
 

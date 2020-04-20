@@ -2,6 +2,8 @@ package conestoga.technocrats.capstone.conestogatechnocratscapstoneproj.presente
 
 import android.content.Context;
 import android.os.AsyncTask;
+import android.text.TextUtils;
+import android.util.Patterns;
 
 import java.lang.ref.WeakReference;
 
@@ -29,7 +31,23 @@ public class LoginAccountPresenter
 
     public void validateUserData(UserTO userTO)
     {
-        iLoginContract.isUserDataValid(true,userTO);
+        boolean isaValid=true;
+        if(userTO==null)
+        {
+            iLoginContract.isUserDataValid(false,userTO);
+            return;
+        }
+        if(TextUtils.isEmpty(userTO.getEmail()) || !Patterns.EMAIL_ADDRESS.matcher(userTO.getEmail()).matches())
+        {
+            isaValid=false;
+            iLoginContract.loginEmailNotValid();
+        }
+        if(TextUtils.isEmpty(userTO.getPasswd()) || userTO.getPasswd().trim().length()<5)
+        {
+            isaValid=false;
+            iLoginContract.loginPassNotValid();
+        }
+        iLoginContract.isUserDataValid(isaValid,userTO);
     }
 
     public void loginUser(UserTO userTO)

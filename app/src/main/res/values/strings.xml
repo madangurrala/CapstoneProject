@@ -8,14 +8,14 @@
         Sign up
     </string>
     <string name="enter_email">
-        Enter your email address here
+        Enter your email address here (Required)
     </string>
     <string name="enter_passwd">
-        Enter your password here
+        Enter your password here (Required)
     </string>
-    <string name="enter_name">Enter your name</string>
-    <string name="enter_family">Enter your family</string>
-    <string name="enter_phone">Enter your phone number</string>
+    <string name="enter_name">Enter your name (Optional)</string>
+    <string name="enter_family">Enter your family (Optional)</string>
+    <string name="enter_phone">Enter your phone number (Optional)</string>
     <string name="account_icon">Account icon</string>
     <string name="edit_profile">Edit Profile</string>
     <string name="update_profile">Update Profile</string>

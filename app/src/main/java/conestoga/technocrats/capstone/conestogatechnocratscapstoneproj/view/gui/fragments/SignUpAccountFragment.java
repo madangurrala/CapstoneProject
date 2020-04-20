@@ -59,13 +59,6 @@ public class SignUpAccountFragment extends Fragment implements View.OnClickListe
         rootFrameLayout = (FrameLayout) inflater.inflate(R.layout.fragment_signup_account, container, false);
         ButterKnife.bind(this, rootFrameLayout);
         signUpAccountPresenter = new SignUpAccountPresenter(getActivity().getApplicationContext(),this);
-
-        // TODO: 24/03/20 Remove these lines
-        /*editName.setText("Name Test");
-        editFamily.setText("Family Test");
-        editEmail.setText(String.format("%s%d%s","user.test",new Random().nextInt(500),"@gmail.com"));
-        editPhone.setText("123456789");
-        editPasswd.setText("pass123");*/
         showCaseStep=0;
         return rootFrameLayout;
     }
@@ -108,7 +101,7 @@ public class SignUpAccountFragment extends Fragment implements View.OnClickListe
     @Override
     public void signUpStatus(boolean status, UserTO userTO) {
         if (!status) {
-            Toast.makeText(getActivity(), "Try again!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), "Sorry, there is a problem, please try again", Toast.LENGTH_SHORT).show();
             return;
         }
         Intent intent=new Intent(getActivity(),MainActivity.class);
@@ -120,9 +113,19 @@ public class SignUpAccountFragment extends Fragment implements View.OnClickListe
     @Override
     public void userDataValidationStatus(boolean status, UserTO userTO) {
         if (!status) {
-            Toast.makeText(getActivity(), "Give right data!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), "Please enter some valid data and try again", Toast.LENGTH_LONG).show();
         }
         signUpAccountPresenter.registerUser(userTO);
+    }
+
+    @Override
+    public void signUpEmailInValid() {
+        editEmail.setError("Please enter a valid email address");
+    }
+
+    @Override
+    public void signUpPasswordInValid() {
+        editPasswd.setError("Please enter a valid password with at least 5 characters");
     }
 
 

@@ -64,8 +64,9 @@ public class LoginFragment extends Fragment implements View.OnClickListener, ILo
         if (loginUserTO == null) {
             loginUserTO = new UserTO();
         }
-        loginUserTO.setEmail("farshad.farshad@gmail.com");
+        //loginUserTO.setEmail("farshad.farshad@gmail.com");
         //loginUserTO.setEmail("madan.madan@gmail.com");
+        loginUserTO.setEmail("test2@gmail.com");
         loginUserTO.setPasswd("test");
         if (loginUserTO.getEmail() != null) {
             editEmail.setText(loginUserTO.getEmail());
@@ -107,21 +108,33 @@ public class LoginFragment extends Fragment implements View.OnClickListener, ILo
 
     @Override
     public void isUserDataValid(boolean status, UserTO userTO) {
-        if (status) {
-            loginAccountPresenter.loginUser(userTO);
+        if (!status) {
+            Toast.makeText(getActivity(), "Please enter some valid data and try again", Toast.LENGTH_LONG).show();
+            return;
         }
+        loginAccountPresenter.loginUser(userTO);
     }
 
     @Override
     public void userLoginStatus(boolean status, UserTO userTO) {
         if (!status) {
-            Toast.makeText(getActivity(), "Sorry, Try Again!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), "Sorry, there is a problem, please try again", Toast.LENGTH_SHORT).show();
             return;
         }
         Intent intent = new Intent(getActivity(), MainActivity.class);
         intent.putExtra(UserTO.KEY.ID_KEY, userTO.getId());
         startActivity(intent);
         getActivity().finish();
+    }
+
+    @Override
+    public void loginEmailNotValid() {
+        editEmail.setError("Please enter a valid email address");
+    }
+
+    @Override
+    public void loginPassNotValid() {
+        editPasswd.setError("Please enter a valid password with at least 5 characters");
     }
 
     private void startHelpShowCase(View targetView,String title,String desc) {

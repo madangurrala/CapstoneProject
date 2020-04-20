@@ -257,9 +257,10 @@ public class PostPropertyActivity extends AppCompatActivity implements IProperti
         if(status)
         {
             Toast.makeText(this, "Added Successfully", Toast.LENGTH_SHORT).show();
+            PostPropertyActivity.this.finish();
             return;
         }
-        Toast.makeText(this, "Failed", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Sorry, there is a problem, please try again later", Toast.LENGTH_SHORT).show();
 
     }
 
