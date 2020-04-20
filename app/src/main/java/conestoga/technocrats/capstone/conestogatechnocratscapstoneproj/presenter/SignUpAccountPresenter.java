@@ -71,7 +71,7 @@ public class SignUpAccountPresenter
             iSignUpAccountContract.signUpPasswordInValid();
         }
 
-        iSignUpAccountContract.userDataValidationStatus(true,userTO);
+        iSignUpAccountContract.userDataValidationStatus(isaValid,userTO);
     }
 
 
