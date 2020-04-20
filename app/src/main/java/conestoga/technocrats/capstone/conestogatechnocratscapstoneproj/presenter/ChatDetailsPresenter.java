@@ -79,6 +79,7 @@ public class ChatDetailsPresenter implements IMessageTask
         {
             return;
         }
+        ProjApplication.allUsersMessage.clear();
         for(MessageTO messageTO:messageTOList)
         {
             long key=messageTO.getSenderId()!=userTO.getId()?messageTO.getSenderId():messageTO.getReceiverId();

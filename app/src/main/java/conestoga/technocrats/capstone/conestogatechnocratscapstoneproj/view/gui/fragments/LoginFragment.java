@@ -64,7 +64,8 @@ public class LoginFragment extends Fragment implements View.OnClickListener, ILo
         if (loginUserTO == null) {
             loginUserTO = new UserTO();
         }
-        loginUserTO.setEmail("test2@gmail.com");
+        loginUserTO.setEmail("farshad.farshad@gmail.com");
+        //loginUserTO.setEmail("madan.madan@gmail.com");
         loginUserTO.setPasswd("test");
         if (loginUserTO.getEmail() != null) {
             editEmail.setText(loginUserTO.getEmail());
