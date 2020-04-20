@@ -60,7 +60,6 @@ public class LoginFragment extends Fragment implements View.OnClickListener, ILo
 
         UserBL userBL = new UserBL(getActivity().getApplicationContext());
         UserTO loginUserTO = userBL.fetchLoginAccountSP();
-        //todo remove these lines later
         if (loginUserTO == null) {
             loginUserTO = new UserTO();
         }

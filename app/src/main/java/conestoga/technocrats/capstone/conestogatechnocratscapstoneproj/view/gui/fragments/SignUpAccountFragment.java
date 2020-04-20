@@ -114,6 +114,7 @@ public class SignUpAccountFragment extends Fragment implements View.OnClickListe
     public void userDataValidationStatus(boolean status, UserTO userTO) {
         if (!status) {
             Toast.makeText(getActivity(), "Please enter some valid data and try again", Toast.LENGTH_LONG).show();
+            return;
         }
         signUpAccountPresenter.registerUser(userTO);
     }
